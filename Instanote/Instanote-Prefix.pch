@@ -1,0 +1,31 @@
+//
+// Prefix header for all source files of the 'Instanote' target in the 'Instanote' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+#endif
+
+#define UMENG_APPKEY @"50d7ced052701556be000276"
+
+#define SERVER_API @"http://1mily.com/userInfoAction_ajaxLogin.do"
+#define API_DOMAIN @"www.1mily.com"
+#define API_FORMAT @"do"
+#define NETWORK_TIMEOUT 30
+#define TWITTERFON_FORM_BOUNDARY  @"0194784892923"
+
+#define FONT_NAME @"Helvetica"
+
+#define aUserId @"userid"
+
+#define STATUSDATA_MAX_PAGE 300
+
+#define DRAG_HEIGHT 20

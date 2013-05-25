@@ -1,0 +1,69 @@
+/*
+ Localizable.strings
+ Instanote
+ 
+ Created by Man Tung on 10/25/12.
+ 
+ */
+
+"errormessage" = "没有服务";
+
+/*** setting ***/
+"more_title" = "更多";
+"more_about" = "关于逸族网";
+"more_update" = "更新";
+"more_feedback" = "反馈";
+"more_logout_title" = "确认要登出吗？";
+"more_logout_yes" = "确认";
+"more_logout_no" = "取消";
+"logout_logout" = "登出";
+
+/*** tabbar section ***/
+"tabbarhome" = "话题";
+"tabbarsetting" = "更多";
+
+/***** login *****/
+"login_title" = "逸族网";
+"login_navigationbar_left" = "注册";
+"login_navigationbar_right" = "忘记密码";
+"longin_username_input_placehold" = "邮箱地址";
+"longin_password_input_placehold" = "密码";
+"login_button" = "登入";
+"login_username_input_empty" = "请输入邮箱地址";
+"login_password_input_empty" = "请输入密码";
+"login_password_input_lessthan_six" = "密码不能少于6位";
+"login_failed" = "登陆失败";
+"login_username_input_notemail" = "请输入正确的邮箱地址";
+"login_username_not_exist" = "这个邮箱尚未注册";
+"login_password_error" = "用户密码错误";
+
+/**** register ****/
+"register_title" = "注册逸族";
+"register_username_placehold" = "邮箱地址";
+"register_password_placehold" = "密码";
+"register_button" = "注册";
+"register_username_input_empty" = "注册邮箱不能为空";
+"register_password_input_empty" = "密码不能为空";
+"register_password_input_lessthan_six" = "请输入至少6位密码";
+"register_failed" = "注册失败，请稍后重试";
+"register_success" = "注册成功，请查收邮件";
+"register_already_registed" = "邮箱已被注册";
+
+/**** forgot ****/
+"forgot_title" = "忘记密码";
+"forgot_username_input_placehold" = "邮箱地址";
+"forgot_button" = "确认";
+"forgot_username_input_empty" = "输入邮箱地址";
+"forgot_message_checkmail" = "请查收邮件";
+"forgot_message_email_not_exist" = "邮箱不存在";
+
+
+/*** feedback ***/
+"feedbackok" = "感谢您的反馈！";
+"feedbackfail" = "发送失败";
+
+
+/***  segment ***/
+"segmenthot" = "热门话题";
+"segmentnewest" = "最新话题";
+

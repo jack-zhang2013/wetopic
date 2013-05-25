@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Note" representedClassName="Note" syncable="YES">
+        <attribute name="local_flag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="local_note_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES" isSyncIdentityProperty="YES"/>
+        <attribute name="note_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="note_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="note_info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="note_lastdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="note_source" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="note_type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="op_log" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="str_note_lastdate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="str_notedate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Note" positionX="-110" positionY="342" width="128" height="225"/>
+    </elements>
+</model>
