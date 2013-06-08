@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface UserViewController : UITableViewController
+{
+    UIImageView * avatarview;
+    UIImageView * bgview;
+    UILabel * tweetcount;
+}
 
 @end

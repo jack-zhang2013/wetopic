@@ -51,13 +51,12 @@
     _umFeedback = [UMFeedback sharedInstance];
     [_umFeedback setAppkey:UMENG_APPKEY delegate:self];
     
-    UIView * bgview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
-    bgview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]];
+    UIView * bgview = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    bgview.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundView = bgview;
     [bgview release];
     
     [self initrightButton];
-    
 }
 
 - (void)initrightButton

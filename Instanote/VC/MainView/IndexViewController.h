@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EGORefreshTableHeaderView.h"
+//#import "EGORefreshTableHeaderView.h"
 #import "TopicViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface IndexViewController : UITableViewController<EGORefreshTableHeaderDelegate>
+@interface IndexViewController : UITableViewController
 {
     NSMutableArray *fetchArray;
     int pagenum;
@@ -19,7 +19,7 @@
     int pagetype;
     
     UIActivityIndicatorView *mLoadMoreAIView;        //页面加载更多转场
-    EGORefreshTableHeaderView *_refreshHeaderView;
+//    EGORefreshTableHeaderView *_refreshHeaderView;
 	BOOL _reloading;
     
     int totalcommentcount;
@@ -43,6 +43,6 @@
 @property (nonatomic, retain)TopicViewController *topicviewcontroller;
 
 - (void)reloadTableViewDataSource;
-- (void)doneLoadingTableViewData;
+//- (void)doneLoadingTableViewData;
 
 @end

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarDelegate, UITabBarControllerDelegate> {
-    UITabBarController * tabBarController;
+@class JASidePanelController;
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+//    UITabBarController * tabBarController;
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -19,7 +21,8 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 //the tabbarItems insert here
-@property (nonatomic, retain) UITabBarController * tabBarController;
+//@property (nonatomic, retain) UITabBarController * tabBarController;
+@property (strong, nonatomic) JASidePanelController *viewController;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

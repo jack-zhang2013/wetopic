@@ -17,6 +17,9 @@
 //#import "RightSomethingViewController.h"
 //#define UMENG_APPKEY @"50d7ced052701556be000276"
 
+#import "LeftViewController.h"
+#import "JASidePanelController.h"
+#import "IndexViewController.h"
 
 @implementation AppDelegate
 
@@ -26,7 +29,7 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
 //tabbar here
-@synthesize tabBarController = tabBarController;
+//@synthesize tabBarController = tabBarController;
 
 //slider menu
 //@synthesize centerController = _viewController;
@@ -51,42 +54,63 @@
     
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
+    
+    self.viewController = [[JASidePanelController alloc] init];
+    self.viewController.shouldDelegateAutorotateToVisiblePanel = NO;
+    
+    LeftViewController *leftviewcontroller = [[LeftViewController alloc] init];
+    
+    self.viewController.leftPanel = leftviewcontroller;
+    
+    [leftviewcontroller release];
+    
+    IndexViewController * indexvc = [[IndexViewController alloc] init];
+    UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:indexvc];
+    [indexnav.navigationBar setBarStyle:UIBarStyleBlackOpaque];
+    
+    self.viewController.centerPanel = indexnav;
+    [indexvc release];
+    [indexnav release];
+    
+    [self.window setRootViewController:self.viewController];
+    
+    
     [self.window makeKeyAndVisible];
     
     //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    tabBarController = [[UITabBarController alloc] init];
-    [tabBarController setHidesBottomBarWhenPushed:YES];
-    NSMutableArray * tabbarsection = [[NSMutableArray alloc] initWithCapacity:3];
+//    tabBarController = [[UITabBarController alloc] init];
+//    [tabBarController setHidesBottomBarWhenPushed:YES];
+//    NSMutableArray * tabbarsection = [[NSMutableArray alloc] initWithCapacity:3];
     
-    IndexViewController * homevc = [[IndexViewController alloc] init];
-    UINavigationController * homevcNav = [[UINavigationController alloc] initWithRootViewController:homevc];
-    [homevcNav.navigationBar setBarStyle:UIBarStyleBlackOpaque];
-    UITabBarItem * hometabbar = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbarhome", nil) image:[UIImage imageNamed:@"tab_icon_2_nor.png"] tag:0];
+//    IndexViewController * homevc = [[IndexViewController alloc] init];
+//    UINavigationController * homevcNav = [[UINavigationController alloc] initWithRootViewController:homevc];
+//    [homevcNav.navigationBar setBarStyle:UIBarStyleBlackOpaque];
+//    UITabBarItem * hometabbar = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbarhome", nil) image:[UIImage imageNamed:@"tab_icon_2_nor.png"] tag:0];
+//
+//    homevcNav.tabBarItem = hometabbar;
+//    [tabbarsection addObject:homevcNav];
+//    [hometabbar release];
+//    [homevcNav release];
+//    [homevc release];
+//    
+//    SettingViewController * settingvc = [[SettingViewController alloc] init];
+//    UINavigationController * settingvcNav = [[UINavigationController alloc] initWithRootViewController:settingvc];
+//    [settingvcNav.navigationBar setBarStyle:UIBarStyleBlackOpaque];
+//    UITabBarItem *settingtabbar = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbarsetting", nil) image:[UIImage imageNamed:@"tab_icon_4_nor.png"] tag:0];
+//    settingvcNav.tabBarItem = settingtabbar;
+//    [tabbarsection addObject:settingvcNav];
+//    [settingtabbar release];
+//    [settingvcNav release];
+//    [settingvc release];
     
-    homevcNav.tabBarItem = hometabbar;
-    [tabbarsection addObject:homevcNav];
-    [hometabbar release];
-    [homevcNav release];
-    [homevc release];
     
-    SettingViewController * settingvc = [[SettingViewController alloc] init];
-    UINavigationController * settingvcNav = [[UINavigationController alloc] initWithRootViewController:settingvc];
-    [settingvcNav.navigationBar setBarStyle:UIBarStyleBlackOpaque];
-    UITabBarItem *settingtabbar = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"tabbarsetting", nil) image:[UIImage imageNamed:@"tab_icon_4_nor.png"] tag:0];
-    settingvcNav.tabBarItem = settingtabbar;
-    [tabbarsection addObject:settingvcNav];
-    [settingtabbar release];
-    [settingvcNav release];
-    [settingvc release];
+//    self.tabBarController.delegate = self;
+//    self.tabBarController.viewControllers = tabbarsection;
     
-    
-    self.tabBarController.delegate = self;
-    self.tabBarController.viewControllers = tabbarsection;
-    
-    [tabbarsection release];
-    [self.window setRootViewController:homevc];
-    [self.window addSubview:self.tabBarController.view];
+//    [tabbarsection release];
+//    [self.window setRootViewController:homevc];
+//    [self.window addSubview:self.tabBarController.view];
     
     return YES;
 }

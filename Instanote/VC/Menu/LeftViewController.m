@@ -1,18 +1,18 @@
 //
-//  UserViewController.m
-//  Instanote
+//  LeftViewController.m
+//  Chinesetoday
 //
-//  Created by Man Tung on 3/21/13.
-//
+//  Created by CMD on 6/3/13.
+//  Copyright (c) 2013 Man Tung. All rights reserved.
 //
 
-#import "UserViewController.h"
+#import "LeftViewController.h"
 
-@interface UserViewController ()
+@interface LeftViewController ()
 
 @end
 
-@implementation UserViewController
+@implementation LeftViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,11 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSLog(@"hello,world!");
-    
-    
-    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -56,14 +51,25 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"首页";
+    } else if (indexPath.row == 1) {
+        cell.textLabel.text = @"关于我们";
+    } else if (indexPath.row == 2) {
+        cell.textLabel.text = @"反馈";
+    } else if (indexPath.row == 3) {
+        cell.textLabel.text = @"设置";
+    }
     // Configure the cell...
     
     return cell;

@@ -48,29 +48,31 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    if (_refreshHeaderView == nil) {
-		
-		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-		view.delegate = self;
-		[self.tableView addSubview:view];
-		_refreshHeaderView = view;
-		[view release];
-		
-	}
+//    if (_refreshHeaderView == nil) {
+//		
+//		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+//		view.delegate = self;
+//		[self.tableView addSubview:view];
+//		_refreshHeaderView = view;
+//		[view release];
+//		
+//	}
     
-    avatarbutton = [[UIButton alloc] initWithFrame:CGRectMake(2, 12, 60, 20)];
-    [avatarbutton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:avatarbutton];
-    
-    double avatarviewsize = 28;
-    avatarview = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, avatarviewsize, avatarviewsize)];
-    avatarview.layer.masksToBounds = YES;
-    avatarview.layer.cornerRadius = avatarviewsize / 2.0;
-    avatarview.backgroundColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar addSubview:avatarview];
+//    avatarbutton = [[UIButton alloc] initWithFrame:CGRectMake(2, 12, 60, 20)];
+//    [avatarbutton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navigationController.navigationBar addSubview:avatarbutton];
+//    
+//    double avatarviewsize = 28;
+//    avatarview = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, avatarviewsize, avatarviewsize)];
+//    avatarview.layer.masksToBounds = YES;
+//    avatarview.layer.cornerRadius = avatarviewsize / 2.0;
+//    avatarview.backgroundColor = [UIColor whiteColor];
+//    [self.navigationController.navigationBar addSubview:avatarview];
     
 	//  update the last update date
-	[_refreshHeaderView refreshLastUpdatedDate];
+//	[_refreshHeaderView refreshLastUpdatedDate];
+    
+    
     
     NSArray *segmentTextContent = [NSArray arrayWithObjects:
                                    NSLocalizedString(@"segmentnewest", @""),
@@ -201,7 +203,7 @@
 - (void)viewDidUnload
 {
     fetchArray = nil;
-    _refreshHeaderView = nil;
+//    _refreshHeaderView = nil;
 //    msgview = nil;
     avatarview = nil;
     avatarbutton = nil;
@@ -212,7 +214,7 @@
 - (void)dealloc
 {
     [fetchArray release];
-    _refreshHeaderView = nil;
+//    _refreshHeaderView = nil;
 //    [msgview release];
     [avatarview release];
     [avatarbutton release];
@@ -282,12 +284,12 @@
 	
 }
 
-- (void)doneLoadingTableViewData{
-	
-	//  model should call this when its done loading
-	_reloading = NO;
-	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-}
+//- (void)doneLoadingTableViewData{
+//	
+//	//  model should call this when its done loading
+//	_reloading = NO;
+//	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+//}
 
 
 #pragma mark -
@@ -300,7 +302,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (!_reloading) {
-        [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+        
+//        [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
         
         /*
         CGFloat prevDelta = previousContentDelta;
@@ -381,7 +384,7 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 	
-	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+//	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
 	
 }
 
@@ -669,7 +672,7 @@
 }
 -(void)endRefreshData
 {
-    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+//    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
     [self reloadtableivew];
     mLoadingDataType = 0;
     _reloading = NO;
