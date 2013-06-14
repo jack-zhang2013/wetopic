@@ -32,8 +32,8 @@
     
     TopicViewController *topicviewcontroller;
     
-    UIImageView *avatarview;
-    UIButton * avatarbutton;
+//    UIImageView *avatarview;
+//    UIButton * avatarbutton;
     
     UISegmentedControl *segmentedControl;
     

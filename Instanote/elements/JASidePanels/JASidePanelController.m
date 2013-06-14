@@ -433,10 +433,12 @@ static char ja_kvoContext;
                 buttonController = [nav.viewControllers objectAtIndex:0];
             }
         }
-        if (!buttonController.navigationItem.leftBarButtonItem) {   
-            buttonController.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
-        }
-    }	
+//        if (!buttonController.navigationItem.leftBarButtonItem) {   
+//            buttonController.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
+//        }
+        [buttonController.navigationController.navigationBar addSubview:[self leftButtonForCenterpanel]];
+        
+    }
 }
 
 #pragma mark - Gesture Recognizer Delegate
@@ -932,12 +934,19 @@ static char ja_kvoContext;
 
 #pragma mark - Public Methods
 
-- (UIBarButtonItem *)leftButtonForCenterPanel {
-    return [[UIBarButtonItem alloc] initWithImage:[[self class] defaultImage] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
+//- (UIBarButtonItem *)leftButtonForCenterPanel {
+//    return [[UIBarButtonItem alloc] initWithImage:[[self class] defaultImage] style:UIBarButtonItemStyleDone target:self action:@selector(toggleLeftPanel:)];
+//}
+
+- (UIButton *)leftButtonForCenterpanel {
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 8, 28, 28)];
+    [btn setBackgroundImage:[UIImage imageNamed:@"btn_comment.png"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(toggleLeftPanel:) forControlEvents:UIControlEventTouchUpInside];
+    return btn;
 }
 
 - (void)showLeftPanel:(BOOL)animated {
-    [self showLeftPanelAnimated:animated];
+    [self showLeftPanelAnimated:animated]; 
 }
 
 - (void)showRightPanel:(BOOL)animated {

@@ -72,8 +72,15 @@
 	//  update the last update date
 //	[_refreshHeaderView refreshLastUpdatedDate];
     
+    UIButton * refreshbtn = [[UIButton alloc] init];
+    [refreshbtn setFrame:CGRectMake(287, 12, 20, 20)];
+    [refreshbtn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
+    [refreshbtn setBackgroundImage:[UIImage imageNamed:@"refresh.png"] forState:UIControlStateNormal];
+//    [refreshbtn setBackgroundColor:[UIColor clearColor]];
     
+    [self.navigationController.navigationBar addSubview:refreshbtn];
     
+     
     NSArray *segmentTextContent = [NSArray arrayWithObjects:
                                    NSLocalizedString(@"segmentnewest", @""),
                                    NSLocalizedString(@"segmenthot", @""), 
@@ -82,7 +89,7 @@
 	segmentedControl.selectedSegmentIndex = 0;
 	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-	segmentedControl.frame = CGRectMake(173, 7, 140, 30);
+	segmentedControl.frame = CGRectMake(90, 7, 140, 30);
 	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
 	[self.navigationController.navigationBar addSubview:segmentedControl];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -99,15 +106,15 @@
     }
 }
 
-- (void)userislogin
-{
-    if ([self getUserIdandEmail]) {
-        NSString *stringurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, [self getUserImage]];
-        [avatarview setImageWithURL:[NSURL URLWithString:stringurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    } else {
-        [avatarview setImage:[UIImage imageNamed:@"nobody.png"]];
-    }
-}
+//- (void)userislogin
+//{
+//    if ([self getUserIdandEmail]) {
+//        NSString *stringurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, [self getUserImage]];
+//        [avatarview setImageWithURL:[NSURL URLWithString:stringurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//    } else {
+//        [avatarview setImage:[UIImage imageNamed:@"nobody.png"]];
+//    }
+//}
 
 - (void)signinAction
 {
@@ -205,8 +212,8 @@
     fetchArray = nil;
 //    _refreshHeaderView = nil;
 //    msgview = nil;
-    avatarview = nil;
-    avatarbutton = nil;
+//    avatarview = nil;
+//    avatarbutton = nil;
     topicviewcontroller = nil;
     [super viewDidUnload];
 }
@@ -216,8 +223,8 @@
     [fetchArray release];
 //    _refreshHeaderView = nil;
 //    [msgview release];
-    [avatarview release];
-    [avatarbutton release];
+//    [avatarview release];
+//    [avatarbutton release];
     [segmentedControl release];
     [topicviewcontroller release];
     [super dealloc];
@@ -575,17 +582,17 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [avatarview setHidden:YES];
-    [avatarbutton setHidden:YES];
+//    [avatarview setHidden:YES];
+//    [avatarbutton setHidden:YES];
     [segmentedControl setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self userislogin];
-    [avatarbutton setHidden:NO];
-    [avatarview setHidden:NO];
+//    [self userislogin];
+//    [avatarbutton setHidden:NO];
+//    [avatarview setHidden:NO];
     [segmentedControl setHidden:NO];
     
     if (!fetchArray) {

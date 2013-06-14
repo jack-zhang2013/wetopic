@@ -73,6 +73,7 @@
         rightbutton.action = @selector(signinAction);
     }
     self.navigationItem.rightBarButtonItem = rightbutton;
+    
 }
 
 - (void)signinAction
