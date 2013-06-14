@@ -172,6 +172,7 @@
 		8F880A4F176030380001A0D9 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4C176030380001A0D9 /* JASidePanelController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8F880A50176030380001A0D9 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4E176030380001A0D9 /* UIViewController+JASidePanel.m */; };
 		8F880A54176033300001A0D9 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A53176033300001A0D9 /* LeftViewController.m */; };
+		8FCFD6E5176AB730003BAC2A /* NewsFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCFD6E4176AB730003BAC2A /* NewsFeedCell.m */; };
 		8FFDBBC417641F2E00A5E210 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFDBBC217641F2E00A5E210 /* refresh.png */; };
 		8FFDBBC517641F2E00A5E210 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFDBBC317641F2E00A5E210 /* refresh@2x.png */; };
 		8FFDBBC817641F7000A5E210 /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFDBBC617641F7000A5E210 /* banner.png */; };
@@ -427,6 +428,8 @@
 		8F880A4E176030380001A0D9 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		8F880A52176033300001A0D9 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftViewController.h; path = Menu/LeftViewController.h; sourceTree = "<group>"; };
 		8F880A53176033300001A0D9 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftViewController.m; path = Menu/LeftViewController.m; sourceTree = "<group>"; };
+		8FCFD6E3176AB730003BAC2A /* NewsFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsFeedCell.h; sourceTree = "<group>"; };
+		8FCFD6E4176AB730003BAC2A /* NewsFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedCell.m; sourceTree = "<group>"; };
 		8FFDBBC217641F2E00A5E210 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		8FFDBBC317641F2E00A5E210 /* refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh@2x.png"; sourceTree = "<group>"; };
 		8FFDBBC617641F7000A5E210 /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
@@ -822,6 +825,8 @@
 				6B15D93116994A1900744574 /* CommentCell.m */,
 				6BDEFEDA16B8BFC800CAE9DE /* TopicDetailCell.h */,
 				6BDEFEDB16B8BFC800CAE9DE /* TopicDetailCell.m */,
+				8FCFD6E3176AB730003BAC2A /* NewsFeedCell.h */,
+				8FCFD6E4176AB730003BAC2A /* NewsFeedCell.m */,
 			);
 			path = elements;
 			sourceTree = "<group>";
@@ -1098,6 +1103,7 @@
 				8F880A4F176030380001A0D9 /* JASidePanelController.m in Sources */,
 				8F880A50176030380001A0D9 /* UIViewController+JASidePanel.m in Sources */,
 				8F880A54176033300001A0D9 /* LeftViewController.m in Sources */,
+				8FCFD6E5176AB730003BAC2A /* NewsFeedCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
