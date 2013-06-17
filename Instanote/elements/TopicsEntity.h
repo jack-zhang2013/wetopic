@@ -10,6 +10,7 @@
 #import "UsersEntity.h"
 #import "CircleDetailImgsEntity.h"
 #import "BaseEnity.h"
+#import "CircleCommentInfosEntity.h"
 
 @interface TopicsEntity : BaseEnity
 {

@@ -15,6 +15,7 @@
 #import "PhotoHeaderView.h"
 #import "WeiboClient.h"
 #import "TopicViewController.h"
+#import "NewsFeedCell.h"
 
 @interface IndexViewController ()
 
@@ -28,6 +29,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     return self;
 }
@@ -36,6 +38,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"---------------------1");
+    [self initNavbarItems];
     
 //    if (!mLoadMoreAIView) {
 //        mLoadMoreAIView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 12, 19, 19)];
@@ -72,26 +76,8 @@
 	//  update the last update date
 //	[_refreshHeaderView refreshLastUpdatedDate];
     
-    UIButton * refreshbtn = [[UIButton alloc] init];
-    [refreshbtn setFrame:CGRectMake(287, 12, 20, 20)];
-    [refreshbtn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
-    [refreshbtn setBackgroundImage:[UIImage imageNamed:@"refresh.png"] forState:UIControlStateNormal];
-//    [refreshbtn setBackgroundColor:[UIColor clearColor]];
     
-    [self.navigationController.navigationBar addSubview:refreshbtn];
     
-     
-    NSArray *segmentTextContent = [NSArray arrayWithObjects:
-                                   NSLocalizedString(@"segmentnewest", @""),
-                                   NSLocalizedString(@"segmenthot", @""), 
-								   nil];
-	segmentedControl = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
-	segmentedControl.selectedSegmentIndex = 0;
-	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-	segmentedControl.frame = CGRectMake(90, 7, 140, 30);
-	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-	[self.navigationController.navigationBar addSubview:segmentedControl];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
@@ -115,6 +101,33 @@
 //        [avatarview setImage:[UIImage imageNamed:@"nobody.png"]];
 //    }
 //}
+
+- (void)initNavbarItems
+{
+    NSLog(@"---------------------2");    
+    UIButton * refreshbtn = [[UIButton alloc] init];
+    [refreshbtn setFrame:CGRectMake(286, 12, 20, 20)];
+    [refreshbtn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
+    [refreshbtn setBackgroundImage:[UIImage imageNamed:@"refresh.png"] forState:UIControlStateNormal];
+    [refreshbtn setBackgroundColor:[UIColor clearColor]];
+    [self.navigationController.navigationBar addSubview:refreshbtn];
+    
+    [refreshbtn release];
+    
+    
+    NSArray *segmentTextContent = [NSArray arrayWithObjects:
+                                   NSLocalizedString(@"segmentnewest", @""),
+                                   NSLocalizedString(@"segmenthot", @""),
+								   nil];
+	UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
+	segmentedControl.selectedSegmentIndex = 0;
+	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+	segmentedControl.frame = CGRectMake(90, 7, 140, 30);
+	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+	[self.navigationController.navigationBar addSubview:segmentedControl];
+    [segmentedControl release];
+}
 
 - (void)signinAction
 {
@@ -225,7 +238,7 @@
 //    [msgview release];
 //    [avatarview release];
 //    [avatarbutton release];
-    [segmentedControl release];
+//    [segmentedControl release];
     [topicviewcontroller release];
     [super dealloc];
 }
@@ -353,42 +366,6 @@
     
 }
 
-- (void)fadeinAction:(CGFloat)offsetY
-{
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    [UIView beginAnimations:@"suckEffect" context:context];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-//    [UIView setAnimationDuration:0.5];
-    
-    CGRect tablerect = self.tableView.frame;
-    CGFloat tableheight = tablerect.size.height;
-    
-    [self.navigationController.navigationBar setHidden:YES];
-    tablerect.origin.y = -44.f;
-    tablerect.size.height = tableheight + 44.f;
-    [self.tableView setFrame:tablerect];
-    
-//    [UIView commitAnimations];
-}
-
-- (void)fadeoutAction:(CGFloat)offsetY
-{
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    [UIView beginAnimations:@"suckEffect" context:context];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-//    [UIView setAnimationDuration:0.5];
-    
-    CGRect tablerect = self.tableView.frame;
-    CGFloat tableheight = tablerect.size.height;
-    
-    [self.navigationController.navigationBar setHidden:NO];
-    tablerect.origin.y = 0.f;
-    tablerect.size.height = tableheight - 44.f;
-    [self.tableView setFrame:tablerect];
-    
-//    [UIView commitAnimations];
-}
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 	
 //	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
@@ -424,15 +401,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [fetchArray count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int count = 1;
-    if (section == [fetchArray count] - 1) {
-        count++;
-    }
+    count = [fetchArray count] + 1;
     return count;
 }
 
@@ -444,46 +419,50 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    float height;
-    if (indexPath.section == [fetchArray count] - 1 && indexPath.row == 1) {
-        return 48.f;
-    } else {
-        height = 121.f;
+    float height = 0.f;
+    if (indexPath.row < [fetchArray count]) {
+        NewsFeedCell * cell = (NewsFeedCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
+        height = [cell cellHeights];
+    } else if (indexPath.row == [fetchArray count]) {
+        height = 48.f;
     }
+//    if (indexPath.section == [fetchArray count] - 1 && indexPath.row == 1) {
+//        return 48.f;
+//    } else {
+//        height = 121.f;
+//    }
     return height;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 44.f;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 44.f;
+//}
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    PhotoHeaderView *headview = [[PhotoHeaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
-    if (section < [fetchArray count]) {
-        TopicsEntity *tp = [fetchArray objectAtIndex:section];
-        [headview layoutSub:tp];
-    }
-    return headview;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    PhotoHeaderView *headview = [[PhotoHeaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+//    if (section < [fetchArray count]) {
+//        TopicsEntity *tp = [fetchArray objectAtIndex:section];
+//        [headview layoutSub:tp];
+//    }
+//    return headview;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    PhotoCell * cell;
+    NewsFeedCell * cell;
     // Configure the cell...
-    if (indexPath.section < [fetchArray count] && indexPath.row == 0) {
+    if (indexPath.row < [fetchArray count]) {
         
-        cell = [[[PhotoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[NewsFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         
-        TopicsEntity * tp = [fetchArray objectAtIndex:indexPath.section];
+        TopicsEntity * tp = [fetchArray objectAtIndex:indexPath.row];
         [cell configurecell:tp];
         
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        
-    } else if (indexPath.section == [fetchArray count] - 1 && indexPath.row == 1) {
+    } else if (indexPath.row == [fetchArray count]) {
         
         UITableViewCell * cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell_loadmore_style2"];
         if (cell == nil){
@@ -564,17 +543,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        TopicsEntity * te = [fetchArray objectAtIndex:indexPath.section];
+    if (indexPath.row < [fetchArray count]) {
+        TopicsEntity * te = [fetchArray objectAtIndex:indexPath.row];
         topicviewcontroller = [[TopicViewController alloc] init];
         topicviewcontroller.mytopic = te;
-//        UINavigationController * detailnav = [[UINavigationController alloc] initWithRootViewController:topicviewcontroller];
-//        detailnav.navigationBar.barStyle = UIBarStyleBlack;
-//        [self presentModalViewController:detailnav animated:YES];
-//        [detailnav release];
-        topicviewcontroller.hidesBottomBarWhenPushed = YES;
-//        self.navigationController.navigationBar set
-        topicviewcontroller.navigationItem.hidesBackButton = YES;
         [self.navigationController pushViewController:topicviewcontroller animated:YES];
     }
 }
@@ -584,7 +556,7 @@
     [super viewWillDisappear:animated];
 //    [avatarview setHidden:YES];
 //    [avatarbutton setHidden:YES];
-    [segmentedControl setHidden:YES];
+//    [segmentedControl setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -593,7 +565,7 @@
 //    [self userislogin];
 //    [avatarbutton setHidden:NO];
 //    [avatarview setHidden:NO];
-    [segmentedControl setHidden:NO];
+//    [segmentedControl setHidden:NO];
     
     if (!fetchArray) {
         [self start];

@@ -35,7 +35,8 @@
 //    UIImageView *avatarview;
 //    UIButton * avatarbutton;
     
-    UISegmentedControl *segmentedControl;
+//    UISegmentedControl *segmentedControl;
+//    UIButton * refreshbtn;
     
     
 }

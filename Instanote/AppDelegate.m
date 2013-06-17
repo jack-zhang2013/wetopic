@@ -66,8 +66,7 @@
     
     IndexViewController * indexvc = [[IndexViewController alloc] init];
     UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:indexvc];
-    [indexnav.navigationBar setBarStyle:UIBarStyleBlackOpaque];
-    
+    [indexnav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.viewController.centerPanel = indexnav;
     [indexvc release];
     [indexnav release];
@@ -114,6 +113,7 @@
     
     return YES;
 }
+
 
 - (void)umengTrack {
     //    [MobClick setCrashReportEnabled:NO]; // 如果不需要捕捉异常，注释掉此行

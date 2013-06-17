@@ -14,31 +14,35 @@
 
 @interface NewsFeedCell : UITableViewCell
 {
-    UIButton * authornameButton;
-    UILabel * descLabel;
+    UIButton *authorNameButton;
+    UILabel *authorNameLabel;
+    UILabel *descLabel;
     
-    UIImageView * authorView;
-    UIButton * authorviewButton;
+    UIImageView *authorView;
+    UIButton *authorViewButton;
     
-    UIButton *contentButton;
+    UILabel *contentLabel;
     
     UIButton *commentButton;
+    UILabel *commentLabel;
     
-    float cellheight;
+    float cellHeight;
 }
 
-@property (nonatomic, retain) UIButton * authornameButton;
+@property (nonatomic, retain) UIButton * authorNameButton;
+@property (nonatomic, retain) UILabel * authorNameLabel;
 @property (nonatomic, retain) UILabel * descLabel;
 
 @property (nonatomic, retain) UIImageView * authorView;
-@property (nonatomic, retain) UIButton * authorviewButton;
+@property (nonatomic, retain) UIButton * authorViewButton;
 
-@property (nonatomic, retain) UIButton *contentButton;
+@property (nonatomic, retain) UILabel *contentLabel;
 
 @property (nonatomic, retain) UIButton *commentButton;
+@property (nonatomic, retain) UILabel *commentLabel;
 
 - (void)configurecell:(TopicsEntity *)top;
 
-- (CGFloat)cellheights;
+- (CGFloat)cellHeights;
 
 @end

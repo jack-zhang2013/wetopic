@@ -19,6 +19,7 @@
 {
     self = [super self];
     if (self) {
+//        NSLog(@"%@", dic);
         def1 = [[dic getStringValueForKey:@"def1" defaultValue:@""] retain];
         def2 = [[dic getStringValueForKey:@"def2" defaultValue:@""] retain];
         def3 = [[dic getStringValueForKey:@"def3" defaultValue:@""] retain];
@@ -32,6 +33,15 @@
         circlecontent = [[dic getStringValueForKey:@"circlecontent" defaultValue:@""] retain];
         
         circleCommentInfo = [[NSMutableArray alloc] initWithCapacity:0];
+        NSDictionary * commentInfoDic = [dic objectForKey:@"topicCommentInfo"];
+        for (NSDictionary * commentinfo in commentInfoDic) {
+            if (![commentinfo isKindOfClass:[NSDictionary class]]) {
+                continue;
+            }
+            CircleCommentInfosEntity *ccie = [CircleCommentInfosEntity entityWithJsonDictionary:commentinfo];
+            [circleCommentInfo addObject:ccie];
+        }
+        
         
         NSDictionary *imgDic = [[dic objectForKey:@"circleDetailImg"] retain];
         
