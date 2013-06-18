@@ -38,8 +38,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"---------------------1");
-    [self initNavbarItems];
+    
+    self.navigationItem.rightBarButtonItem = [self rightButtonGen];
+    
+    NSArray *segmentTextContent = [NSArray arrayWithObjects:
+                                   NSLocalizedString(@"segmentnewest", @""),
+                                   NSLocalizedString(@"segmenthot", @""),
+								   nil];
+	UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
+	segmentedControl.selectedSegmentIndex = 0;
+	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+	segmentedControl.frame = CGRectMake(90, 7, 140, 30);
+	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+	[self.navigationController.navigationBar addSubview:segmentedControl];
+    [segmentedControl release];
     
 //    if (!mLoadMoreAIView) {
 //        mLoadMoreAIView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 12, 19, 19)];
@@ -75,11 +88,19 @@
     
 	//  update the last update date
 //	[_refreshHeaderView refreshLastUpdatedDate];
-    
-    
-    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+}
+
+- (UIBarButtonItem *)rightButtonGen {
+    UIImage *faceImage = [UIImage imageNamed:@"refresh.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake( 0, 0, 22, 22 );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self
+             action:@selector(refreshData)
+   forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
 }
 
 - (void)avatarAction
@@ -102,32 +123,6 @@
 //    }
 //}
 
-- (void)initNavbarItems
-{
-    NSLog(@"---------------------2");    
-    UIButton * refreshbtn = [[UIButton alloc] init];
-    [refreshbtn setFrame:CGRectMake(286, 12, 20, 20)];
-    [refreshbtn addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventTouchUpInside];
-    [refreshbtn setBackgroundImage:[UIImage imageNamed:@"refresh.png"] forState:UIControlStateNormal];
-    [refreshbtn setBackgroundColor:[UIColor clearColor]];
-    [self.navigationController.navigationBar addSubview:refreshbtn];
-    
-    [refreshbtn release];
-    
-    
-    NSArray *segmentTextContent = [NSArray arrayWithObjects:
-                                   NSLocalizedString(@"segmentnewest", @""),
-                                   NSLocalizedString(@"segmenthot", @""),
-								   nil];
-	UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
-	segmentedControl.selectedSegmentIndex = 0;
-	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-	segmentedControl.frame = CGRectMake(90, 7, 140, 30);
-	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-	[self.navigationController.navigationBar addSubview:segmentedControl];
-    [segmentedControl release];
-}
 
 - (void)signinAction
 {
@@ -207,17 +202,6 @@
         }
     }
     [self.tableView reloadData];
-}
-
-
-- (void)withoutHTML:(NSString *)str
-{
-//    NSString *regEx = @"<([^>]*)>";
-//    NSString * stringWithoutHTML = [str stringByReplacingOccurrencesOfRegex:regEx withString:@""];
-//    NSLog(@"stringWithoutHTML=%@",stringWithoutHTML);
-//    private final static String regxpForHtml = "<([^>]*)>";
-//    private final static String regxpForImgTag = "<\\s*img\\s+([^>]*)\\s*>";
-//    private final static String regxpForImaTagSrcAttrib = "src=\"([^\"]+)\"";
 }
 
 - (void)viewDidUnload

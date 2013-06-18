@@ -24,7 +24,6 @@
 @synthesize commentButton;
 @synthesize commentLabel;
 
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -60,6 +59,13 @@
         if (!authorViewButton) {
             authorViewButton = [[UIButton alloc] initWithFrame:CGRectZero];
             [self addSubview:authorViewButton];
+        }
+        
+        if (!timeLabel) {
+            timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+            timeLabel.font = [UIFont fontWithName:FONT_NAME size:12];
+            timeLabel.textColor = [UIColor grayColor];
+            [self addSubview:timeLabel];
         }
         
         if (!contentLabel) {
@@ -108,20 +114,26 @@
     descLabel.frame = descLabelRect;
     descLabel.text = @"创建了此话题";
     
-    CGRect authorViewRect = CGRectMake(320 - 5 - 15, 7, 15, 15);
+    CGRect authorViewRect = CGRectMake(320 - 5 - 15, 5, 15, 15);
     authorView.frame = authorViewRect;
     NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, top.userinfo.image];
     [authorView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
     authorViewButton.frame = authorViewRect;
     
+    CGRect timeLabelRect = CGRectMake(157, 7, 140, 13);
+    timeLabel.frame = timeLabelRect;
+    timeLabel.text = [top timestamp:top.createdatetime];
+    timeLabel.textAlignment = NSTextAlignmentRight;
+    
     contentLabel.frame = CGRectMake(5, 25, 310, 15);
     contentLabel.text = top.title;
     [contentLabel sizeToFitFixedWidth:310];
     CGRect contentButtonRect = contentLabel.frame;
     
+    int indexAt = 68;
     commentLabel.frame = CGRectMake(5, contentButtonRect.origin.y + contentButtonRect.size.height + 5, 310, 13);
-    NSString *content = [top.circlecontent length] > 65 ? [NSString stringWithFormat:@"%@...", [top.circlecontent substringToIndex:65]] : top.circlecontent;
+    NSString *content = [top.circlecontent length] > indexAt ? [NSString stringWithFormat:@"%@...", [top.circlecontent substringToIndex:indexAt]] : top.circlecontent;
     
     NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     commentLabel.text = [[content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""] stringByTrimmingCharactersInSet:whitespace];

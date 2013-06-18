@@ -69,6 +69,6 @@
 
 + (TopicsEntity *)entityWithJsonDictionary:(NSDictionary *)dic;
 
-//- (NSString *)timestamp:(time_t )create_at;
+- (NSString *)timestamp:(time_t )create_at;
 
 @end

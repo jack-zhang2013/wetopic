@@ -21,6 +21,8 @@
     UIImageView *authorView;
     UIButton *authorViewButton;
     
+    UILabel *timeLabel;
+    
     UILabel *contentLabel;
     
     UIButton *commentButton;

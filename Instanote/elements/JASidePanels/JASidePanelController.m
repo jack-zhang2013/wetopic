@@ -433,10 +433,10 @@ static char ja_kvoContext;
                 buttonController = [nav.viewControllers objectAtIndex:0];
             }
         }
-//        if (!buttonController.navigationItem.leftBarButtonItem) {   
-//            buttonController.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
-//        }
-        [buttonController.navigationController.navigationBar addSubview:[self leftButtonForCenterpanel]];
+        if (!buttonController.navigationItem.leftBarButtonItem) {   
+            buttonController.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
+        }
+//        [buttonController.navigationController.navigationBar addSubview:[self leftButtonForCenterPanel]];
         
     }
 }
@@ -934,15 +934,13 @@ static char ja_kvoContext;
 
 #pragma mark - Public Methods
 
-//- (UIBarButtonItem *)leftButtonForCenterPanel {
-//    return [[UIBarButtonItem alloc] initWithImage:[[self class] defaultImage] style:UIBarButtonItemStyleDone target:self action:@selector(toggleLeftPanel:)];
-//}
-
-- (UIButton *)leftButtonForCenterpanel {
-    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 8, 28, 28)];
-    [btn setBackgroundImage:[UIImage imageNamed:@"btn_comment.png"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(toggleLeftPanel:) forControlEvents:UIControlEventTouchUpInside];
-    return btn;
+- (UIBarButtonItem *)leftButtonForCenterPanel {
+    UIImage *faceImage = [UIImage imageNamed:@"btn_comment.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake( 0, 0, faceImage.size.width, faceImage.size.height );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(toggleLeftPanel:) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
 }
 
 - (void)showLeftPanel:(BOOL)animated {

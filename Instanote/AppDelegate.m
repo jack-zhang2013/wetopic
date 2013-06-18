@@ -67,12 +67,14 @@
     IndexViewController * indexvc = [[IndexViewController alloc] init];
     UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:indexvc];
     [indexnav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    
     self.viewController.centerPanel = indexnav;
-    [indexvc release];
-    [indexnav release];
+   
     
     [self.window setRootViewController:self.viewController];
     
+    [indexvc release];
+    [indexnav release];
     
     [self.window makeKeyAndVisible];
     
