@@ -28,11 +28,11 @@
 {
     [super viewDidLoad];
     
-    UIButton *btn_back = [[UIButton alloc] initWithFrame:CGRectMake(10, 11, 33, 22)];
-    [btn_back setImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
-    [btn_back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:btn_back];
-    [btn_back release];
+//    UIButton *btn_back = [[UIButton alloc] initWithFrame:CGRectMake(10, 11, 33, 22)];
+//    [btn_back setImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
+//    [btn_back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navigationController.navigationBar addSubview:btn_back];
+//    [btn_back release];
     
     self.view.backgroundColor = [UIColor whiteColor];
     

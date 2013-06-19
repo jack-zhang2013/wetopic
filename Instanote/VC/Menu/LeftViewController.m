@@ -10,6 +10,7 @@
 #import "SettingViewController.h"
 #import "AboutUsViewController.h"
 #import "IndexViewController.h"
+#import "VersionViewController.h"
 #import "UMFeedbackViewController.h"
 
 #import "JASidePanelController.h"
@@ -34,12 +35,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(215, 14, 20, 20)];
+    [settingButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+    [self.navigationController.navigationBar addSubview:settingButton];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,17 +74,27 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.backgroundColor = [UIColor grayColor];
+        
+        if (indexPath.row == 0) {
+            
+            
+            
+            
+            
+            
+            
+        } else if (indexPath.row == 1) {
+            cell.textLabel.text = @"关于我们";
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = @"反馈";
+        } else if (indexPath.row == 3) {
+            cell.textLabel.text = @"设置";
+        }
+        
     }
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"首页";
-    } else if (indexPath.row == 1) {
-        cell.textLabel.text = @"关于我们";
-    } else if (indexPath.row == 2) {
-        cell.textLabel.text = @"反馈";
-    } else if (indexPath.row == 3) {
-        cell.textLabel.text = @"设置";
-    }
+    
     // Configure the cell...
     
     return cell;
@@ -130,16 +147,16 @@
     if (indexPath.row == 0) {
         [self tapHomeView];
     } else if (indexPath.row == 1) {
-        [self tapFeedbackView];
-    } else if (indexPath.row == 2) {
         [self tapAboutView];
+    } else if (indexPath.row == 2) {
+        [self tapFeedbackView];
     } else if (indexPath.row == 3) {
         [self tapSettingView];
     }
 }
 
 - (void)tapAboutView {
-    AboutUsViewController *aboutvc = [[AboutUsViewController alloc] init];
+    VersionViewController *aboutvc = [[VersionViewController alloc] init];
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:aboutvc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.sidePanelController.centerPanel = nav;
@@ -170,6 +187,22 @@
     feedbackViewController.appkey = UMENG_APPKEY;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:feedbackViewController];
     [self presentModalViewController:navigationController animated:YES];
+}
+
+- (UIImage *)separatorImage
+{
+    UIGraphicsBeginImageContext(CGSizeMake(1, 4));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIGraphicsPushContext(context);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1].CGColor);
+    CGContextFillRect(context, CGRectMake(0, 0, 1, 2));
+    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:79/255.0 green:79/255.0 blue:77/255.0 alpha:1].CGColor);
+    CGContextFillRect(context, CGRectMake(0, 3, 1, 2));
+    UIGraphicsPopContext();
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return [UIImage imageWithCGImage:outputImage.CGImage scale:2.0 orientation:UIImageOrientationUp];
 }
 
 

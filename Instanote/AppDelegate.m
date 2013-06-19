@@ -53,16 +53,16 @@
     [self umengTrack];
     
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    
-    
     self.viewController = [[JASidePanelController alloc] init];
     self.viewController.shouldDelegateAutorotateToVisiblePanel = NO;
     
     LeftViewController *leftviewcontroller = [[LeftViewController alloc] init];
+    UINavigationController * leftnav = [[UINavigationController alloc] initWithRootViewController:leftviewcontroller];
+    [leftnav.navigationBar setBackgroundImage:[UIImage imageNamed:@"left_banner.png"] forBarMetrics:UIBarMetricsDefault];
     
-    self.viewController.leftPanel = leftviewcontroller;
-    
+    self.viewController.leftPanel = leftnav;
     [leftviewcontroller release];
+    [leftnav release];
     
     IndexViewController * indexvc = [[IndexViewController alloc] init];
     UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:indexvc];

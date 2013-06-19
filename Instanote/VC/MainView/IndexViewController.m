@@ -281,19 +281,8 @@
 #pragma mark Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource{
-	
-	//  should be calling your tableviews data source model to reload
-	//  put here just for demo
 	_reloading = YES;
-	
 }
-
-//- (void)doneLoadingTableViewData{
-//	
-//	//  model should call this when its done loading
-//	_reloading = NO;
-//	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-//}
 
 
 #pragma mark -
@@ -306,54 +295,12 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (!_reloading) {
-        
-//        [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-        
-        /*
-        CGFloat prevDelta = previousContentDelta;
-        CGFloat delta = scrollView.contentOffset.y - initialContentOffset;
-        
-        NSLog(@"%f", scrollView.contentOffset.y - scrollView.contentSize.height);
-        
-        if (delta > 0.f && prevDelta <= 0.f) {
-            
-            
-            
-            if (![self.navigationController.navigationBar isHidden]) {
-                
-                [self fadeinAction:1.f];
-                
-            }
-            
-        } else if (delta < 0.f && prevDelta >= 0.f) {
-            
-            
-            
-            if ([self.navigationController.navigationBar isHidden]) {
-                
-                [self fadeoutAction:1.f];
-                
-            }
-
-        }
-         
-        previousContentDelta = delta;
-         */
-        
         if(scrollView.isDragging && scrollView.contentOffset.y >=  scrollView.contentSize.height - scrollView.frame.size.height + DRAG_HEIGHT) {
             if (scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height) {
                 [self loadMoreData];
             }
         }
     }
-    
-    
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-	
-//	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-	
 }
 
 
