@@ -7,7 +7,7 @@
 //
 
 #import "SettingViewController.h"
-#import "FeedbackViewController.h"
+#import "UMFeedbackViewController.h"
 #import "AboutUsViewController.h"
 #import "VersionViewController.h"
 #import "LoginViewController.h"
@@ -206,7 +206,7 @@
 
 - (void)feedbackAction
 {
-    FeedbackViewController *feedbackViewController = [[FeedbackViewController alloc] initWithNibName:@"FeedbackViewController" bundle:nil];
+    UMFeedbackViewController *feedbackViewController = [[UMFeedbackViewController alloc] initWithNibName:@"FeedbackViewController" bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:feedbackViewController];
     [self presentModalViewController:navigationController animated:YES];
     [navigationController release];

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "TopicsEntity.h"
-#import "EGORefreshTableHeaderView.h"
 #import "msgView.h"
 #import "CommentDetailViewController.h"
 #import "AddViewController.h"

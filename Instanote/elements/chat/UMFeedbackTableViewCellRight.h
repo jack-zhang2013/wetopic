@@ -1,5 +1,5 @@
 //
-//  FeedbackTableViewCell.h
+//  UMFeedbackTableViewCellRight.h
 //  UMeng Analysis
 //
 //  Created by liuyu on 9/18/12.
@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface L_FeedbackTableViewCell : UITableViewCell {
-    
+@interface UMFeedbackTableViewCellRight : UITableViewCell {
+
     UIImageView *messageBackgroundView;
 }
+
+@property(nonatomic, retain) UILabel *timestampLabel;
 
 @end
