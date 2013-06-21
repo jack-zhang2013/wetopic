@@ -28,11 +28,15 @@
 {
     [super viewDidLoad];
     
-//    UIButton *btn_back = [[UIButton alloc] initWithFrame:CGRectMake(10, 11, 33, 22)];
-//    [btn_back setImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
+//    UIButton *btn_back = [[UIButton alloc] initWithFrame:CGRectMake(5, 11, 50, 22)];
+//    [btn_back setTitle:@"完成" forState:UIControlStateNormal];
+//    [btn_back setBackgroundColor:[UIColor grayColor]];
 //    [btn_back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
 //    [self.navigationController.navigationBar addSubview:btn_back];
 //    [btn_back release];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];
+    
     
     self.view.backgroundColor = [UIColor whiteColor];
     

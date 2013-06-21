@@ -178,6 +178,10 @@
 		8FC7DF28177015FB00CDE978 /* UMFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7DF0A177015FB00CDE978 /* UMFeedbackViewController.m */; };
 		8FC7DF29177015FB00CDE978 /* UMFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC7DF0B177015FB00CDE978 /* UMFeedbackViewController.xib */; };
 		8FCFD6E5176AB730003BAC2A /* NewsFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCFD6E4176AB730003BAC2A /* NewsFeedCell.m */; };
+		8FF128E417743E0A00D5E14F /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF128E217743E0A00D5E14F /* feedback.png */; };
+		8FF128E517743E0A00D5E14F /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF128E317743E0A00D5E14F /* feedback@2x.png */; };
+		8FF128E81774456C00D5E14F /* friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF128E61774456C00D5E14F /* friend.png */; };
+		8FF128E91774456C00D5E14F /* friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF128E71774456C00D5E14F /* friend@2x.png */; };
 		8FFA1AEA1771A6F8004D125C /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFA1ADD1771A6F8004D125C /* about.png */; };
 		8FFA1AEB1771A6F8004D125C /* about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFA1ADE1771A6F8004D125C /* about@2x.png */; };
 		8FFA1AEC1771A6F8004D125C /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFA1ADF1771A6F8004D125C /* home.png */; };
@@ -453,6 +457,10 @@
 		8FC7DF0B177015FB00CDE978 /* UMFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMFeedbackViewController.xib; sourceTree = "<group>"; };
 		8FCFD6E3176AB730003BAC2A /* NewsFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsFeedCell.h; sourceTree = "<group>"; };
 		8FCFD6E4176AB730003BAC2A /* NewsFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedCell.m; sourceTree = "<group>"; };
+		8FF128E217743E0A00D5E14F /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
+		8FF128E317743E0A00D5E14F /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback@2x.png"; sourceTree = "<group>"; };
+		8FF128E61774456C00D5E14F /* friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend.png; sourceTree = "<group>"; };
+		8FF128E71774456C00D5E14F /* friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friend@2x.png"; sourceTree = "<group>"; };
 		8FFA1ADD1771A6F8004D125C /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
 		8FFA1ADE1771A6F8004D125C /* about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about@2x.png"; sourceTree = "<group>"; };
 		8FFA1ADF1771A6F8004D125C /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
@@ -563,6 +571,10 @@
 		664B288915143AFE00F92B96 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8FF128E61774456C00D5E14F /* friend.png */,
+				8FF128E71774456C00D5E14F /* friend@2x.png */,
+				8FF128E217743E0A00D5E14F /* feedback.png */,
+				8FF128E317743E0A00D5E14F /* feedback@2x.png */,
 				8FFA1ADD1771A6F8004D125C /* about.png */,
 				8FFA1ADE1771A6F8004D125C /* about@2x.png */,
 				8FFA1ADF1771A6F8004D125C /* home.png */,
@@ -1100,6 +1112,10 @@
 				8FFA1AF41771A6F8004D125C /* notice@2x.png in Resources */,
 				8FFA1AF51771A6F8004D125C /* setting.png in Resources */,
 				8FFA1AF61771A6F8004D125C /* setting@2x.png in Resources */,
+				8FF128E417743E0A00D5E14F /* feedback.png in Resources */,
+				8FF128E517743E0A00D5E14F /* feedback@2x.png in Resources */,
+				8FF128E81774456C00D5E14F /* friend.png in Resources */,
+				8FF128E91774456C00D5E14F /* friend@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

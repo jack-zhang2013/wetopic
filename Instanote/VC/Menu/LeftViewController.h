@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface LeftViewController : UITableViewController
+{
+    UIImageView *avatarView;
+    UILabel * userName;
+    UILabel * userDesc;
+    UIButton * avatarButton;
+}
 
 @end

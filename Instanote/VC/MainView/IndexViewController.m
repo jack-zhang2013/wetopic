@@ -384,7 +384,7 @@
             
             [cell addSubview:loadMoreLabel];
             [loadMoreLabel release];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
 //        [cell addSubview:mLoadMoreAIView];
 //        UIButton * loadMoreButton = [UIButton buttonWithType:UIButtonTypeCustom];

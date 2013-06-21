@@ -44,6 +44,8 @@
 //    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn_comment.png"] style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
 //    //[[UIBarButtonItem alloc] initWithTitle:@"评论" style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     btn_comment = [[UIButton alloc] initWithFrame:CGRectMake(280, 7, 30, 30)];
     [btn_comment setImage:[UIImage imageNamed:@"btn_comment.png"] forState:UIControlStateNormal];
     [btn_comment addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
@@ -58,7 +60,7 @@
 //    msgview = [[msgView alloc] initWithFrame:CGRectMake(80, 200, 160, 40)];
 //    [self.view addSubview:msgview];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     
 //    if (_refreshHeaderView == nil) {
 //		
@@ -71,6 +73,8 @@
 //	
 //	//  update the last update date
 //	[_refreshHeaderView refreshLastUpdatedDate];
+    
+    
     
     UISwipeGestureRecognizer * swipegr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(backAction)];
     [self.tableView addGestureRecognizer:swipegr];
@@ -470,6 +474,8 @@
     [super viewWillDisappear:animated];
     [btn_comment setHidden:YES];
     [btn_back setHidden:YES];
+    
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -477,6 +483,8 @@
     [super viewWillAppear:animated];
     [btn_comment setHidden:NO];
     [btn_back setHidden:NO];
+    
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated

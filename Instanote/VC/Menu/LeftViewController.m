@@ -12,6 +12,8 @@
 #import "IndexViewController.h"
 #import "VersionViewController.h"
 #import "UMFeedbackViewController.h"
+#import "LoginViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
@@ -42,10 +44,38 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(215, 14, 20, 20)];
+    UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(218, 14, 20, 20)];
     [settingButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+    [settingButton addTarget:self action:@selector(tapSettingView) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:settingButton];
+    [settingButton release];
     
+//    UIButton *noticeButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 14, 20, 20)];
+//    [noticeButton setImage:[UIImage imageNamed:@"notice.png"] forState:UIControlStateNormal];
+//    [self.navigationController.navigationBar addSubview:noticeButton];
+//    [noticeButton release];
+    
+    if (!userName) {
+        userName = [[UILabel alloc] init];
+        userName.font = [UIFont fontWithName:FONT_NAME size:15];
+        userName.textColor = [UIColor grayColor];
+    }
+    
+    if (!userDesc) {
+        userDesc = [[UILabel alloc] init];
+        userDesc.font = [UIFont fontWithName:FONT_NAME size:12];
+        userDesc.textColor = [UIColor grayColor];
+    }
+    
+    if (!avatarView) {
+        avatarView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nobody.png"]];
+    }
+    
+    if (!avatarButton) {
+        avatarButton = [[UIButton alloc] init];
+    }
+    
+    [self fillUserInfo];
     
 }
 
@@ -66,8 +96,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return 5;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0;
+    if (indexPath.row == 0) {
+        height = 65.f;
+    } else {
+        height = 40.f;
+    }
+    return height;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -76,21 +118,67 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor grayColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         if (indexPath.row == 0) {
             
+            avatarButton.frame = CGRectMake(0, 0, 240, 40);
             
+            avatarView.frame = CGRectMake(10, 10, 40, 40);
             
+            userName.frame = CGRectMake(55, 12, 200, 16);
+            userName.text = @"登陆就可以显示用户名啦";
             
+            userDesc.frame = CGRectMake(55, 33, 220, 13);
+            userDesc.text = @"点击登陆";
             
-            
+            [cell addSubview:avatarView];
+            [cell addSubview:avatarButton];
+            [cell addSubview:userName];
+            [cell addSubview:userDesc];
             
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = @"关于我们";
+            
+            UIImageView * homeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home.png"]];
+            homeImageView.frame = CGRectMake(10, 10, 20, 20);
+            UILabel * homeLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
+            homeLable.text = @"首页";
+            homeLable.font = [UIFont fontWithName:FONT_NAME size:15];
+            
+            [cell addSubview:homeImageView];
+            [cell addSubview:homeLable];
+            
+            [homeImageView release];
+            [homeLable release];
+            
+            
         } else if (indexPath.row == 2) {
-            cell.textLabel.text = @"反馈";
+            
+            UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback.png"]];
+            settingImageView.frame = CGRectMake(10, 10, 20, 20);
+            UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
+            settingLable.text = @"反馈";
+            settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
+            
+            [cell addSubview:settingImageView];
+            [cell addSubview:settingLable];
+            
+            [settingImageView release];
+            [settingLable release];
+            
         } else if (indexPath.row == 3) {
-            cell.textLabel.text = @"设置";
+            
+            UIImageView * aboutImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"about.png"]];
+            aboutImageView.frame = CGRectMake(10, 10, 20, 20);
+            UILabel * aboutLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
+            aboutLable.text = @"关于";
+            aboutLable.font = [UIFont fontWithName:FONT_NAME size:15];
+            
+            [cell addSubview:aboutImageView];
+            [cell addSubview:aboutLable];
+            
+            [aboutImageView release];
+            [aboutLable release];
         }
         
     }
@@ -145,21 +233,23 @@
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-        [self tapHomeView];
+        
+        
+        
     } else if (indexPath.row == 1) {
-        [self tapAboutView];
+        [self tapHomeView];
     } else if (indexPath.row == 2) {
         [self tapFeedbackView];
     } else if (indexPath.row == 3) {
-        [self tapSettingView];
+        [self tapAboutView];
     }
 }
 
 - (void)tapAboutView {
-    VersionViewController *aboutvc = [[VersionViewController alloc] init];
+    SettingViewController *aboutvc = [[SettingViewController alloc] init];
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:aboutvc];
-    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
-    self.sidePanelController.centerPanel = nav;
+    //[nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [self presentModalViewController:nav animated:YES];
     [aboutvc release];
     [nav release];
 }
@@ -189,21 +279,95 @@
     [self presentModalViewController:navigationController animated:YES];
 }
 
-- (UIImage *)separatorImage
+#pragma mark
+#pragma userinfo
+
+-(int)getUserId
 {
-    UIGraphicsBeginImageContext(CGSizeMake(1, 4));
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    UIGraphicsPushContext(context);
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:28/255.0 green:28/255.0 blue:27/255.0 alpha:1].CGColor);
-    CGContextFillRect(context, CGRectMake(0, 0, 1, 2));
-    CGContextSetFillColorWithColor(context, [UIColor colorWithRed:79/255.0 green:79/255.0 blue:77/255.0 alpha:1].CGColor);
-    CGContextFillRect(context, CGRectMake(0, 3, 1, 2));
-    UIGraphicsPopContext();
-    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return [UIImage imageWithCGImage:outputImage.CGImage scale:2.0 orientation:UIImageOrientationUp];
+    NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
+    NSUInteger userid = [def integerForKey:aUserId];
+    if (userid) {
+        return userid;
+    } else {
+        return 0;
+    }
 }
+
+- (NSString *)getUserImage
+{
+    NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
+    NSString *userimage = [def objectForKey:@"image"];
+    if (userimage) {
+        return userimage;
+    } else {
+        return @"";
+    }
+}
+
+- (void)fillUserInfo
+{
+    if ([self getUserIdandEmail]) {
+        NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
+        NSString *userimage = [def objectForKey:@"image"];
+        NSString *username = [def objectForKey:@"nick"];
+        NSString *userdesc = [def objectForKey:@"what"];
+        userName.text = username;
+        userDesc.text = userdesc;
+        
+        NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, userimage];
+        [avatarView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [avatarButton addTarget:self action:@selector(userAction) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [avatarButton addTarget:self action:@selector(signinAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    
+}
+
+
+-(BOOL)getUserIdandEmail
+{
+    NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
+    NSUInteger userid = [def integerForKey:aUserId];
+    NSString * email  =[def objectForKey:@"email"];
+    //    NSString * image = [def objectForKey:@"image"];
+    //    NSLog(@"%d,%@,%@", userid, email, image);
+    if (userid && [email length]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)avatarAction
+{
+    if ([self getUserIdandEmail]) {
+        [self userAction];
+        
+    } else {
+        [self signinAction];
+    }
+}
+
+- (void)userAction
+{
+    //push to userview
+}
+
+- (void)signinAction
+{
+    LoginViewController *loginvc = [[LoginViewController alloc] init];
+    loginvc.finishAction = @selector(viewDidLoad);
+    loginvc.finishTarget = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginvc];
+    navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    [self presentModalViewController:navigationController animated:YES];
+    [navigationController release];
+    [loginvc release];
+}
+
+
+
 
 
 

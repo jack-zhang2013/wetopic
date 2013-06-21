@@ -46,7 +46,8 @@
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"more_title", nil);
+//    self.title = NSLocalizedString(@"more_title", nil);
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];
     
     _umFeedback = [UMFeedback sharedInstance];
     [_umFeedback setAppkey:UMENG_APPKEY delegate:self];
@@ -56,7 +57,12 @@
     self.tableView.backgroundView = bgview;
     [bgview release];
     
-    [self initrightButton];
+//    [self initrightButton];
+}
+
+- (void)backAction
+{
+    [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
 - (void)initrightButton
