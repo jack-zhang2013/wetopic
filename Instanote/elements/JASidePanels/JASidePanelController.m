@@ -436,8 +436,6 @@ static char ja_kvoContext;
         if (!buttonController.navigationItem.leftBarButtonItem) {   
             buttonController.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
         }
-//        [buttonController.navigationController.navigationBar addSubview:[self leftButtonForCenterPanel]];
-        
     }
 }
 

@@ -23,36 +23,43 @@
 
 @implementation IndexViewController
 @synthesize topicviewcontroller;
+@synthesize pagetype;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     return self;
 }
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [self rightButtonGen];
+    if (pagetype == 0 || pagetype == 1) {
+        self.title = @"最新话题";
+    } else if (pagetype == 2) {
+        self.title = @"最热话题";
+    }
     
-    NSArray *segmentTextContent = [NSArray arrayWithObjects:
-                                   NSLocalizedString(@"segmentnewest", @""),
-                                   NSLocalizedString(@"segmenthot", @""),
-								   nil];
-	UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
-	segmentedControl.selectedSegmentIndex = 0;
-	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-	segmentedControl.frame = CGRectMake(90, 7, 140, 30);
-	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-	[self.navigationController.navigationBar addSubview:segmentedControl];
-    [segmentedControl release];
+//    self.navigationItem.rightBarButtonItem = [self rightButtonGen];
+//    NSArray *segmentTextContent = [NSArray arrayWithObjects:
+//                                   NSLocalizedString(@"segment newest", @""),
+//                                   NSLocalizedString(@"segmenthot", @""),
+//								   nil];
+//    
+//	UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
+//	segmentedControl.selectedSegmentIndex = 0;
+//	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+//	segmentedControl.frame = CGRectMake(90, 7, 140, 30);
+//	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+//	[self.navigationController.navigationBar addSubview:segmentedControl];
+//    
+//    [segmentedControl release];
     
 //    if (!mLoadMoreAIView) {
 //        mLoadMoreAIView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 12, 19, 19)];
@@ -88,20 +95,20 @@
     
 	//  update the last update date
 //	[_refreshHeaderView refreshLastUpdatedDate];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     
 }
 
-- (UIBarButtonItem *)rightButtonGen {
-    UIImage *faceImage = [UIImage imageNamed:@"refresh.png"];
-    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
-    face.bounds = CGRectMake( 0, 0, 22, 22 );
-    [face setImage:faceImage forState:UIControlStateNormal];
-    [face addTarget:self
-             action:@selector(refreshData)
-   forControlEvents:UIControlEventTouchUpInside];
-    return [[UIBarButtonItem alloc] initWithCustomView:face];
-}
+//- (UIBarButtonItem *)rightButtonGen {
+//    UIImage *faceImage = [UIImage imageNamed:@"refresh.png"];
+//    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+//    face.bounds = CGRectMake( 0, 0, 22, 22 );
+//    [face setImage:faceImage forState:UIControlStateNormal];
+//    [face addTarget:self
+//             action:@selector(refreshData)
+//   forControlEvents:UIControlEventTouchUpInside];
+//    return [[UIBarButtonItem alloc] initWithCustomView:face];
+//}
 
 - (void)avatarAction
 {
@@ -486,7 +493,7 @@
 {
     pagenum = 1;
     pagesize = 20;
-    pagetype = 1;
+//    pagetype = 1;
     fetchArray = [[NSMutableArray alloc] init];
 }
 

@@ -12,7 +12,7 @@
 @interface CommentDetailViewController : UIViewController
 {
     CircleCommentInfosEntity * mycomment;
-    UIButton * btn_back;
+//    UIButton * btn_back;
 }
 
 @property (nonatomic, retain)CircleCommentInfosEntity * mycomment;

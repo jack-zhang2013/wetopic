@@ -46,7 +46,7 @@
     
     UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(218, 14, 20, 20)];
     [settingButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
-    [settingButton addTarget:self action:@selector(tapSettingView) forControlEvents:UIControlEventTouchUpInside];
+//    [settingButton addTarget:self action:@selector(tapSettingView) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:settingButton];
     [settingButton release];
     
@@ -96,7 +96,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -139,10 +139,10 @@
             
         } else if (indexPath.row == 1) {
             
-            UIImageView * homeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home.png"]];
-            homeImageView.frame = CGRectMake(10, 10, 20, 20);
+            UIImageView * homeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list.png"]];
+            homeImageView.frame = CGRectMake(10, 13, 15, 15);
             UILabel * homeLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
-            homeLable.text = @"首页";
+            homeLable.text = @"最新话题";
             homeLable.font = [UIFont fontWithName:FONT_NAME size:15];
             
             [cell addSubview:homeImageView];
@@ -153,6 +153,20 @@
             
             
         } else if (indexPath.row == 2) {
+            
+            UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fire.png"]];
+            settingImageView.frame = CGRectMake(10, 10, 10, 20);
+            UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
+            settingLable.text = @"最热话题";
+            settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
+            
+            [cell addSubview:settingImageView];
+            [cell addSubview:settingLable];
+            
+            [settingImageView release];
+            [settingLable release];
+            
+        } else if (indexPath.row == 3) {
             
             UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback.png"]];
             settingImageView.frame = CGRectMake(10, 10, 20, 20);
@@ -166,7 +180,7 @@
             [settingImageView release];
             [settingLable release];
             
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == 4) {
             
             UIImageView * aboutImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"about.png"]];
             aboutImageView.frame = CGRectMake(10, 10, 20, 20);
@@ -239,9 +253,11 @@
     } else if (indexPath.row == 1) {
         [self tapHomeView];
     } else if (indexPath.row == 2) {
-        [self tapFeedbackView];
+        [self tapHomeViewHot];
     } else if (indexPath.row == 3) {
-        [self tapAboutView];
+        [self tapFeedbackView];
+    } else if (indexPath.row == 4) {
+        [self tapSettingView];
     }
 }
 
@@ -256,6 +272,17 @@
 
 - (void)tapHomeView {
     IndexViewController *homevc = [[IndexViewController alloc] init];
+    homevc.pagetype = 1;
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    self.sidePanelController.centerPanel = nav;
+    [homevc release];
+    [nav release];
+}
+
+- (void)tapHomeViewHot {
+    IndexViewController *homevc = [[IndexViewController alloc] init];
+    homevc.pagetype = 2;
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.sidePanelController.centerPanel = nav;
@@ -365,10 +392,5 @@
     [navigationController release];
     [loginvc release];
 }
-
-
-
-
-
 
 @end

@@ -31,11 +31,14 @@
     [super viewDidLoad];
     
     self.navigationItem.hidesBackButton = YES;
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    btn_back = [[UIButton alloc] initWithFrame:CGRectMake(10, 11, 33, 22)];
-    [btn_back setImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
-    [btn_back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:btn_back];
+//    UIButton * btn_back = [[UIButton alloc] initWithFrame:CGRectMake(10, 13, 24, 16)];
+//    [btn_back setImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
+//    [btn_back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navigationController.navigationBar addSubview:btn_back];
+    
+    self.navigationItem.leftBarButtonItem = [self leftButtonGen];
     
 	// Do any additional setup after loading the view.
     UIScrollView * scrollview = [[UIScrollView alloc] init];
@@ -97,6 +100,17 @@
 //    [scrollview release];
 }
 
+- (UIBarButtonItem *)leftButtonGen {
+    UIImage *faceImage = [UIImage imageNamed:@"arrow.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake( 0, 0, 24, 16 );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self
+             action:@selector(backAction)
+   forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
+}
+
 - (void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -117,13 +131,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [btn_back setHidden:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [btn_back setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,13 +147,11 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    btn_back = nil;
 }
 
 - (void)dealloc
 {
     [super dealloc];
-    [btn_back release];
 }
 
 @end

@@ -42,6 +42,7 @@
 }
 
 @property (nonatomic, retain)TopicViewController *topicviewcontroller;
+@property (nonatomic, assign)int pagetype;
 
 - (void)reloadTableViewDataSource;
 //- (void)doneLoadingTableViewData;

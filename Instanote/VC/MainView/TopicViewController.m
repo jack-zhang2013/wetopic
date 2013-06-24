@@ -44,8 +44,6 @@
 //    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn_comment.png"] style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
 //    //[[UIBarButtonItem alloc] initWithTitle:@"评论" style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
     
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     btn_comment = [[UIButton alloc] initWithFrame:CGRectMake(280, 7, 30, 30)];
     [btn_comment setImage:[UIImage imageNamed:@"btn_comment.png"] forState:UIControlStateNormal];
     [btn_comment addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
@@ -166,7 +164,6 @@
     //[self.tv setContentSize:CGSizeMake(320, tv.contentSize.height)];
 }
 
-
 - (BOOL)ifCanLoadMore
 {
     return ((pagenum + 1) * pagesize <= STATUSDATA_MAX_PAGE && [fetchArray count] > 0 && [fetchArray count] < totalcommentcount);
@@ -271,7 +268,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    float height;
+    float height = 0.f;
     if (indexPath.row == 0) {
         TopicDetailCell * topcell = (TopicDetailCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
         height = [topcell cellheights];
@@ -281,9 +278,7 @@
         height = [cell ch];
     }
     else if (indexPath.row == [fetchArray count] + 1) {
-        height = 50.f;
-    } else {
-        height = 40.f;
+        height = 45.f;
     }
     return height;
 }
@@ -317,19 +312,18 @@
         
         UITableViewCell * cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                                 reuseIdentifier:@"cell_loadmore_style2"] autorelease];
+        
+        UILabel * loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 14, 150, 17)];
+        [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
+        [loadMoreLabel setBackgroundColor:[UIColor clearColor]];
+        
+        [cell addSubview:loadMoreLabel];
+        [loadMoreLabel release];
+
         if ([fetchArray count] < totalcommentcount) {
-            UILabel * loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 14, 150, 17)];
-            [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
-            [loadMoreLabel setBackgroundColor:[UIColor clearColor]];
             [loadMoreLabel setText:@"上拉加载更多"];
-            [cell addSubview:loadMoreLabel];
-            [loadMoreLabel release];
-        }
-        else {
-            UIImageView * nomoreimageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 19, 320, 6)];
-            [nomoreimageview setImage:[UIImage imageNamed:@"endline.png"]];
-            [cell addSubview:nomoreimageview];
-            [nomoreimageview release];
+        } else {
+            [loadMoreLabel setText:@"没有更多了"];
         }
         
         cell.selectionStyle=UITableViewCellSelectionStyleNone;

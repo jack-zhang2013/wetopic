@@ -69,8 +69,8 @@
 {
     NSString *stringurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, cce.userinfo.image];
     [userImageView setImageWithURL:[NSURL URLWithString:stringurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    NSString * info = [[self stringWithoutNbsp:cce.commentinfo] stringByConvertingHTMLToPlainText];
-    
+//    NSString * info = [[self stringWithoutNbsp:cce.commentinfo] stringByConvertingHTMLToPlainText];
+    NSString * info = [self stringWithoutNbsp:cce.commentinfo];
     contentLabel.text = info;
     [contentLabel sizeToFitFixedWidth:270];
     
