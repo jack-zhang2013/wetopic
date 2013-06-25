@@ -38,23 +38,16 @@
     
     [self initpage];
     
+    self.tableView.showsVerticalScrollIndicator = NO;
+    
+    
 //    CGRect tableviewRect = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height + 44.f);
 //    [self.tableView setFrame:tableviewRect];
     
 //    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn_comment.png"] style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
 //    //[[UIBarButtonItem alloc] initWithTitle:@"评论" style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
     
-    btn_comment = [[UIButton alloc] initWithFrame:CGRectMake(280, 7, 30, 30)];
-    [btn_comment setImage:[UIImage imageNamed:@"btn_comment.png"] forState:UIControlStateNormal];
-    [btn_comment addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:btn_comment];
-    [btn_comment release];
-    
-    btn_back = [[UIButton alloc] initWithFrame:CGRectMake(10, 11, 33, 22)];
-    [btn_back setImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
-    [btn_back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:btn_back];
-    
+       
 //    msgview = [[msgView alloc] initWithFrame:CGRectMake(80, 200, 160, 40)];
 //    [self.view addSubview:msgview];
     
@@ -227,35 +220,17 @@
 }
 
 
-#pragma mark -
-#pragma mark EGORefreshTableHeaderDelegate Methods
-
-//- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view {
-//	
-//	[self reloadTableViewDataSource];
-//	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
-//	
-//}
-//
-//- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view {
-//	
-//	return _reloading; // should return if data source model is reloading
-//	
-//}
-//
-//- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-//	
-//	return [NSDate date]; // should return date data source was last changed
-//	
-//}
-
-
 #pragma mark
 #pragma mark - tableview delegate
 
 - (void)tableviewScrollToTop:(BOOL)animated
 {
     [self.tableView setContentOffset:CGPointMake(0,0) animated:animated];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -349,6 +324,31 @@
         commentdetailvc.mycomment = commententity;
         [self.navigationController pushViewController:commentdetailvc animated:YES];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 44.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * navView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
+    navView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"banner.png"]];
+    [self.view addSubview:navView];
+    
+    btn_comment = [[UIButton alloc] initWithFrame:CGRectMake(288, 10, 24, 24)];
+    [btn_comment setImage:[UIImage imageNamed:@"share_white.png"] forState:UIControlStateNormal];
+    [btn_comment addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
+    [navView addSubview:btn_comment];
+    [btn_comment release];
+    
+    btn_back = [[UIButton alloc] initWithFrame:CGRectMake(10, 14, 24, 16)];
+    [btn_back setImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
+    [btn_back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [navView addSubview:btn_back];
+    
+    return navView;
 }
 
 
@@ -466,18 +466,11 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [btn_comment setHidden:YES];
-    [btn_back setHidden:YES];
-    
-    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [btn_comment setHidden:NO];
-    [btn_back setHidden:NO];
-    
     self.navigationController.navigationBarHidden = YES;
 }
 

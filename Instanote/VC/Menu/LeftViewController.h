@@ -16,4 +16,6 @@
     UIButton * avatarButton;
 }
 
+- (void)fillUserInfo;
+
 @end

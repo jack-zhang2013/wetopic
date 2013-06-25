@@ -22,12 +22,6 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize viewController = _viewController;
-//tabbar here
-//@synthesize tabBarController = tabBarController;
-
-//slider menu
-//@synthesize centerController = _viewController;
-//@synthesize leftController = _leftController;
 
 - (void)dealloc
 {

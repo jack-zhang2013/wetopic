@@ -29,8 +29,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
-//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     return self;
 }
@@ -42,73 +40,11 @@
     if (pagetype == 0 || pagetype == 1) {
         self.title = @"最新话题";
     } else if (pagetype == 2) {
-        self.title = @"最热话题";
+        self.title = @"热门话题";
     }
-    
-//    self.navigationItem.rightBarButtonItem = [self rightButtonGen];
-//    NSArray *segmentTextContent = [NSArray arrayWithObjects:
-//                                   NSLocalizedString(@"segment newest", @""),
-//                                   NSLocalizedString(@"segmenthot", @""),
-//								   nil];
-//    
-//	UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
-//	segmentedControl.selectedSegmentIndex = 0;
-//	segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-//	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-//	segmentedControl.frame = CGRectMake(90, 7, 140, 30);
-//	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-//	[self.navigationController.navigationBar addSubview:segmentedControl];
-//    
-//    [segmentedControl release];
-    
-//    if (!mLoadMoreAIView) {
-//        mLoadMoreAIView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 12, 19, 19)];
-//        mLoadMoreAIView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-//    }
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-//    if (_refreshHeaderView == nil) {
-//		
-//		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-//		view.delegate = self;
-//		[self.tableView addSubview:view];
-//		_refreshHeaderView = view;
-//		[view release];
-//		
-//	}
-    
-//    avatarbutton = [[UIButton alloc] initWithFrame:CGRectMake(2, 12, 60, 20)];
-//    [avatarbutton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.navigationController.navigationBar addSubview:avatarbutton];
-//    
-//    double avatarviewsize = 28;
-//    avatarview = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8, avatarviewsize, avatarviewsize)];
-//    avatarview.layer.masksToBounds = YES;
-//    avatarview.layer.cornerRadius = avatarviewsize / 2.0;
-//    avatarview.backgroundColor = [UIColor whiteColor];
-//    [self.navigationController.navigationBar addSubview:avatarview];
-    
-	//  update the last update date
-//	[_refreshHeaderView refreshLastUpdatedDate];
     
     
 }
-
-//- (UIBarButtonItem *)rightButtonGen {
-//    UIImage *faceImage = [UIImage imageNamed:@"refresh.png"];
-//    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
-//    face.bounds = CGRectMake( 0, 0, 22, 22 );
-//    [face setImage:faceImage forState:UIControlStateNormal];
-//    [face addTarget:self
-//             action:@selector(refreshData)
-//   forControlEvents:UIControlEventTouchUpInside];
-//    return [[UIBarButtonItem alloc] initWithCustomView:face];
-//}
 
 - (void)avatarAction
 {
@@ -145,12 +81,12 @@
 
 - (void)userAction
 {
-//    NSLog(@"hello,world!");
+    NSLog(@"hello,world!");
 }
 
+/*
 - (void)segmentAction:(id)sender
 {
-	// The segmented control was clicked, handle it here
 	UISegmentedControl *segc = (UISegmentedControl *)sender;
     [self initpage];
 	switch (segc.selectedSegmentIndex) {
@@ -166,6 +102,8 @@
     [self loadDataBegin];
     [self.tableView reloadData];
 }
+ 
+ */
 
 - (void)loadDataBegin
 {
@@ -214,10 +152,6 @@
 - (void)viewDidUnload
 {
     fetchArray = nil;
-//    _refreshHeaderView = nil;
-//    msgview = nil;
-//    avatarview = nil;
-//    avatarbutton = nil;
     topicviewcontroller = nil;
     [super viewDidUnload];
 }
@@ -225,11 +159,6 @@
 - (void)dealloc
 {
     [fetchArray release];
-//    _refreshHeaderView = nil;
-//    [msgview release];
-//    [avatarview release];
-//    [avatarbutton release];
-//    [segmentedControl release];
     [topicviewcontroller release];
     [super dealloc];
 }
@@ -275,8 +204,6 @@
     NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
     NSUInteger userid = [def integerForKey:aUserId];
     NSString * email  =[def objectForKey:@"email"];
-//    NSString * image = [def objectForKey:@"image"];
-//    NSLog(@"%d,%@,%@", userid, email, image);
     if (userid && [email length]) {
         return YES;
     } else {
@@ -325,12 +252,6 @@
     return count;
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    TopicsEntity * topic = [fetchArray objectAtIndex:section];
-//    return topic.title;
-//}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     float height = 0.f;
@@ -340,33 +261,12 @@
     } else if (indexPath.row == [fetchArray count]) {
         height = 48.f;
     }
-//    if (indexPath.section == [fetchArray count] - 1 && indexPath.row == 1) {
-//        return 48.f;
-//    } else {
-//        height = 121.f;
-//    }
     return height;
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 44.f;
-//}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    PhotoHeaderView *headview = [[PhotoHeaderView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
-//    if (section < [fetchArray count]) {
-//        TopicsEntity *tp = [fetchArray objectAtIndex:section];
-//        [headview layoutSub:tp];
-//    }
-//    return headview;
-//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NewsFeedCell * cell;
     // Configure the cell...
     if (indexPath.row < [fetchArray count]) {
@@ -393,12 +293,6 @@
             [loadMoreLabel release];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-//        [cell addSubview:mLoadMoreAIView];
-//        UIButton * loadMoreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [loadMoreButton setFrame:CGRectMake(80.f, 0.f, 160.f, 60.f)];
-//        [loadMoreButton setBackgroundColor:[UIColor clearColor]];
-//        [loadMoreButton addTarget:self action:(@selector(loadMoreData)) forControlEvents:UIControlEventTouchUpInside];
-//        [cell addSubview:loadMoreButton];
         
         return cell;
         
@@ -413,45 +307,6 @@
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -468,18 +323,11 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    [avatarview setHidden:YES];
-//    [avatarbutton setHidden:YES];
-//    [segmentedControl setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [self userislogin];
-//    [avatarbutton setHidden:NO];
-//    [avatarview setHidden:NO];
-//    [segmentedControl setHidden:NO];
     
     if (!fetchArray) {
         [self start];

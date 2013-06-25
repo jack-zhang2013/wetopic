@@ -57,7 +57,7 @@
     
     if (!userName) {
         userName = [[UILabel alloc] init];
-        userName.font = [UIFont fontWithName:FONT_NAME size:15];
+        userName.font = [UIFont fontWithName:FONT_NAME size:16];
         userName.textColor = [UIColor grayColor];
     }
     
@@ -74,9 +74,6 @@
     if (!avatarButton) {
         avatarButton = [[UIButton alloc] init];
     }
-    
-    [self fillUserInfo];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -126,11 +123,13 @@
             
             avatarView.frame = CGRectMake(10, 10, 40, 40);
             
-            userName.frame = CGRectMake(55, 12, 200, 16);
-            userName.text = @"登陆就可以显示用户名啦";
+            userName.frame = CGRectMake(55, 12, 200, 17);
+            userName.text = @"用户名";
             
             userDesc.frame = CGRectMake(55, 33, 220, 13);
-            userDesc.text = @"点击登陆";
+            userDesc.text = @"个人简介";
+            
+            [self fillUserInfo];
             
             [cell addSubview:avatarView];
             [cell addSubview:avatarButton];
@@ -140,7 +139,7 @@
         } else if (indexPath.row == 1) {
             
             UIImageView * homeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list.png"]];
-            homeImageView.frame = CGRectMake(10, 13, 15, 15);
+            homeImageView.frame = CGRectMake(14, 13, 14, 14);
             UILabel * homeLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
             homeLable.text = @"最新话题";
             homeLable.font = [UIFont fontWithName:FONT_NAME size:15];
@@ -155,9 +154,9 @@
         } else if (indexPath.row == 2) {
             
             UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fire.png"]];
-            settingImageView.frame = CGRectMake(10, 10, 10, 20);
+            settingImageView.frame = CGRectMake(10, 10, 20, 20);
             UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
-            settingLable.text = @"最热话题";
+            settingLable.text = @"热门话题";
             settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
             
             [cell addSubview:settingImageView];
@@ -248,7 +247,7 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         
-        
+        [self avatarAction];
         
     } else if (indexPath.row == 1) {
         [self tapHomeView];
@@ -335,16 +334,29 @@
 {
     if ([self getUserIdandEmail]) {
         NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
-        NSString *userimage = [def objectForKey:@"image"];
+        NSString *image = [def objectForKey:@"image"];
+        NSString *otheraccountuserimage = [def objectForKey:@"otheraccountuserimage"];
         NSString *username = [def objectForKey:@"nick"];
         NSString *userdesc = [def objectForKey:@"what"];
+        
         userName.text = username;
         userDesc.text = userdesc;
+        NSLog(@"%@ %@", username, userdesc);
         
-        NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, userimage];
-        [avatarView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        if (image && otheraccountuserimage) {
+            
+            [avatarView setImage:[UIImage imageNamed:@"nobody.png"]];
+            
+        } else {
+            NSString *realimage = image ? image : otheraccountuserimage;
+            NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
+            NSLog(@"____%@___", realimage);
+            [avatarView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        }
         [avatarButton addTarget:self action:@selector(userAction) forControlEvents:UIControlEventTouchUpInside];
+        
     } else {
+        
         [avatarButton addTarget:self action:@selector(signinAction) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -357,8 +369,6 @@
     NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
     NSUInteger userid = [def integerForKey:aUserId];
     NSString * email  =[def objectForKey:@"email"];
-    //    NSString * image = [def objectForKey:@"image"];
-    //    NSLog(@"%d,%@,%@", userid, email, image);
     if (userid && [email length]) {
         return YES;
     } else {
@@ -369,6 +379,7 @@
 - (void)avatarAction
 {
     if ([self getUserIdandEmail]) {
+        
         [self userAction];
         
     } else {
@@ -379,6 +390,7 @@
 - (void)userAction
 {
     //push to userview
+    NSLog(@"hello,world!");
 }
 
 - (void)signinAction

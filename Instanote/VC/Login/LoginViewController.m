@@ -457,6 +457,7 @@
     }
     else {
         [self convertdata:obj];
+        NSLog(@"%@", obj);
     }
 }
 
