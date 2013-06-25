@@ -10,6 +10,7 @@
 #import "SettingViewController.h"
 #import "IndexViewController.h"
 #import "MobClick.h"
+#import "UMSocialData.h"
 //slider menu
 #import "LeftViewController.h"
 #import "JASidePanelController.h"
@@ -76,13 +77,16 @@
     //   reportPolicy为枚举类型,可以为 REALTIME, BATCH,SENDDAILY,SENDWIFIONLY几种
     //   channelId 为NSString * 类型，channelId 为nil或@""时,默认会被被当作@"App Store"渠道
     
-    //      [MobClick checkUpdate];   //自动更新检查, 如果需要自定义更新请使用下面的方法,需要接收一个(NSDictionary *)appInfo的参数
+    [MobClick checkUpdate];   //自动更新检查, 如果需要自定义更新请使用下面的方法,需要接收一个(NSDictionary *)appInfo的参数
     //    [MobClick checkUpdateWithDelegate:self selector:@selector(updateMethod:)];
     
 //    [MobClick updateOnlineConfig];  //在线参数配置
     
     //    1.6.8之前的初始化方法
     //    [MobClick setDelegate:self reportPolicy:REALTIME];  //建议使用新方法
+    
+    [UMSocialData setAppKey:UMENG_APPKEY];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineConfigCallBack:) name:UMOnlineConfigDidFinishedNotification object:nil];
     
 }

@@ -47,10 +47,9 @@
         
         
         contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 10, 0, 0)];
-        contentLabel.backgroundColor = [UIColor clearColor];
-        contentLabel.font = [UIFont fontWithName:FONT_NAME size:15];
+        contentLabel.textColor = [UIColor darkGrayColor];
+        contentLabel.font = [UIFont fontWithName:FONT_NAME size:14];
         [contentLabel setNumberOfLines:0];
-        contentLabel.backgroundColor = [UIColor clearColor];
         contentLabel.lineBreakMode = UILineBreakModeWordWrap;
         [self addSubview:contentLabel];
         

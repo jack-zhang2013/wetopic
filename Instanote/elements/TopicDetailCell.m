@@ -10,10 +10,12 @@
 #import "UILabel+Extensions.h"
 #import "TopicsEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 
 @implementation TopicDetailCell
-@synthesize imageviewavatar, imageviewcommentcount, imageviewcontent;
-@synthesize commentcountlabel, contentlabel, timelabel, imageviewtime, titlelabel, avatarnamelabel;
+@synthesize imageviewavatar;
+@synthesize commentcountlabel, contentlabel, timelabel, titlelabel, avatarnamelabel;
+@synthesize commentButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -42,26 +44,6 @@
             [self addSubview:avatarnamelabel];
         }
         
-        //time & comment
-        
-        if (!imageviewcommentcount) {
-            imageviewcommentcount = [[UIImageView alloc] initWithFrame:CGRectMake(150, 13, 12, 12)];
-            imageviewcommentcount.image = [UIImage imageNamed:@"comment_count.png"];
-//            [self addSubview:imageviewcommentcount];
-        }
-        if (!commentcountlabel) {
-            commentcountlabel = [[UILabel alloc] initWithFrame:CGRectMake(165, 12, 38, 15)];
-            commentcountlabel.backgroundColor = [UIColor clearColor];
-            commentcountlabel.font = [UIFont fontWithName:FONT_NAME size:14];
-            commentcountlabel.textColor = [UIColor orangeColor];
-            [self addSubview:commentcountlabel];
-        }
-        
-        if (!imageviewtime) {
-            imageviewtime = [[UIImageView alloc] initWithFrame:CGRectMake(188, 14, 12, 12)];
-            imageviewtime.image = [UIImage imageNamed:@"clock.png"];
-//            [self addSubview:imageviewtime];
-        }
         if (!timelabel) {
             timelabel = [[UILabel alloc] initWithFrame:CGRectMake(195, 12, 80, 15)];
             timelabel.backgroundColor = [UIColor clearColor];
@@ -71,26 +53,38 @@
             [self addSubview:timelabel];
         }
         
-        
-        if (!imageviewcontent) {
-            imageviewcontent = [[UIImageView alloc] initWithFrame:CGRectMake(5, 40, 310, 114)];
-            [self addSubview:imageviewcontent];
+        if (!commentcountlabel) {
+            commentcountlabel = [[UILabel alloc] initWithFrame:CGRectMake(165, 12, 38, 15)];
+            commentcountlabel.backgroundColor = [UIColor clearColor];
+            commentcountlabel.font = [UIFont fontWithName:FONT_NAME size:14];
+            commentcountlabel.textColor = [UIColor orangeColor];
+            [self addSubview:commentcountlabel];
         }
         
+                
+//        if (!imageviewcontent) {
+//            imageviewcontent = [[UIImageView alloc] initWithFrame:CGRectZero];
+//            [self addSubview:imageviewcontent];
+//        }
+        
         if (!titlelabel) {
-            titlelabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 159, 300, 20)];
+            titlelabel = [[UILabel alloc] initWithFrame:CGRectZero];
             titlelabel.backgroundColor = [UIColor clearColor];
-            titlelabel.textColor = [UIColor orangeColor];
-            titlelabel.font = [UIFont fontWithName:FONT_NAME size:20];
+            titlelabel.font = [UIFont fontWithName:FONT_NAME size:16];
             [self addSubview:titlelabel];
         }
         
         if (!contentlabel) {
-            contentlabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 182, 300, 20)];
+            contentlabel = [[UILabel alloc] initWithFrame:CGRectZero];
             contentlabel.backgroundColor = [UIColor clearColor];
-            contentlabel.font = [UIFont fontWithName:FONT_NAME size:17];
-            contentlabel.textColor = [UIColor blackColor];
+            contentlabel.font = [UIFont fontWithName:FONT_NAME size:14];
+            contentlabel.textColor = [UIColor grayColor];
             [self addSubview:contentlabel];
+        }
+        
+        if (!commentButton) {
+            commentButton = [[UIButton alloc] initWithFrame:CGRectZero];
+            [self addSubview:commentButton];
         }
         
         cellheight = 0;
@@ -108,47 +102,43 @@
     
     timelabel.text = [top timestamp:top.createdatetime];
     [timelabel sizeToFit];
-    CGFloat timelabelx = 320 - timelabel.frame.size.width - 5;
-    timelabel.frame = CGRectMake(timelabelx, 12, timelabel.frame.size.width, timelabel.frame.size.height);
+    CGFloat timelabelX = 320 - timelabel.frame.size.width - 5;
+    timelabel.frame = CGRectMake(timelabelX, 12, timelabel.frame.size.width, timelabel.frame.size.height);
     
-    CGRect imageviewtimerect = imageviewtime.frame;
-    imageviewtimerect.origin.x = 320 - timelabel.frame.size.width - 13;
-    imageviewtime.frame = imageviewtimerect;
+//    CircleDetailImgsEntity * img = top.circleDetailImg[0];
+//    NSString *url_content = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, img.bigimg];
+//    
+//    [imageviewcontent setImageWithURL:[NSURL URLWithString:url_content] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
-    
-    CircleDetailImgsEntity * img = top.circleDetailImg[0];
-    NSString *url_content = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, img.bigimg];
-    
-    [imageviewcontent setImageWithURL:[NSURL URLWithString:url_content] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    
+    titlelabel.frame = CGRectMake(5, 42, 310, 15);
     titlelabel.text = top.title;
-    
-    [titlelabel sizeToFitFixedWidth:300];
+    [titlelabel sizeToFitFixedWidth:310];
+    CGRect titlelabelRect = CGRectMake(titlelabel.frame.origin.x, titlelabel.frame.origin.y, titlelabel.frame.size.width, timelabel.frame.size.height);
+    titlelabel.frame = titlelabelRect;
     
     contentlabel.text = [self stringWithoutNbsp:top.circlecontent];
-    [contentlabel sizeToFitFixedWidth:300];
-    CGRect contentframe = CGRectMake(contentlabel.frame.origin.x, titlelabel.frame.origin.y + titlelabel.frame.size.height + 5, contentlabel.frame.size.width, contentlabel.frame.size.height);
-    contentlabel.frame = contentframe;
-    
+    [contentlabel sizeToFitFixedWidth:310];
+    CGRect contentlabelRect = CGRectMake(5, titlelabel.frame.origin.y + titlelabel.frame.size.height + 3, contentlabel.frame.size.width, contentlabel.frame.size.height);
+    contentlabel.frame = contentlabelRect;
     
     commentcountlabel.text = [NSString stringWithFormat:@"%d条评论", top.comcount];
+    commentcountlabel.backgroundColor = [UIColor orangeColor];
+    commentcountlabel.textColor = [UIColor whiteColor];
+    commentcountlabel.layer.cornerRadius = 3.0f;
+    commentcountlabel.textAlignment = NSTextAlignmentCenter;
+    commentcountlabel.layer.masksToBounds = YES;
     [commentcountlabel sizeToFit];
+    CGRect countlabelRect = CGRectMake(5, contentlabelRect.origin.y + contentlabelRect.size.height + 5, commentcountlabel.frame.size.width + 7, 25);
+    commentcountlabel.frame = countlabelRect;
     
-//    CGRect imageviewcommentrect = CGRectZero;
-//    imageviewcommentrect.origin.x = 5;
-//    imageviewcommentrect.origin.y = contentframe.origin.y + contentframe.size.height + 8;
-//    imageviewcommentrect.size.width = 12;
-//    imageviewcommentrect.size.height = 12;
-//    imageviewcommentcount.frame = imageviewcommentrect;
+    commentButton.frame = CGRectMake(215, countlabelRect.origin.y, 100, 25);
+    commentButton.backgroundColor = [UIColor orangeColor];
+    commentButton.layer.cornerRadius = 3.0f;
+    commentButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:14];
+    commentButton.layer.masksToBounds = YES;
+    [commentButton setTitle:@"添加新评论" forState:UIControlStateNormal];
     
-    CGRect lablelcountrect = CGRectZero;
-    lablelcountrect.origin.x = 10;
-    lablelcountrect.origin.y = contentframe.origin.y + contentframe.size.height + 5;
-    lablelcountrect.size.width = commentcountlabel.frame.size.width;
-    lablelcountrect.size.height = 16;
-    commentcountlabel.frame = lablelcountrect;
-    
-    cellheight = contentframe.origin.y + contentframe.size.height + 30.f;
+    cellheight = contentlabelRect.origin.y + contentlabelRect.size.height + 38.f;
 }
 
 - (NSString *)stringWithoutNbsp:(NSString *)agr

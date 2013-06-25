@@ -14,6 +14,8 @@
 #import "NSDictionaryAdditions.h"
 #import "CommentDetailViewController.h"
 #import "AddViewController.h"
+#import "UMSocialSnsService.h"
+#import "UMSocialSnsPlatformManager.h"
 
 @interface TopicViewController ()
 
@@ -86,6 +88,17 @@
     [addvc release];
     [addnav release];
 }
+
+- (void)shareAction
+{
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:UMENG_APPKEY
+                                      shareText:@"分享这个话题"
+                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina, UMShareToWechat, UMShareToRenren, UMShareToDouban, UMShareToSms, UMShareToEmail, nil]
+                                       delegate:nil];
+}
+
 
 - (void)refreshviewAction
 {
@@ -268,6 +281,9 @@
             cell = [[[TopicDetailCell alloc] init] autorelease];
         }
         [cell configurecell:mytopic];
+        
+        [cell.commentButton addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
+        
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -339,7 +355,7 @@
     
     btn_comment = [[UIButton alloc] initWithFrame:CGRectMake(288, 10, 24, 24)];
     [btn_comment setImage:[UIImage imageNamed:@"share_white.png"] forState:UIControlStateNormal];
-    [btn_comment addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
+    [btn_comment addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
     [navView addSubview:btn_comment];
     [btn_comment release];
     

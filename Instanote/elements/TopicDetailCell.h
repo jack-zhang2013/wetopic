@@ -18,15 +18,15 @@
     
     UILabel * timelabel;
     UILabel * commentcountlabel;
-    UIImageView *imageviewcommentcount;
-    UIImageView *imageviewtime;
     
-    UIImageView *imageviewcontent;
+//    UIImageView *imageviewcontent;
     
     UILabel * titlelabel;
     UILabel * contentlabel;
     
     float cellheight;
+    
+    UIButton *commentButton;
 }
 
 @property (nonatomic, retain)UIImageView *imageviewavatar;
@@ -34,13 +34,13 @@
 
 @property (nonatomic, retain)UILabel * timelabel;
 @property (nonatomic, retain)UILabel * commentcountlabel;
-@property (nonatomic, retain)UIImageView *imageviewcommentcount;
-@property (nonatomic, retain)UIImageView *imageviewtime;
 
-@property (nonatomic, retain)UIImageView *imageviewcontent;
+//@property (nonatomic, retain)UIImageView *imageviewcontent;
 
 @property (nonatomic, retain)UILabel * titlelabel;
 @property (nonatomic, retain)UILabel * contentlabel;
+
+@property (nonatomic,retain)UIButton * commentButton;
 
 - (void)configurecell:(TopicsEntity *)top;
 
