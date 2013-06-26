@@ -15,6 +15,7 @@
 #endif
 
 #define UMENG_APPKEY @"50d7ced052701556be000276"
+#define WECHAT_APPID @""
 
 #define SERVER_API @"http://1mily.com/userInfoAction_ajaxLogin.do"
 #define API_DOMAIN @"www.1mily.com"

@@ -13,6 +13,7 @@
 #import "VersionViewController.h"
 #import "UMFeedbackViewController.h"
 #import "LoginViewController.h"
+#import "UserViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import "JASidePanelController.h"
@@ -55,25 +56,7 @@
 //    [self.navigationController.navigationBar addSubview:noticeButton];
 //    [noticeButton release];
     
-    if (!userName) {
-        userName = [[UILabel alloc] init];
-        userName.font = [UIFont fontWithName:FONT_NAME size:16];
-        userName.textColor = [UIColor grayColor];
-    }
     
-    if (!userDesc) {
-        userDesc = [[UILabel alloc] init];
-        userDesc.font = [UIFont fontWithName:FONT_NAME size:12];
-        userDesc.textColor = [UIColor grayColor];
-    }
-    
-    if (!avatarView) {
-        avatarView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nobody.png"]];
-    }
-    
-    if (!avatarButton) {
-        avatarButton = [[UIButton alloc] init];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,14 +76,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 6;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = 0;
     if (indexPath.row == 0) {
-        height = 65.f;
+        height = 50.f;
     } else {
         height = 40.f;
     }
@@ -112,29 +95,60 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.backgroundColor = [UIColor grayColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (cell == nil) {
         
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor grayColor];
         if (indexPath.row == 0) {
             
+            UIButton *avatarButton = [[UIButton alloc] init];
             avatarButton.frame = CGRectMake(0, 0, 240, 40);
             
-            avatarView.frame = CGRectMake(10, 10, 40, 40);
+            UIImageView *avatarView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
             
-            userName.frame = CGRectMake(55, 12, 200, 17);
-            userName.text = @"用户名";
+            UILabel *userName = [[UILabel alloc] init];
+            userName.font = [UIFont fontWithName:FONT_NAME size:20];
+            userName.frame = CGRectMake(50, 8, 200, 20);
             
-            userDesc.frame = CGRectMake(55, 33, 220, 13);
-            userDesc.text = @"个人简介";
+            UILabel *userDesc = [[UILabel alloc] init];
+            userDesc.font = [UIFont fontWithName:FONT_NAME size:11];
+            userDesc.textColor = [UIColor grayColor];
+            userDesc.frame = CGRectMake(50, 30, 220, 12);
             
-            [self fillUserInfo];
+            if ([self getUserIdandEmail]) {
+                NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
+                NSString *image = [def objectForKey:@"image"];
+                NSString *otheraccountuserimage = [def objectForKey:@"otheraccountuserimage"];
+                NSString *username = [def objectForKey:@"nick"];
+                NSString *userdesc = [def objectForKey:@"what"];
+                userdesc = [userdesc length] > 0 ? userdesc : @"还没有个人简介";
+                
+                userName.text = username;
+                userDesc.text = userdesc;
+                
+                if (![image length] && ![otheraccountuserimage length]) {
+                    
+                    [avatarView setImage:[UIImage imageNamed:@"nobody_male.png"]];
+                    
+                } else {
+                    NSString *realimage = image ? image : otheraccountuserimage;
+                    NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
+                    [avatarView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"nobody_male.png"]];
+                }
+                
+                [avatarButton addTarget:self action:@selector(userAction) forControlEvents:UIControlEventTouchUpInside];
+                
+            } else {
+                
+                [avatarButton addTarget:self action:@selector(signinAction) forControlEvents:UIControlEventTouchUpInside];
+            }
             
             [cell addSubview:avatarView];
             [cell addSubview:avatarButton];
             [cell addSubview:userName];
             [cell addSubview:userDesc];
+            
             
         } else if (indexPath.row == 1) {
             
@@ -192,6 +206,8 @@
             
             [aboutImageView release];
             [aboutLable release];
+        } else {
+            //
         }
         
     }
@@ -201,44 +217,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -257,7 +235,48 @@
         [self tapFeedbackView];
     } else if (indexPath.row == 4) {
         [self tapSettingView];
+    } else {
+        
     }
+}
+
+- (void)avatarAction
+{
+    NSLog(@"avataraction");
+    if ([self getUserIdandEmail]) {
+        
+        [self userAction];
+        
+    } else {
+        [self signinAction];
+    }
+}
+
+- (void)userAction
+{
+    
+    NSLog(@"wtf");
+    
+    UserViewController *uservc = [[UserViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    self.sidePanelController.centerPanel = nav;
+    //    [self presentModalViewController:navigationController animated:YES];
+    [nav release];
+    [uservc release];
+    
+}
+
+- (void)signinAction
+{
+    LoginViewController *loginvc = [[LoginViewController alloc] init];
+    loginvc.finishAction = @selector(viewDidLoad);
+    loginvc.finishTarget = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginvc];
+    navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    [self presentModalViewController:navigationController animated:YES];
+    [navigationController release];
+    [loginvc release];
 }
 
 - (void)tapAboutView {
@@ -330,40 +349,6 @@
     }
 }
 
-- (void)fillUserInfo
-{
-    if ([self getUserIdandEmail]) {
-        NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
-        NSString *image = [def objectForKey:@"image"];
-        NSString *otheraccountuserimage = [def objectForKey:@"otheraccountuserimage"];
-        NSString *username = [def objectForKey:@"nick"];
-        NSString *userdesc = [def objectForKey:@"what"];
-        
-        userName.text = username;
-        userDesc.text = userdesc;
-        NSLog(@"%@ %@", username, userdesc);
-        
-        if (image && otheraccountuserimage) {
-            
-            [avatarView setImage:[UIImage imageNamed:@"nobody.png"]];
-            
-        } else {
-            NSString *realimage = image ? image : otheraccountuserimage;
-            NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
-            NSLog(@"____%@___", realimage);
-            [avatarView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-        }
-        [avatarButton addTarget:self action:@selector(userAction) forControlEvents:UIControlEventTouchUpInside];
-        
-    } else {
-        
-        [avatarButton addTarget:self action:@selector(signinAction) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    
-}
-
-
 -(BOOL)getUserIdandEmail
 {
     NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
@@ -374,35 +359,6 @@
     } else {
         return NO;
     }
-}
-
-- (void)avatarAction
-{
-    if ([self getUserIdandEmail]) {
-        
-        [self userAction];
-        
-    } else {
-        [self signinAction];
-    }
-}
-
-- (void)userAction
-{
-    //push to userview
-    NSLog(@"hello,world!");
-}
-
-- (void)signinAction
-{
-    LoginViewController *loginvc = [[LoginViewController alloc] init];
-    loginvc.finishAction = @selector(viewDidLoad);
-    loginvc.finishTarget = self;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginvc];
-    navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-    [self presentModalViewController:navigationController animated:YES];
-    [navigationController release];
-    [loginvc release];
 }
 
 @end

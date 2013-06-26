@@ -66,8 +66,24 @@
 
 - (void)configurecell:(CircleCommentInfosEntity *)cce
 {
-    NSString *stringurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, cce.userinfo.image];
-    [userImageView setImageWithURL:[NSURL URLWithString:stringurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    NSString * image = cce.userinfo.image;
+    NSString * otheraccountuserimage = cce.userinfo.otheraccountuserimage;
+    
+    if (![image length] && ![otheraccountuserimage length]) {
+        
+        
+        
+        [userImageView setImage:[UIImage imageNamed:@"nobody_male.png"]];
+        
+    } else {
+        
+//        NSLog(@"%@_%@", image, otheraccountuserimage);
+        
+        NSString *realimage = image ? image : otheraccountuserimage;
+        NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
+        [userImageView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"nobody_male.png"]];
+    }
+    
 //    NSString * info = [[self stringWithoutNbsp:cce.commentinfo] stringByConvertingHTMLToPlainText];
     NSString * info = [self stringWithoutNbsp:cce.commentinfo];
     contentLabel.text = info;

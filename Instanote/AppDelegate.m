@@ -11,6 +11,8 @@
 #import "IndexViewController.h"
 #import "MobClick.h"
 #import "UMSocialData.h"
+#import "UMSocialSnsService.h"
+#import "WXApi.h"
 //slider menu
 #import "LeftViewController.h"
 #import "JASidePanelController.h"
@@ -40,6 +42,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self umengTrack];
+    [WXApi registerApp:WECHAT_APPID];
+    
     
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     self.viewController = [[JASidePanelController alloc] init];
@@ -65,6 +69,19 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [UMSocialSnsService  applicationDidBecomeActive];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
 }
 
 
@@ -108,13 +125,6 @@
 {
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     */
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
 }
 

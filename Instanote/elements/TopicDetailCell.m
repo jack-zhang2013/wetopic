@@ -95,8 +95,18 @@
 
 - (void)configurecell:(TopicsEntity *)top
 {
-    NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, top.userinfo.image];
-    [imageviewavatar setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    NSString * image = top.userinfo.image;
+    NSString * otheraccountuserimage = top.userinfo.otheraccountuserimage;
+    if (![image length] && ![otheraccountuserimage length]) {
+        
+        [imageviewavatar setImage:[UIImage imageNamed:@"nobody_male.png"]];
+        
+    } else {
+        NSString *realimage = image ? image : otheraccountuserimage;
+        NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
+        [imageviewavatar setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"nobody_male.png"]];
+    }
     
     avatarnamelabel.text = top.userinfo.nick;
     

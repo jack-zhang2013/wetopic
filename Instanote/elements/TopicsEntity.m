@@ -32,15 +32,15 @@
         circledetailid = [[dic getStringValueForKey:@"circledetailid" defaultValue:@""] retain];
         circlecontent = [[dic getStringValueForKey:@"circlecontent" defaultValue:@""] retain];
         
-        circleCommentInfo = [[NSMutableArray alloc] initWithCapacity:0];
-        NSDictionary * commentInfoDic = [dic objectForKey:@"topicCommentInfo"];
-        for (NSDictionary * commentinfo in commentInfoDic) {
-            if (![commentinfo isKindOfClass:[NSDictionary class]]) {
-                continue;
-            }
-            CircleCommentInfosEntity *ccie = [CircleCommentInfosEntity entityWithJsonDictionary:commentinfo];
-            [circleCommentInfo addObject:ccie];
-        }
+//        circleCommentInfo = [[NSMutableArray alloc] initWithCapacity:0];
+//        NSDictionary * commentInfoDic = [dic objectForKey:@"topicCommentInfo"];
+//        for (NSDictionary * commentinfo in commentInfoDic) {
+//            if (![commentinfo isKindOfClass:[NSDictionary class]]) {
+//                continue;
+//            }
+//            CircleCommentInfosEntity *ccie = [CircleCommentInfosEntity entityWithJsonDictionary:commentinfo];
+//            [circleCommentInfo addObject:ccie];
+//        }
         
         
         NSDictionary *imgDic = [[dic objectForKey:@"circleDetailImg"] retain];

@@ -10,12 +10,12 @@
 
 @interface LeftViewController : UITableViewController
 {
-    UIImageView *avatarView;
-    UILabel * userName;
-    UILabel * userDesc;
-    UIButton * avatarButton;
+//    UIImageView *avatarView;
+//    UILabel * userName;
+//    UILabel * userDesc;
+//    UIButton * avatarButton;
 }
 
-- (void)fillUserInfo;
+//- (void)fillUserInfo;
 
 @end

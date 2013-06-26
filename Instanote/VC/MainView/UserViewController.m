@@ -26,12 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSLog(@"hello,world!");
-    
-    
-    
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -50,19 +44,36 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    if (section == 0) {
+        return 1;
+    } else {
+        return 3;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [[tableView dequeueReusableCellWithIdentifier:CellIdentifier] autorelease];
+    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        UITableViewCell *usercell = [[tableView dequeueReusableCellWithIdentifier:CellIdentifier] autorelease];
+        if (!usercell) {
+            usercell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            
+            UIImageView * userCoverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 131)];
+            userCoverImage.image = [UIImage imageNamed:@"user_cover_1.png"];
+            
+            [usercell addSubview:userCoverImage];
+            
+        }
+    }
     
     // Configure the cell...
     

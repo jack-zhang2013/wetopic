@@ -116,12 +116,22 @@
     
     CGRect authorViewRect = CGRectMake(320 - 5 - 15, 5, 15, 15);
     authorView.frame = authorViewRect;
-    NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, top.userinfo.image];
-    [authorView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    NSString * image = top.userinfo.image;
+    NSString * otheraccountuserimage = top.userinfo.otheraccountuserimage;
+    if (![image length] && ![otheraccountuserimage length]) {
+        
+        [authorView setImage:[UIImage imageNamed:@"nobody_male.png"]];
+        
+    } else {
+        NSString *realimage = image ? image : otheraccountuserimage;
+        NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
+        [authorView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"nobody_male.png"]];
+    }
     
     authorViewButton.frame = authorViewRect;
     
-    CGRect timeLabelRect = CGRectMake(157, 7, 140, 13);
+    CGRect timeLabelRect = CGRectMake(177, 7, 120, 13);
     timeLabel.frame = timeLabelRect;
     timeLabel.text = [top timestamp:top.createdatetime];
     timeLabel.textAlignment = NSTextAlignmentRight;

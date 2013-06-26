@@ -85,11 +85,11 @@
 //    [bannerview addSubview:disagreeButton];
 //    [disagreeButton release];
     
-    UILabel * contentlabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 15)];
+    UILabel * contentlabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300, 15)];
     contentlabel.backgroundColor = [UIColor clearColor];
     contentlabel.font = [UIFont fontWithName:FONT_NAME size:17];
     contentlabel.text = [self stringWithoutNbsp:mycomment.commentinfo];
-    [contentlabel sizeToFitFixedWidth:310];
+    [contentlabel sizeToFitFixedWidth:300];
     [scrollview addSubview:contentlabel];
     
     scrollview.contentSize = CGSizeMake(320, contentlabel.frame.size.height + 10);

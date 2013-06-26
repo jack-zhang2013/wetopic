@@ -146,7 +146,6 @@
     [postBody appendFormat:@"&userId=%d", userid];
     [postBody appendFormat:@"&source=%d", source];
     [postBody appendFormat:@"&comcontent=%@", [content encodeAsURIComponent]];
-    NSLog(@"%@", postBody);
     [self post:[self getURL:path queryParameters:nil] body:postBody];
 }
 
