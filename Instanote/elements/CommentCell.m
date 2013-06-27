@@ -10,7 +10,7 @@
 #import "CircleCommentInfosEntity.h"
 #import "UILabel+Extensions.h"
 #import "NSString+HTML.h"
-#import <QuartzCore/QuartzCore.h>
+//#import <QuartzCore/QuartzCore.h>
 
 @implementation CommentCell
 @synthesize userImageView;
@@ -27,8 +27,8 @@
     if (self) {
         // Initialization code
         userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 25, 25)];
-        userImageView.layer.cornerRadius = 3.0f;
-        userImageView.layer.masksToBounds = YES;
+//        userImageView.layer.cornerRadius = 3.0f;
+//        userImageView.layer.masksToBounds = YES;
         [self addSubview:userImageView];
         
 //        timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 180, 13)];
@@ -41,7 +41,7 @@
         commentcountLabel.textAlignment = UITextAlignmentLeft;
         commentcountLabel.textColor = [UIColor whiteColor];
         commentcountLabel.backgroundColor = [UIColor orangeColor];
-        commentcountLabel.layer.cornerRadius = 3.0f;
+//        commentcountLabel.layer.cornerRadius = 3.0f;
         commentcountLabel.textAlignment = NSTextAlignmentCenter;
         commentcountLabel.font = [UIFont fontWithName:FONT_NAME size:12];
         

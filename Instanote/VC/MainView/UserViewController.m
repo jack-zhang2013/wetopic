@@ -7,6 +7,10 @@
 //
 
 #import "UserViewController.h"
+//#import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
+#import "IndexViewController.h"
+
 
 @interface UserViewController ()
 
@@ -31,6 +35,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,67 +62,106 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0;
+    if (indexPath.row == 0 && indexPath.section == 0) {
+        height = 160.f;
+    } else {
+        height = 40.f;
+    }
+    return height;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [[tableView dequeueReusableCellWithIdentifier:CellIdentifier] autorelease];
-    
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        UITableViewCell *usercell = [[tableView dequeueReusableCellWithIdentifier:CellIdentifier] autorelease];
-        if (!usercell) {
-            usercell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            UIImageView * userCoverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 160)];
+            userCoverImage.image = [UIImage imageNamed:@"user_cover1.png"];
+            [cell addSubview:userCoverImage];
+            [userCoverImage release];
             
-            UIImageView * userCoverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 131)];
-            userCoverImage.image = [UIImage imageNamed:@"user_cover_1.png"];
+            CGFloat userImageViewSize = 70.f;
+            CGFloat userImageViewFromTop = 20.f;
             
-            [usercell addSubview:userCoverImage];
+            UIImageView *userImageView = [[UIImageView alloc] initWithFrame:CGRectMake((320 - userImageViewSize) / 2, userImageViewFromTop, userImageViewSize, userImageViewSize)];
+            userImageView.image = [UIImage imageNamed:@"nobody_male.png"];
+            userImageView.backgroundColor = [UIColor whiteColor];
+            [userImageView.layer setMasksToBounds:YES];
+            CGFloat radius = userImageViewSize / 2;
+            [userImageView.layer setCornerRadius:radius];
+            [userImageView.layer setBorderWidth:3.0];
+            [userImageView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+            
+            [cell addSubview:userImageView];
+            
+            [userImageView release];
+            
+            UILabel * userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, userImageViewSize + userImageViewFromTop + 3, 320, 20)];
+            userNameLabel.textAlignment = NSTextAlignmentCenter;
+            userNameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+            userNameLabel.textColor = [UIColor whiteColor];
+            userNameLabel.backgroundColor = [UIColor clearColor];
+            userNameLabel.text = @"用户名";
+            [cell addSubview:userNameLabel];
+            [userNameLabel release];
+            
+            UIView * bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 120, 320, 40)];
+            bannerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"user_cover_banner"]];
+            [cell addSubview:bannerView];
+            
+            
+            UIButton * allNewsFeedButton = [[UIButton alloc] initWithFrame:CGRectMake(200, 0, 120, 40)];
+            [allNewsFeedButton addTarget:self action:@selector(allNewsFeedAction) forControlEvents:UIControlEventTouchUpInside];
+            [bannerView addSubview:allNewsFeedButton];
+            [allNewsFeedButton release];
+            
+            UILabel * allNewsFeedLabel = [[UILabel alloc] initWithFrame:CGRectMake(160, 12, 134, 16)];
+            allNewsFeedLabel.text = @"所有动态";
+            allNewsFeedLabel.backgroundColor = [UIColor clearColor];
+            allNewsFeedLabel.textAlignment = NSTextAlignmentRight;
+            allNewsFeedLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+            allNewsFeedLabel.textColor = [UIColor whiteColor];
+            [bannerView addSubview:allNewsFeedLabel];
+            [allNewsFeedLabel release];
+            
+            UIImageView * allNewsFeedAccessory = [[UIImageView alloc] initWithFrame:CGRectMake(295, 13, 14, 14)];
+            allNewsFeedAccessory.image = [UIImage imageNamed:@"user_cover_arrow"];
+            [bannerView addSubview:allNewsFeedAccessory];
+            [allNewsFeedAccessory release];
+            
+            [bannerView release];
             
         }
+        
+        
     }
+    
     
     // Configure the cell...
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+#pragma mark - actions
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)allNewsFeedAction
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    IndexViewController *homevc = [[IndexViewController alloc] init];
+    homevc.pagetype = 1;
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController pushViewController:nav animated:YES];
+    [homevc release];
+    [nav release];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

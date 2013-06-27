@@ -6,7 +6,7 @@
 
 */
 
-"errormessage" = "没有服务";
+"errormessage" = "请检查网络";
 
 /*** setting ***/
 "more_title" = "更多";

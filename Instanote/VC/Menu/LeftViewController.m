@@ -19,7 +19,6 @@
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
 
-
 @interface LeftViewController ()
 
 @end
@@ -38,24 +37,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(218, 14, 20, 20)];
     [settingButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
-//    [settingButton addTarget:self action:@selector(tapSettingView) forControlEvents:UIControlEventTouchUpInside];
+    //    [settingButton addTarget:self action:@selector(tapSettingView) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:settingButton];
     [settingButton release];
     
-//    UIButton *noticeButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 14, 20, 20)];
-//    [noticeButton setImage:[UIImage imageNamed:@"notice.png"] forState:UIControlStateNormal];
-//    [self.navigationController.navigationBar addSubview:noticeButton];
-//    [noticeButton release];
-    
+    //    UIButton *noticeButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 14, 20, 20)];
+    //    [noticeButton setImage:[UIImage imageNamed:@"notice.png"] forState:UIControlStateNormal];
+    //    [self.navigationController.navigationBar addSubview:noticeButton];
+    //    [noticeButton release];
     
 }
 
@@ -90,16 +88,14 @@
     return height;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor grayColor];
         if (indexPath.row == 0) {
             
             UIButton *avatarButton = [[UIButton alloc] init];
@@ -148,6 +144,11 @@
             [cell addSubview:avatarButton];
             [cell addSubview:userName];
             [cell addSubview:userDesc];
+            
+            [avatarView release];
+            [avatarButton release];
+            [userName release];
+            [userDesc release];
             
             
         } else if (indexPath.row == 1) {
@@ -209,14 +210,9 @@
         } else {
             //
         }
-        
     }
-    
-    // Configure the cell...
-    
     return cell;
 }
-
 
 #pragma mark - Table view delegate
 
@@ -235,36 +231,7 @@
         [self tapFeedbackView];
     } else if (indexPath.row == 4) {
         [self tapSettingView];
-    } else {
-        
     }
-}
-
-- (void)avatarAction
-{
-    NSLog(@"avataraction");
-    if ([self getUserIdandEmail]) {
-        
-        [self userAction];
-        
-    } else {
-        [self signinAction];
-    }
-}
-
-- (void)userAction
-{
-    
-    NSLog(@"wtf");
-    
-    UserViewController *uservc = [[UserViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
-    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
-    self.sidePanelController.centerPanel = nav;
-    //    [self presentModalViewController:navigationController animated:YES];
-    [nav release];
-    [uservc release];
-    
 }
 
 - (void)signinAction
@@ -324,6 +291,17 @@
     [self presentModalViewController:navigationController animated:YES];
 }
 
+- (void)userAction
+{
+    UserViewController *uservc = [[UserViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    self.sidePanelController.centerPanel = nav;
+    [nav release];
+    [uservc release];
+    
+}
+
 #pragma mark
 #pragma userinfo
 
@@ -360,5 +338,19 @@
         return NO;
     }
 }
+
+- (void)avatarAction
+{
+    NSLog(@"avataraction");
+    if ([self getUserIdandEmail]) {
+        
+        [self userAction];
+        
+    } else {
+        [self signinAction];
+    }
+}
+
+
 
 @end

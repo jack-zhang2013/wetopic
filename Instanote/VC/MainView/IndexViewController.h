@@ -17,6 +17,7 @@
     int pagenum;
     int pagesize;
     int pagetype;
+    NSString *indexUserId;
     
     UIActivityIndicatorView *mLoadMoreAIView;        //页面加载更多转场
 //    EGORefreshTableHeaderView *_refreshHeaderView;
@@ -43,6 +44,7 @@
 
 @property (nonatomic, retain)TopicViewController *topicviewcontroller;
 @property (nonatomic, assign)int pagetype;
+@property (nonatomic, retain)NSString *indexUserId;
 
 - (void)reloadTableViewDataSource;
 //- (void)doneLoadingTableViewData;

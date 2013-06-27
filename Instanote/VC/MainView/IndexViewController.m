@@ -24,6 +24,7 @@
 @implementation IndexViewController
 @synthesize topicviewcontroller;
 @synthesize pagetype;
+@synthesize indexUserId;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,14 +37,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if (pagetype == 0 || pagetype == 1) {
+    if (![indexUserId length] && (pagetype == 0 || pagetype == 1)) {
         self.title = @"最新话题";
     } else if (pagetype == 2) {
         self.title = @"热门话题";
     }
-    
-    
 }
 
 - (void)avatarAction
