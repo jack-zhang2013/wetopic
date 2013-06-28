@@ -59,6 +59,7 @@
     
     IndexViewController * indexvc = [[IndexViewController alloc] init];
     indexvc.pagetype = 1;
+    indexvc.title = @"最新话题";
     UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:indexvc];
     [indexnav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.viewController.centerPanel = indexnav;

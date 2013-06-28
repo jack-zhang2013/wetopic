@@ -37,11 +37,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (![indexUserId length] && (pagetype == 0 || pagetype == 1)) {
-        self.title = @"最新话题";
-    } else if (pagetype == 2) {
-        self.title = @"热门话题";
-    }
 }
 
 - (void)avatarAction
@@ -77,11 +72,6 @@
     [loginvc release];
 }
 
-- (void)userAction
-{
-    NSLog(@"hello,world!");
-}
-
 /*
 - (void)segmentAction:(id)sender
 {
@@ -106,7 +96,7 @@
 - (void)loadDataBegin
 {
     WeiboClient *client = [[WeiboClient alloc] initWithTarget:self action:@selector(loadDataFinished:obj:)];
-    [client timeline:pagesize pageNum:pagenum pageType:pagetype];
+    [client timeline:pagesize pageNum:pagenum pageType:pagetype userId:indexUserId];
 }
 
 - (void)loadDataFinished:(WeiboClient *)sender

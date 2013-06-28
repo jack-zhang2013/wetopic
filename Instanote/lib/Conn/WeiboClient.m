@@ -120,7 +120,7 @@
 #pragma mark -
 #pragma mark Comments
 
-- (void)timeline:(int)ps pageNum:(int)pn pageType:(int)type
+- (void)timeline:(int)ps pageNum:(int)pn pageType:(int)type userId:(NSString *)uid
 {
     NSString *path = [NSString stringWithFormat:@"topicAction_getNewTopicForPhone.%@", API_FORMAT];
 	
@@ -133,6 +133,9 @@
     }
     if (type > 0) {
         [params setObject:[NSString stringWithFormat:@"%d", type] forKey:@"type"];
+    }
+    if ([uid length]) {
+        [params setObject:uid forKey:@"userId"];
     }
 	[super get:[self getURL:path queryParameters:params]];
 }

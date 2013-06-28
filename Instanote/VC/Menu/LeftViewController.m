@@ -258,6 +258,7 @@
 - (void)tapHomeView {
     IndexViewController *homevc = [[IndexViewController alloc] init];
     homevc.pagetype = 1;
+    homevc.title = @"最新话题";
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.sidePanelController.centerPanel = nav;
@@ -268,6 +269,7 @@
 - (void)tapHomeViewHot {
     IndexViewController *homevc = [[IndexViewController alloc] init];
     homevc.pagetype = 2;
+    homevc.title = @"热门话题";
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.sidePanelController.centerPanel = nav;
