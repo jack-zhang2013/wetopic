@@ -47,6 +47,8 @@ typedef enum {
 
 - (void)reguser:(NSString *)email pwd:(NSString *)password;
 
+- (void)user:(NSString *)userid;
+
 
 ///////////end notices
 

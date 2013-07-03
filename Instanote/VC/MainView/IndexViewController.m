@@ -39,15 +39,15 @@
     [super viewDidLoad];
 }
 
-- (void)avatarAction
-{
-    if ([self getUserIdandEmail]) {
-        [self userAction];
-        
-    } else {
-        [self signinAction];
-    }
-}
+//- (void)avatarAction
+//{
+//    if ([self getUserIdandEmail]) {
+//        [self userAction];
+//        
+//    } else {
+//        [self signinAction];
+//    }
+//}
 
 //- (void)userislogin
 //{
@@ -60,17 +60,17 @@
 //}
 
 
-- (void)signinAction
-{
-    LoginViewController *loginvc = [[LoginViewController alloc] init];
-    loginvc.finishAction = @selector(viewDidLoad);
-    loginvc.finishTarget = self;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginvc];
-    navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-    [self presentModalViewController:navigationController animated:YES];
-    [navigationController release];
-    [loginvc release];
-}
+//- (void)signinAction
+//{
+//    LoginViewController *loginvc = [[LoginViewController alloc] init];
+//    loginvc.finishAction = @selector(viewDidLoad);
+//    loginvc.finishTarget = self;
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginvc];
+//    navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+//    [self presentModalViewController:navigationController animated:YES];
+//    [navigationController release];
+//    [loginvc release];
+//}
 
 /*
 - (void)segmentAction:(id)sender
@@ -265,7 +265,6 @@
         [cell configurecell:tp];
         
     } else if (indexPath.row == [fetchArray count]) {
-        
         UITableViewCell * cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell_loadmore_style2"];
         if (cell == nil){
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -275,7 +274,11 @@
             [loadMoreLabel setTextColor:[UIColor grayColor]];
             [loadMoreLabel setBackgroundColor:[UIColor clearColor]];
             
-            [loadMoreLabel setText:@"上拉加载更多"];
+            if ([fetchArray count] < totalcommentcount) {
+                [loadMoreLabel setText:@"上拉加载更多"];
+            } else {
+                [loadMoreLabel setText:@"没有更多了"];
+            }
             
             [cell addSubview:loadMoreLabel];
             [loadMoreLabel release];

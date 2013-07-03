@@ -15,6 +15,7 @@
 #import "LoginViewController.h"
 #import "UserViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
@@ -24,6 +25,7 @@
 @end
 
 @implementation LeftViewController
+@synthesize userName, userDesc, avatarView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -54,6 +56,37 @@
     //    [noticeButton setImage:[UIImage imageNamed:@"notice.png"] forState:UIControlStateNormal];
     //    [self.navigationController.navigationBar addSubview:noticeButton];
     //    [noticeButton release];
+    
+}
+
+- (void)refreshTableview
+{
+    if ([self getUserIdandEmail]) {
+        UsersEntity * userentity = [self getUserEntity];
+        NSString *image = userentity.image;
+        NSString *otheraccountuserimage = userentity.otheraccountuserimage;
+        NSString *username = userentity.nick;
+        NSString *userdesc = userentity.what;
+        
+        userName.text = [username length] > 0 ? username : @"用户名";
+        userDesc.text = [userdesc length] > 0 ? userdesc : @"还没有个人简介";
+        
+        if (![image length] && ![otheraccountuserimage length]) {
+            
+            [avatarView setImage:[UIImage imageNamed:@"nobody_male.png"]];
+            
+        } else {
+            
+            NSString *realimage = image ? image : otheraccountuserimage;
+            NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
+            [avatarView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"nobody_male.png"]];
+        }
+        
+    } else {
+        userName.text = @"用户尚未登录";
+        userDesc.text = @"个人素描";
+        [avatarView setImage:[UIImage imageNamed:@"nobody_male.png"]];
+    }
     
 }
 
@@ -98,57 +131,33 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
             
-            UIButton *avatarButton = [[UIButton alloc] init];
-            avatarButton.frame = CGRectMake(0, 0, 240, 40);
-            
-            UIImageView *avatarView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
-            
-            UILabel *userName = [[UILabel alloc] init];
-            userName.font = [UIFont fontWithName:FONT_NAME size:20];
-            userName.frame = CGRectMake(50, 8, 200, 20);
-            
-            UILabel *userDesc = [[UILabel alloc] init];
-            userDesc.font = [UIFont fontWithName:FONT_NAME size:11];
-            userDesc.textColor = [UIColor grayColor];
-            userDesc.frame = CGRectMake(50, 30, 220, 12);
-            
-            if ([self getUserIdandEmail]) {
-                NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
-                NSString *image = [def objectForKey:@"image"];
-                NSString *otheraccountuserimage = [def objectForKey:@"otheraccountuserimage"];
-                NSString *username = [def objectForKey:@"nick"];
-                NSString *userdesc = [def objectForKey:@"what"];
-                userdesc = [userdesc length] > 0 ? userdesc : @"还没有个人简介";
-                
-                userName.text = username;
-                userDesc.text = userdesc;
-                
-                if (![image length] && ![otheraccountuserimage length]) {
-                    
-                    [avatarView setImage:[UIImage imageNamed:@"nobody_male.png"]];
-                    
-                } else {
-                    NSString *realimage = image ? image : otheraccountuserimage;
-                    NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
-                    [avatarView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"nobody_male.png"]];
-                }
-                
-                [avatarButton addTarget:self action:@selector(userAction) forControlEvents:UIControlEventTouchUpInside];
-                
-            } else {
-                
-                [avatarButton addTarget:self action:@selector(signinAction) forControlEvents:UIControlEventTouchUpInside];
+            if (!avatarView) {
+                CGFloat userImageViewSize = 40.f;
+                avatarView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, userImageViewSize, userImageViewSize)];
+                [avatarView.layer setMasksToBounds:YES];
+                CGFloat radius = userImageViewSize / 2;
+                [avatarView.layer setCornerRadius:radius];
             }
             
+            if (!userName) {
+                userName = [[UILabel alloc] init];
+                userName.font = [UIFont fontWithName:FONT_NAME size:17];
+                userName.frame = CGRectMake(50, 7, 200, 20);
+            }
+
+            
+            if (!userDesc) {
+                userDesc = [[UILabel alloc] init];
+                userDesc.font = [UIFont fontWithName:FONT_NAME size:11];
+                userDesc.textColor = [UIColor grayColor];
+                userDesc.frame = CGRectMake(50, 30, 220, 12);
+            }
+            
+            [self refreshTableview];
+            
             [cell addSubview:avatarView];
-            [cell addSubview:avatarButton];
             [cell addSubview:userName];
             [cell addSubview:userDesc];
-            
-            [avatarView release];
-            [avatarButton release];
-            [userName release];
-            [userDesc release];
             
             
         } else if (indexPath.row == 1) {
@@ -220,9 +229,7 @@
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
-        
         [self avatarAction];
-        
     } else if (indexPath.row == 1) {
         [self tapHomeView];
     } else if (indexPath.row == 2) {
@@ -237,7 +244,7 @@
 - (void)signinAction
 {
     LoginViewController *loginvc = [[LoginViewController alloc] init];
-    loginvc.finishAction = @selector(viewDidLoad);
+    loginvc.finishAction = @selector(refreshTableview);
     loginvc.finishTarget = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginvc];
     navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
@@ -296,6 +303,7 @@
 - (void)userAction
 {
     UserViewController *uservc = [[UserViewController alloc] init];
+    uservc.userentity = [self getUserEntity];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.sidePanelController.centerPanel = nav;
@@ -306,6 +314,28 @@
 
 #pragma mark
 #pragma userinfo
+
+- (UsersEntity *)getUserEntity
+{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    UsersEntity * userentity = [[UsersEntity alloc] init];
+    userentity.email = [def stringForKey:@"email"];
+    userentity.image = [def stringForKey:@"image"];
+    userentity.nick = [def stringForKey:@"nick"];
+    userentity.otheraccountuserimage = [def stringForKey:@"otheraccountuserimage"];
+    userentity.password = [def stringForKey:@"password"];
+    userentity.otheraccount = [def integerForKey:@"otheraccount"];
+    userentity.otheraccountypeid = [def integerForKey:@"otheraccountypeid"];
+    userentity.sex = [def integerForKey:@"sex"];
+    userentity.registertime = [def integerForKey:@"registertime"];
+    userentity.userid = [def stringForKey:@"userid"];
+    userentity.userlevel = [def integerForKey:@"userlevel"];
+    userentity.address = [def stringForKey:@"address"];
+    userentity.hobby = [def stringForKey:@"hobby"];
+    userentity.what = [def stringForKey:@"what"];
+    userentity.website = [def stringForKey:@"website"];
+    return userentity;
+}
 
 -(int)getUserId
 {
@@ -343,7 +373,6 @@
 
 - (void)avatarAction
 {
-    NSLog(@"avataraction");
     if ([self getUserIdandEmail]) {
         
         [self userAction];
@@ -353,6 +382,21 @@
     }
 }
 
+- (void)dealloc
+{
+    [super dealloc];
+    [avatarView release];
+    [userName release];
+    [userDesc release];
+}
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    avatarView = nil;
+    userName = nil;
+    userDesc = nil;
+    
+}
 
 @end

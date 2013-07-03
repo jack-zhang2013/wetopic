@@ -199,6 +199,16 @@
     [self post:[self getURL:path queryParameters:nil] body:postBody];
 }
 
+- (void)user:(NSString *)userid
+{
+    NSString *path = [NSString stringWithFormat:@"topicAction_findUserByUserId.%@", API_FORMAT];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
+    if ( [userid length] ) {
+        [params setObject:[NSString stringWithFormat:@"%@", userid] forKey:@"userId"];
+    }
+	[super get:[self getURL:path queryParameters:params]];
+}
+
 
 - (void)getComments:(long long)statusId 
 	 startingAtPage:(int)page 

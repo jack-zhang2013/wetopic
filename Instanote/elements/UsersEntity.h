@@ -23,8 +23,11 @@
     time_t registertime;
     int sex;
     NSString *what;
-    int userid;
+    NSString *userid;
     int userlevel;
+    NSString *hobby;
+    NSString *address;
+    NSString *website;
     
 }
 
@@ -40,8 +43,11 @@
 @property (nonatomic, assign) time_t registertime;
 @property (nonatomic, assign) int sex;
 @property (nonatomic, retain) NSString *what;
-@property (nonatomic, assign) int userid;
+@property (nonatomic, assign) NSString *userid;
 @property (nonatomic, assign) int userlevel;
+@property (nonatomic, retain) NSString *hobby;
+@property (nonatomic, retain) NSString *address;
+@property (nonatomic, retain) NSString *website;
 
 - (UsersEntity *)initWithJsonDictionary:(NSDictionary *)dic;
 

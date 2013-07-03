@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface LeftViewController : UITableViewController
+{
+    UIImageView *avatarView;
+    UILabel *userName;
+    UILabel *userDesc;
+}
+
+@property (nonatomic, retain)UIImageView *avatarView;
+@property (nonatomic, retain)UILabel *userName;
+@property (nonatomic, retain)UILabel *userDesc;
 
 @end
