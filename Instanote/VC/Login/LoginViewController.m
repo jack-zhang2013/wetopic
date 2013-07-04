@@ -434,7 +434,7 @@
     [def setInteger:user.otheraccountypeid forKey:@"otheraccountypeid"];
     [def setInteger:user.sex forKey:@"sex"];
     [def setInteger:user.registertime forKey:@"registertime"];
-    [def setObject:user.userid forKey:aUserId];
+    [def setInteger:user.userid forKey:aUserId];
     [def setInteger:user.userlevel forKey:@"userlevel"];
     [def setObject:user.address forKey:@"address"];
     [def setObject:user.hobby forKey:@"hobby"];

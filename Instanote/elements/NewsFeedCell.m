@@ -9,6 +9,7 @@
 #import "NewsFeedCell.h"
 #import "UILabel+Extensions.h"
 #import "TopicViewController.h"
+#import "UserViewController.h"
 
 @implementation NewsFeedCell
 

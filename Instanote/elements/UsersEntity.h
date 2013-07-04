@@ -23,7 +23,7 @@
     time_t registertime;
     int sex;
     NSString *what;
-    NSString *userid;
+    int userid;
     int userlevel;
     NSString *hobby;
     NSString *address;
@@ -43,7 +43,7 @@
 @property (nonatomic, assign) time_t registertime;
 @property (nonatomic, assign) int sex;
 @property (nonatomic, retain) NSString *what;
-@property (nonatomic, assign) NSString *userid;
+@property (nonatomic, assign) int userid;
 @property (nonatomic, assign) int userlevel;
 @property (nonatomic, retain) NSString *hobby;
 @property (nonatomic, retain) NSString *address;

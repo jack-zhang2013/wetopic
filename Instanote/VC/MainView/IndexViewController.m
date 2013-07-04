@@ -16,6 +16,7 @@
 #import "WeiboClient.h"
 #import "TopicViewController.h"
 #import "NewsFeedCell.h"
+#import "UserViewController.h"
 
 @interface IndexViewController ()
 
@@ -23,8 +24,8 @@
 
 @implementation IndexViewController
 @synthesize topicviewcontroller;
-@synthesize pagetype;
-@synthesize indexUserId;
+@synthesize pagetype = pagetype;
+@synthesize indexUserId = indexUserId;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -199,6 +200,19 @@
     }
 }
 
+- (void)userAction:(int)uid
+{
+    NSLog(@"%d", uid);
+    UserViewController *uservc = [[UserViewController alloc] init];
+    uservc.userId = uid;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [self presentModalViewController:nav animated:YES];
+    [nav release];
+    [uservc release];
+    
+}
+
 #pragma mark -
 #pragma mark Data Source Loading / Reloading Methods
 
@@ -260,9 +274,13 @@
     if (indexPath.row < [fetchArray count]) {
         
         cell = [[[NewsFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        
         TopicsEntity * tp = [fetchArray objectAtIndex:indexPath.row];
         [cell configurecell:tp];
+        
+//        SEL userinfoMethodSelector = NSSelectorFromString(@"");
+        
+        [cell.authorNameButton addTarget:self action:@selector(userAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.authorViewButton addTarget:self action:@selector(userAction:) forControlEvents:UIControlEventTouchUpInside];
         
     } else if (indexPath.row == [fetchArray count]) {
         UITableViewCell * cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell_loadmore_style2"];

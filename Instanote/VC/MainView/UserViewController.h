@@ -20,12 +20,17 @@
     UILabel * userDescLablel;
     UILabel * userHobbyLable;
     
+//    UIView * bannerView;
+//    UIButton * allNewsFeedButton;
+    
     
     UsersEntity * userentity;
-    NSString * userId;
+    int userId;
 }
 
-@property (nonatomic, retain)NSString * userId;
+@property (nonatomic, assign)int userId;
 @property (nonatomic, retain)UsersEntity *userentity;
+
+- (void)allNewsFeedAction;
 
 @end

@@ -120,7 +120,7 @@
 #pragma mark -
 #pragma mark Comments
 
-- (void)timeline:(int)ps pageNum:(int)pn pageType:(int)type userId:(NSString *)uid
+- (void)timeline:(int)ps pageNum:(int)pn pageType:(int)type userId:(int)uid
 {
     NSString *path = [NSString stringWithFormat:@"topicAction_getNewTopicForPhone.%@", API_FORMAT];
 	
@@ -134,8 +134,8 @@
     if (type > 0) {
         [params setObject:[NSString stringWithFormat:@"%d", type] forKey:@"type"];
     }
-    if ([uid length]) {
-        [params setObject:uid forKey:@"userId"];
+    if (uid > 0) {
+        [params setObject:[NSString stringWithFormat:@"%d", uid] forKey:@"userId"];
     }
 	[super get:[self getURL:path queryParameters:params]];
 }
@@ -199,12 +199,12 @@
     [self post:[self getURL:path queryParameters:nil] body:postBody];
 }
 
-- (void)user:(NSString *)userid
+- (void)user:(int)userid
 {
     NSString *path = [NSString stringWithFormat:@"topicAction_findUserByUserId.%@", API_FORMAT];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
-    if ( [userid length] ) {
-        [params setObject:[NSString stringWithFormat:@"%@", userid] forKey:@"userId"];
+    if ( userid > 0 ) {
+        [params setObject:[NSString stringWithFormat:@"%d", userid] forKey:@"userId"];
     }
 	[super get:[self getURL:path queryParameters:params]];
 }

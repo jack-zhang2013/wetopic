@@ -28,7 +28,7 @@
         otheraccountypeid = [dic getIntValueForKey:@"otheraccountypeid" defaultValue:-1];
         password = [[dic getStringValueForKey:@"password" defaultValue:@""] retain];
         registertime = [dic getTimeValueForKey:@"registertimeLong" defaultValue:0];
-        userid = [dic getStringValueForKey:@"userid" defaultValue:@""];
+        userid = [dic getIntValueForKey:@"userid" defaultValue:-1];
         userlevel = [dic getIntValueForKey:@"userlevel" defaultValue:-1];
         what = [dic getStringValueForKey:@"what" defaultValue:@""];
         hobby = [dic getStringValueForKey:@"hobby" defaultValue:@""];

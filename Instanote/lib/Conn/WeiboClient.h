@@ -39,7 +39,7 @@ typedef enum {
 
 - (void)topicCommnet:(NSString *)tid pageNum:(int)pn pageSize:(int)ps;
 
-- (void)timeline:(int)ps pageNum:(int)pn pageType:(int)type userId:(NSString *)uid;
+- (void)timeline:(int)ps pageNum:(int)pn pageType:(int)type userId:(int)uid;
 
 - (void)login:(NSString *)email pwd:(NSString *)password;
 
@@ -47,7 +47,7 @@ typedef enum {
 
 - (void)reguser:(NSString *)email pwd:(NSString *)password;
 
-- (void)user:(NSString *)userid;
+- (void)user:(int)userid;
 
 
 ///////////end notices

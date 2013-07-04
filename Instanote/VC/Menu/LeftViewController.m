@@ -328,7 +328,7 @@
     userentity.otheraccountypeid = [def integerForKey:@"otheraccountypeid"];
     userentity.sex = [def integerForKey:@"sex"];
     userentity.registertime = [def integerForKey:@"registertime"];
-    userentity.userid = [def stringForKey:@"userid"];
+    userentity.userid = [def integerForKey:@"userid"];
     userentity.userlevel = [def integerForKey:@"userlevel"];
     userentity.address = [def stringForKey:@"address"];
     userentity.hobby = [def stringForKey:@"hobby"];
