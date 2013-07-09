@@ -200,15 +200,15 @@
     }
 }
 
-- (void)userAction:(int)uid
+- (void)userAction:(UIButton *)sender;
 {
-    NSLog(@"%d", uid);
     UserViewController *uservc = [[UserViewController alloc] init];
-    uservc.userId = uid;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
-    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
-    [self presentModalViewController:nav animated:YES];
-    [nav release];
+    uservc.userId = sender.tag;
+    [self.navigationController pushViewController:uservc animated:YES];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
+//    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+//    [self presentModalViewController:nav animated:YES];
+//    [nav release];
     [uservc release];
     
 }
@@ -276,9 +276,6 @@
         cell = [[[NewsFeedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         TopicsEntity * tp = [fetchArray objectAtIndex:indexPath.row];
         [cell configurecell:tp];
-        
-//        SEL userinfoMethodSelector = NSSelectorFromString(@"");
-        
         [cell.authorNameButton addTarget:self action:@selector(userAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.authorViewButton addTarget:self action:@selector(userAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -295,7 +292,11 @@
             if ([fetchArray count] < totalcommentcount) {
                 [loadMoreLabel setText:@"上拉加载更多"];
             } else {
-                [loadMoreLabel setText:@"没有更多了"];
+                if ([fetchArray count] == 0) {
+                    [loadMoreLabel setText:@"正在加载"];
+                } else {
+                    [loadMoreLabel setText:@"没有更多了"];
+                }
             }
             
             [cell addSubview:loadMoreLabel];

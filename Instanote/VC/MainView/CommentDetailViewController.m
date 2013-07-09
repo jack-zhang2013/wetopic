@@ -33,11 +33,6 @@
     self.navigationItem.hidesBackButton = YES;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-//    UIButton * btn_back = [[UIButton alloc] initWithFrame:CGRectMake(10, 13, 24, 16)];
-//    [btn_back setImage:[UIImage imageNamed:@"arrow.png"] forState:UIControlStateNormal];
-//    [btn_back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.navigationController.navigationBar addSubview:btn_back];
-    
     self.navigationItem.leftBarButtonItem = [self leftButtonGen];
     
 	// Do any additional setup after loading the view.
@@ -58,16 +53,16 @@
     NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, mycomment.userinfo.image];
     [avatarview setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     [bannerview addSubview:avatarview];
-    UILabel * usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 15, 260, 17)];
+    UILabel * usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 5, 260, 17)];
     usernameLabel.backgroundColor = [UIColor clearColor];
-    usernameLabel.textColor = [UIColor orangeColor];
+//    usernameLabel.textColor = [UIColor orangeColor];
     usernameLabel.text = mycomment.userinfo.nick;
     usernameLabel.font = [UIFont fontWithName:FONT_NAME size:15];
     [bannerview addSubview:usernameLabel];
     
     UILabel * userdesc = [[UILabel alloc] initWithFrame:CGRectMake(44, 25, 100, 15)];
     userdesc.backgroundColor = [UIColor clearColor];
-    userdesc.textColor = [UIColor orangeColor];
+    userdesc.textColor = [UIColor grayColor];
     userdesc.text = mycomment.userinfo.what;
     userdesc.font = [UIFont fontWithName:FONT_NAME size:13];
     [bannerview addSubview:userdesc];

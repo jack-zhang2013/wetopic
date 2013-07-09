@@ -203,10 +203,11 @@
 - (void)userinfoAction
 {
     VersionViewController * versionController = [[VersionViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:versionController];
-    [navigationController.navigationBar setBarStyle:UIBarStyleBlackOpaque];
-    [self presentModalViewController:navigationController animated:YES];
-    [navigationController release];
+    [self.navigationController pushViewController:versionController animated:YES];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:versionController];
+//    [navigationController.navigationBar setBarStyle:UIBarStyleBlackOpaque];
+//    [self presentModalViewController:navigationController animated:YES];
+//    [navigationController release];
     [versionController release];
 }
 

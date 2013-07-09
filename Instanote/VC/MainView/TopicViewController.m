@@ -46,10 +46,9 @@
 //    CGRect tableviewRect = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height + 44.f);
 //    [self.tableView setFrame:tableviewRect];
     
-//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn_comment.png"] style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
-//    //[[UIBarButtonItem alloc] initWithTitle:@"评论" style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
+    self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
+    self.navigationItem.rightBarButtonItem = [self rightButtonForCenterPanel];
     
-       
 //    msgview = [[msgView alloc] initWithFrame:CGRectMake(80, 200, 160, 40)];
 //    [self.view addSubview:msgview];
     
@@ -75,6 +74,10 @@
     
     [self loadDataBegin];
 }
+
+
+
+
 
  - (void)commentAction
 {
@@ -314,7 +317,12 @@
         if ([fetchArray count] < totalcommentcount) {
             [loadMoreLabel setText:@"上拉加载更多"];
         } else {
-            [loadMoreLabel setText:@"没有更多了"];
+            if ([fetchArray count] == 0) {
+                [loadMoreLabel setText:@"正在加载"];
+            } else {
+                [loadMoreLabel setText:@"没有更多了"];
+            }
+            
         }
         
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -342,11 +350,12 @@
     }
 }
 
+/*
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 44.f;
 }
-
+ 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * navView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
@@ -367,6 +376,25 @@
     return navView;
 }
 
+ */
+
+- (UIBarButtonItem *)leftButtonForCenterPanel {
+    UIImage *faceImage = [UIImage imageNamed:@"arrow.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake( 12, 12, 24, 16 );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
+}
+
+- (UIBarButtonItem *)rightButtonForCenterPanel {
+    UIImage *faceImage = [UIImage imageNamed:@"share_white.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake( 10, 10, 24, 24 );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
+}
 
 #pragma mark
 #pragma mark - page inits
@@ -482,13 +510,13 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated

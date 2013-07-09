@@ -35,7 +35,7 @@
     NSString *topicPks;
     time_t updatedatetime;
 //    NSString *updatedatetime_String;
-    NSString *userid;
+    int userid;
     UsersEntity *userinfo;
     int visitcount;
 }
@@ -61,7 +61,7 @@
 @property (nonatomic, retain)NSString *topicPks;
 @property (nonatomic, assign)time_t updatedatetime;
 //@property (nonatomic, assign)NSString *updatedatetimeString;
-@property (nonatomic, retain)NSString *userid;
+@property (nonatomic, assign)int userid;
 @property (nonatomic, retain)UsersEntity *userinfo;
 @property (nonatomic, assign)int visitcount;
 

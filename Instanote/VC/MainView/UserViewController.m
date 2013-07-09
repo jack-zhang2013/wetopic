@@ -35,6 +35,8 @@
 {
     [super viewDidLoad];
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reLoadTableView) name:@"load user info" object:nil];
+    
     if (!userCoverImage) {
         userCoverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 160)];
     }
@@ -82,11 +84,25 @@
         userDescLablel = [[UILabel alloc] initWithFrame:CGRectMake(95, 11, 205, labelHight)];
         userDescLablel.font = [UIFont fontWithName:FONT_NAME size:labelHight];
     }
-    
-    
+    [self loadUserEntity];
+}
+
+- (void)loadUserEntity
+{
     if (!userentity) {
+        
+        self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
+        
         [self userService];
+        
+    } else {
+        [self refreshTableView];
     }
+}
+
+- (void)reLoadTableView
+{
+    [self.tableView reloadData];
 }
 
 - (void)allNewsFeedAction
@@ -94,7 +110,7 @@
     IndexViewController *homevc = [[IndexViewController alloc] init];
     homevc.pagetype = 1;
     homevc.title = @"用户动态";
-    homevc.indexUserId = userentity.userid;
+    homevc.indexUserId = userId;
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     homevc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];
@@ -102,6 +118,15 @@
     [homevc release];
     [nav release];
 
+}
+
+- (UIBarButtonItem *)leftButtonForCenterPanel {
+    UIImage *faceImage = [UIImage imageNamed:@"arrow.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake( 12, 12, 24, 16 );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(backActionWithPush) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
 }
 
 - (void)userService
@@ -126,16 +151,20 @@
 
 - (void)convertdata:(NSObject *)data
 {
-    NSLog(@"%@", data);
+//    NSLog(@"%@", data);
     NSDictionary * dic = (NSDictionary *)data;
     int status = [dic getIntValueForKey:@"status" defaultValue:0];
     if (status == 1) {
         NSDictionary * data = [dic objectForKey:@"data"];
         NSDictionary * user = [data objectForKey:@"user"];
+        
         userentity = [UsersEntity entityWithJsonDictionary:user];
+        
+        [self refreshTableView];
+        
+    } else {
+        //show message.
     }
-    [self viewDidLoad];
-    [self refreshTableView];
 }
 
 
@@ -197,20 +226,19 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        
         if (indexPath.section == 0 && indexPath.row == 0) {
-            NSString *ws = userentity.website;
-            if ([ws length] > 0) {
-                char index_usercover = [ws characterAtIndex:([ws length] - 5)];
-                [self userCoverSet:index_usercover];
-            }
+            
+//            [self userCoverImageSet];
             
             [cell addSubview:userCoverImage];
             
-            [self userImageSet];
+//            [self userImageSet];
+            
             [cell addSubview:userImageView];
             
             
-            userNameLabel.text = userentity.nick;
+//            userNameLabel.text = userentity.nick;
             
             
             [cell addSubview:userNameLabel];
@@ -242,7 +270,7 @@
             [bannerView release];
             
         }
-         
+        
         else if (indexPath.section == 1 && indexPath.row == 0) {
             
             UILabel * innerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 13, 80, labelHight)];
@@ -252,9 +280,8 @@
             [cell addSubview:innerLabel];
             [innerLabel release];
             
+//            userLevelLabel.text = !userentity.sex ? @"骑士" : @"千金";
             
-            
-            userLevelLabel.text = !userentity.sex ? @"骑士" : @"千金";
             [cell addSubview:userLevelLabel];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
@@ -267,8 +294,8 @@
             [cell addSubview:innerLabel];
             [innerLabel release];
             
-                        
-            userAddressLabel.text = userentity.address;
+//            userAddressLabel.text = userentity.address;
+            
             [cell addSubview:userAddressLabel];
             
         }
@@ -283,11 +310,11 @@
             
             
             
-            userHobbyLable.text = userentity.hobby;
+//            userHobbyLable.text = userentity.hobby;
             [userHobbyLable sizeToFitFixedWidth:205.f];
             
             [cell addSubview:userHobbyLable];
-//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
         }
         else if (indexPath.section == 1 && indexPath.row == 3) {
@@ -299,15 +326,17 @@
             [cell addSubview:innerLabel];
             [innerLabel release];
             
+//            userDescLablel.text = userentity.what;
             
-            userDescLablel.text = userentity.what;
             [userDescLablel sizeToFitFixedWidth:205.f];
             
             [cell addSubview:userDescLablel];
-//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         
     }
+    
+       
     // Configure the cell...
     
     return cell;
@@ -320,6 +349,11 @@
 - (void)backAction
 {
     [self.navigationController dismissModalViewControllerAnimated:YES];
+}
+
+- (void)backActionWithPush
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -335,6 +369,17 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+- (void)userCoverImageSet
+{
+    NSString *ws = userentity.website;
+    if ([ws length] > 0) {
+        char index_usercover = [ws characterAtIndex:([ws length] - 5)];
+        [self userCoverSet:index_usercover];
+    } else {
+        userCoverImage.image = [UIImage imageNamed:@"user_cover_default.png"];
+    }
 }
 
 - (void)userCoverSet:(char )c
@@ -362,21 +407,22 @@
 
 - (void)refreshTableView
 {
-    userCoverImage.image = [UIImage imageNamed:@"user_cover_default.png"];
+//    NSLog(@"nick is %@, hobby is %@, what is %@, address is %@, website is %@", userentity.nick, userentity.hobby, userentity.what, userentity.address, userentity.website);
+    [self userCoverImageSet];
     
-    userImageView.image = [UIImage imageNamed:@"nobody_male.png"];
+    [self userImageSet];
     
-    NSString *ws = userentity.website;
-    if ([ws length] > 0) {
-        char index_usercover = [ws characterAtIndex:([ws length] - 5)];
-        NSLog(@"%c", index_usercover);
-    }
+    userNameLabel.text = userentity.nick;
     
-    userHobbyLable.text = userentity.hobby;
+    userHobbyLable.text = [userentity.hobby length] ? userentity.hobby : @"还没有添加兴趣";
     
-    userDescLablel.text = userentity.what;
+    userDescLablel.text = [userentity.what length] ? userentity.what : @"什么也没有";
     
     userLevelLabel.text = userentity.sex ? @"骑士" : @"千金";
+    
+    userAddressLabel.text = [userentity.address length] > 0 ? userentity.address : @"还没有填写地址";
+    
+    [self.tableView reloadData];
 }
 
 - (void)dealloc

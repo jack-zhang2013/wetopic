@@ -66,7 +66,7 @@
         topicPks = [[dic getStringValueForKey:@"topicPks" defaultValue:@""] retain];
         updatedatetime = [dic getTimeValueForKey:@"updatedatetimeLong" defaultValue:0];
 //        updatedatetime_String = [dic getStringValueForKey:@"updatedatetime" defaultValue:0];
-        userid = [[dic getStringValueForKey:@"userid" defaultValue:@""] retain];
+        userid = [dic getIntValueForKey:@"userid" defaultValue:0];
         visitcount = [dic getIntValueForKey:@"circleid" defaultValue:0];
     }
     return self;

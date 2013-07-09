@@ -108,6 +108,9 @@
     CGRect authorNameLabelRect = authorNameLabel.frame;
     authorNameLabel.frame = authorNameLabelRect;
     authorNameButton.frame = authorNameLabel.frame;
+    authorNameButton.tag = top.userid;
+    
+    
     
     CGRect descLabelRect = authorNameLabel.frame;
     descLabelRect.origin.x = authorNameLabelRect.origin.x + authorNameLabelRect.size.width;
@@ -131,6 +134,7 @@
     }
     
     authorViewButton.frame = authorViewRect;
+    authorViewButton.tag = top.userid;
     
     CGRect timeLabelRect = CGRectMake(177, 7, 120, 13);
     timeLabel.frame = timeLabelRect;
