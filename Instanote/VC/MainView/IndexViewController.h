@@ -32,6 +32,7 @@
     CGFloat initialContentOffset;
     
     TopicViewController *topicviewcontroller;
+    UILabel * loadMoreLabel;
     
 //    UIImageView *avatarview;
 //    UIButton * avatarbutton;

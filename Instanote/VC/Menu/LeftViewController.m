@@ -162,8 +162,8 @@
             
         } else if (indexPath.row == 1) {
             
-            UIImageView * homeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list.png"]];
-            homeImageView.frame = CGRectMake(14, 13, 14, 14);
+            UIImageView * homeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"left_clock.png"]];
+            homeImageView.frame = CGRectMake(11, 11, 18, 18);
             UILabel * homeLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
             homeLable.text = @"最新话题";
             homeLable.font = [UIFont fontWithName:FONT_NAME size:15];
@@ -178,7 +178,7 @@
         } else if (indexPath.row == 2) {
             
             UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fire.png"]];
-            settingImageView.frame = CGRectMake(10, 10, 20, 20);
+            settingImageView.frame = CGRectMake(10, 9, 20, 20);
             UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
             settingLable.text = @"热门话题";
             settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
@@ -192,7 +192,7 @@
         } else if (indexPath.row == 3) {
             
             UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback.png"]];
-            settingImageView.frame = CGRectMake(10, 10, 20, 20);
+            settingImageView.frame = CGRectMake(10, 9, 20, 20);
             UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
             settingLable.text = @"反馈";
             settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
@@ -304,6 +304,7 @@
 {
     UserViewController *uservc = [[UserViewController alloc] init];
     uservc.userentity = [self getUserEntity];
+    uservc.userId = [self getUserEntity].userid;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.sidePanelController.centerPanel = nav;

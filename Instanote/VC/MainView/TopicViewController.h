@@ -26,7 +26,7 @@
     
 //    msgView *msgview;
     
-    UIButton * loadMoreButton;
+//    UIButton * loadMoreButton;
 
     UIButton * btn_comment;
     UIButton * btn_back;

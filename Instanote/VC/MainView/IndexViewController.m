@@ -38,6 +38,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (!loadMoreLabel) {
+        loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 14, 150, 17)];
+        [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
+        [loadMoreLabel setTextColor:[UIColor grayColor]];
+        [loadMoreLabel setBackgroundColor:[UIColor clearColor]];
+    }
+    
+    
 }
 
 //- (void)avatarAction
@@ -113,7 +121,6 @@
     }
 }
 
-
 - (void)alerterror:(NSString *)title
 {
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
@@ -123,6 +130,7 @@
 
 - (void)convertdata:(NSObject *)obj
 {
+    NSLog(@"%@", obj);
     NSDictionary *jsondata = [(NSDictionary *)obj objectForKey:@"data"];
     totalcommentcount = [jsondata getIntValueForKey:@"count" defaultValue:0];
     NSDictionary *allTopics = [jsondata objectForKey:@"allTopics"];
@@ -134,6 +142,9 @@
             TopicsEntity * tps = [TopicsEntity entityWithJsonDictionary:topic];
             [fetchArray addObject:tps];
         }
+        if ([fetchArray count] == 0) {
+            loadMoreLabel.text = @"还没有话题";
+        }
     }
     [self.tableView reloadData];
 }
@@ -142,6 +153,7 @@
 {
     fetchArray = nil;
     topicviewcontroller = nil;
+    loadMoreLabel = nil;
     [super viewDidUnload];
 }
 
@@ -149,6 +161,7 @@
 {
     [fetchArray release];
     [topicviewcontroller release];
+    [loadMoreLabel release];
     [super dealloc];
 }
 
@@ -284,10 +297,6 @@
         if (cell == nil){
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                            reuseIdentifier:@"cell_loadmore_style2"] autorelease];
-            UILabel * loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 14, 150, 17)];
-            [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
-            [loadMoreLabel setTextColor:[UIColor grayColor]];
-            [loadMoreLabel setBackgroundColor:[UIColor clearColor]];
             
             if ([fetchArray count] < totalcommentcount) {
                 [loadMoreLabel setText:@"上拉加载更多"];
@@ -300,7 +309,6 @@
             }
             
             [cell addSubview:loadMoreLabel];
-            [loadMoreLabel release];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         

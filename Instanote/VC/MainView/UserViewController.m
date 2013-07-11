@@ -113,11 +113,20 @@
     homevc.indexUserId = userId;
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
-    homevc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];
+    homevc.navigationItem.leftBarButtonItem = [self doneButton];
     [self presentModalViewController:nav animated:YES];
     [homevc release];
     [nav release];
 
+}
+
+- (UIBarButtonItem *)doneButton {
+    UIImage *faceImage = [UIImage imageNamed:@"done_button.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake( 12, 12, 40, 25 );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
 }
 
 - (UIBarButtonItem *)leftButtonForCenterPanel {
@@ -311,7 +320,7 @@
             
             
 //            userHobbyLable.text = userentity.hobby;
-            [userHobbyLable sizeToFitFixedWidth:205.f];
+            
             
             [cell addSubview:userHobbyLable];
             //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -327,8 +336,6 @@
             [innerLabel release];
             
 //            userDescLablel.text = userentity.what;
-            
-            [userDescLablel sizeToFitFixedWidth:205.f];
             
             [cell addSubview:userDescLablel];
             //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -407,20 +414,22 @@
 
 - (void)refreshTableView
 {
-//    NSLog(@"nick is %@, hobby is %@, what is %@, address is %@, website is %@", userentity.nick, userentity.hobby, userentity.what, userentity.address, userentity.website);
     [self userCoverImageSet];
     
     [self userImageSet];
     
     userNameLabel.text = userentity.nick;
     
-    userHobbyLable.text = [userentity.hobby length] ? userentity.hobby : @"还没有添加兴趣";
     
-    userDescLablel.text = [userentity.what length] ? userentity.what : @"什么也没有";
+    userHobbyLable.text = [userentity.hobby length] == 0 ? @"还没有添加兴趣" : userentity.hobby;
+    [userHobbyLable sizeToFitFixedWidth:205.f];
+    
+    userDescLablel.text = [userentity.what length] == 0 ? @"什么也没有" : userentity.what;
+    [userDescLablel sizeToFitFixedWidth:205.f];
     
     userLevelLabel.text = userentity.sex ? @"骑士" : @"千金";
     
-    userAddressLabel.text = [userentity.address length] > 0 ? userentity.address : @"还没有填写地址";
+    userAddressLabel.text = [userentity.address length] == 0 ? @"还没有填写地址" : userentity.address;
     
     [self.tableView reloadData];
 }

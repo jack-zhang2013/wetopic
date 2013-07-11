@@ -22,7 +22,7 @@
 
 @synthesize contentLabel;
 
-@synthesize commentButton;
+//@synthesize commentButton;
 @synthesize commentLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -76,10 +76,10 @@
             [self addSubview:contentLabel];
         }
         
-        if (!commentButton) {
-            commentButton = [[UIButton alloc] initWithFrame:CGRectZero];
-            [self addSubview:commentButton];
-        }
+//        if (!commentButton) {
+//            commentButton = [[UIButton alloc] initWithFrame:CGRectZero];
+//            [self addSubview:commentButton];
+//        }
         
         if (!commentLabel) {
             commentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -154,7 +154,7 @@
     commentLabel.text = [[content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""] stringByTrimmingCharactersInSet:whitespace];
     [commentLabel sizeToFitFixedWidth:310];
     CGRect commentLabelRect = commentLabel.frame;
-    commentButton.frame = commentLabelRect;
+//    commentButton.frame = commentLabelRect;
     
 //    CircleCommentInfosEntity *commentinfoentity =  top.circleCommentInfo[0];
 //    [commentButton setTitle:commentinfoentity.commentinfo forState:UIControlStateNormal];
@@ -176,7 +176,7 @@
     [authorView release];
     [authorViewButton release];
     [contentLabel release];
-    [commentButton release];
+//    [commentButton release];
     [commentLabel release];
 }
 

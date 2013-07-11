@@ -25,7 +25,7 @@
     
     UILabel *contentLabel;
     
-    UIButton *commentButton;
+//    UIButton *commentButton;
     UILabel *commentLabel;
     
     float cellHeight;
@@ -40,7 +40,7 @@
 
 @property (nonatomic, retain) UILabel *contentLabel;
 
-@property (nonatomic, retain) UIButton *commentButton;
+//@property (nonatomic, retain) UIButton *commentButton;
 @property (nonatomic, retain) UILabel *commentLabel;
 
 - (void)configurecell:(TopicsEntity *)top;

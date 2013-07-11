@@ -46,8 +46,8 @@
 {
     [super viewDidLoad];
     
-//    self.title = NSLocalizedString(@"more_title", nil);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];
+    self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
+    //[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];
     
     _umFeedback = [UMFeedback sharedInstance];
     [_umFeedback setAppkey:UMENG_APPKEY delegate:self];
@@ -56,8 +56,16 @@
     bgview.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundView = bgview;
     [bgview release];
-    
-//    [self initrightButton];
+}
+
+- (UIBarButtonItem *)leftButtonForCenterPanel {
+    UIImage *faceImage = [UIImage imageNamed:@"done_button.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    [face setTitle:@"完成" forState:UIControlStateNormal];
+    face.bounds = CGRectMake( 10, 8, 40, 25  );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
 }
 
 - (void)backAction
@@ -96,29 +104,17 @@
 /**生成列表表格 Height**/
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 0;
-    if (indexPath.section == 0) {
-        height = 45.f;
-    } else if (indexPath.section == 1) {
-        
-    }
     return 45;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    } else if (section == 1) {
-        return 2;
-    } else {
-        return 0;
-    }
+    return 2;
 }
 
 /*
@@ -146,17 +142,13 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"settingCell"] autorelease];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+        cell.textLabel.font = [UIFont fontWithName:FONT_NAME size:16];
         cell.textLabel.textColor = [UIColor blackColor];
         
-        if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = NSLocalizedString(@"more_update", nil);
+        } else if (indexPath.row == 1) {
             cell.textLabel.text = NSLocalizedString(@"more_about", nil);
-        } else if (indexPath.section == 1) {
-            if (indexPath.row == 0) {
-                cell.textLabel.text = NSLocalizedString(@"more_update", nil);
-            } else if (indexPath.row == 1) {
-                cell.textLabel.text = NSLocalizedString(@"more_feedback", nil);
-            }
         }
     }
     return cell;
@@ -165,14 +157,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 0) {
-        [self userinfoAction];
-    } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            [self versionAction];
-        } else if (indexPath.row == 1) {
-            [self feedbackAction];
-        }
+    if (indexPath.row == 0) {
+        [self versionAction];
+    } else if (indexPath.row == 1) {
+        [self aboutAction];
     }
 }
 
@@ -200,12 +188,11 @@
 }
 
 #pragma mark tableviewcelldidselect methods
-- (void)userinfoAction
+- (void)aboutAction
 {
     VersionViewController * versionController = [[VersionViewController alloc] init];
     [self.navigationController pushViewController:versionController animated:YES];
 //    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:versionController];
-//    [navigationController.navigationBar setBarStyle:UIBarStyleBlackOpaque];
 //    [self presentModalViewController:navigationController animated:YES];
 //    [navigationController release];
     [versionController release];

@@ -309,7 +309,7 @@
         
         UILabel * loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 14, 150, 17)];
         [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
-        [loadMoreLabel setBackgroundColor:[UIColor clearColor]];
+        [loadMoreLabel setTextColor:[UIColor grayColor]];
         
         [cell addSubview:loadMoreLabel];
         [loadMoreLabel release];

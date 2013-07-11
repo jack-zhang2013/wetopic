@@ -35,39 +35,48 @@
 //    [self.navigationController.navigationBar addSubview:btn_back];
 //    [btn_back release];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];
-    
+    self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];//[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(backAction)];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UILabel * version = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 400)];
-    version.text = @"我们是精神富足，乐享生活的一族。在喧嚣都市中，我们想往涓涓清流。\n\n不管我们身处这个城市的哪一个角落，总有与我们爱好相通，志趣相投的人。\n\n来吧，从此刻开始，开辟或加入专属自己的逸族圈子吧。哪怕你的爱好再小众，在这里也可以找到你的知己。让我们的身边簇拥着知己，一起分享，一起品位生活的点点滴滴。让我们与漂泊无所，孤独无依感，挥手作别，从这里开启你的第二人生。\n\n\n逸族网CEO\n李勇";
-    version.font = [UIFont fontWithName:FONT_NAME size:15];
-    version.backgroundColor = [UIColor clearColor];
-    [version sizeToFitFixedWidth:315];
-    [self.view addSubview:version];
-    [version release];
+    UIScrollView * scrollview = [[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UIImageView * imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"aboutyizu.png"]];
+    imageview.frame = CGRectMake(0, 0, 320, 500);
+    
+    [scrollview addSubview:imageview];
+    scrollview.contentSize = CGSizeMake(320, 500 + 70);
+    [self.view addSubview:scrollview];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    [imageview release];
+    [scrollview release];
     
 	// Do any additional setup after loading the view.
+}
+
+- (UIBarButtonItem *)leftButtonForCenterPanel {
+    UIImage *faceImage = [UIImage imageNamed:@"arrow.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake( 12, 12, 24, 16 );
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tabBarController.tabBar setHidden:YES];
-//    [btn_back setHidden:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.tabBarController.tabBar setHidden:NO];
-//    [btn_back setHidden:YES];
 }
 
 - (void)backAction
 {
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
