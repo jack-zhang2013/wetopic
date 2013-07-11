@@ -96,6 +96,9 @@
         [self userService];
         
     } else {
+        
+        self.navigationItem.rightBarButtonItem = [self rightButtonForCenterPanel];
+        
         [self refreshTableView];
     }
 }
@@ -137,6 +140,21 @@
     [face addTarget:self action:@selector(backActionWithPush) forControlEvents:UIControlEventTouchUpInside];
     return [[UIBarButtonItem alloc] initWithCustomView:face];
 }
+
+- (UIBarButtonItem *)rightButtonForCenterPanel {
+    UIImage *faceImage = [UIImage imageNamed:@"user_setting.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake(0, 10, 22, 22);
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(userSetting) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
+}
+
+- (void)userSetting
+{
+    NSLog(@"hello,world");
+}
+
 
 - (void)userService
 {

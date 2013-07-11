@@ -130,7 +130,7 @@
 
 - (void)convertdata:(NSObject *)obj
 {
-    NSLog(@"%@", obj);
+//    NSLog(@"%@", obj);
     NSDictionary *jsondata = [(NSDictionary *)obj objectForKey:@"data"];
     totalcommentcount = [jsondata getIntValueForKey:@"count" defaultValue:0];
     NSDictionary *allTopics = [jsondata objectForKey:@"allTopics"];
