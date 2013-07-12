@@ -7,12 +7,14 @@
 //
 
 #import "UserSettingViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface UserSettingViewController ()
 
 @end
 
 @implementation UserSettingViewController
+@synthesize userId, userentity;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,12 +28,41 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = nil;
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if (!userCoverImage) {
+        userCoverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 160)];
+    }
+    
+    CGFloat userImageViewSize = 70.f;
+    CGFloat userImageViewFromTop = 20.f;
+    
+    if (!userImageView) {
+        userImageView = [[UIImageView alloc] initWithFrame:CGRectMake((320 - userImageViewSize) / 2, userImageViewFromTop, userImageViewSize, userImageViewSize)];
+        userImageView.backgroundColor = [UIColor whiteColor];
+        [userImageView.layer setMasksToBounds:YES];
+        CGFloat radius = userImageViewSize / 2;
+        [userImageView.layer setCornerRadius:radius];
+        [userImageView.layer setBorderWidth:3.0];
+        [userImageView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    }
+    
+    if (!userNameTextField) {
+        userNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(100, 6, 205, 25)];
+        userNameTextField.backgroundColor = [UIColor greenColor];
+    }
+    
+    if (!userDescTextField) {
+        userDescTextField = [[UITextView alloc] initWithFrame:CGRectMake(100, 6, 205, 116)];
+        userDescTextField.backgroundColor = [UIColor greenColor];
+    }
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,66 +75,118 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    if (section == 0) {
+        return 3;
+    } else if (section == 1) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.section == 0) {
+            
+            if (indexPath.row == 0) {
+                
+                
+                [cell addSubview:userCoverImage];
+                
+                [cell addSubview:userImageView];
+                
+                [cell addSubview:[self coverButton]];
+                
+                [cell addSubview:[self avatarButton]];
+                
+                
+                
+            } else if (indexPath.row == 1) {
+                
+                [cell addSubview:userNameTextField];
+                
+            } else if (indexPath.row == 2) {
+                
+                [cell addSubview:userDescTextField];
+                
+            }
+            
+            
+        } else if (indexPath.section == 1) {
+            
+            [cell addSubview:[self logoutButton]];
+            
+        } else {
+            //nothing
+        }
+        
+        
+    }
     
     // Configure the cell...
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (UIButton *)coverButton
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    UIButton * changeCover = [UIButton buttonWithType:UIButtonTypeCustom];
+    changeCover.frame = CGRectMake(16, 111, 120, 34);
+    changeCover.titleLabel.font = [UIFont fontWithName:FONT_NAME size:14];
+    changeCover.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"user_setting_button.png"]];
+    [changeCover setTitle:@"更改封面" forState:UIControlStateNormal];
+    return changeCover;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (UIButton *)avatarButton
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    UIButton * changeAvatar = [UIButton buttonWithType:UIButtonTypeCustom];
+    changeAvatar.frame = CGRectMake(184, 111, 120, 34);
+    changeAvatar.titleLabel.font = [UIFont fontWithName:FONT_NAME size:14];
+    changeAvatar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"user_setting_button.png"]];
+    [changeAvatar setTitle:@"更改头像" forState:UIControlStateNormal];
+    return changeAvatar;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (UIButton *)logoutButton
 {
+    UIButton * logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    logoutButton.frame = CGRectMake(10, 0, 300, 44);
+    logoutButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_logout.png"]];
+    logoutButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    [logoutButton setTitle:@"登出" forState:UIControlStateNormal];
+    return logoutButton;
+    
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    CGFloat height = 0.f;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            height = 160.f;
+        } else if (indexPath.row == 1) {
+            height = 40.f;
+        } else if (indexPath.row == 2) {
+            height = 130.f;
+        }
+        
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+        height = 40.f;
+    }
+    return height;
 }
-*/
 
 #pragma mark - Table view delegate
 

@@ -10,6 +10,7 @@
 //#import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
 #import "IndexViewController.h"
+#import "UserSettingViewController.h"
 #import "WeiboClient.h"
 #import "NSDictionaryAdditions.h"
 #import "UILabel+Extensions.h"
@@ -41,13 +42,12 @@
         userCoverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 160)];
     }
     
-    CGFloat userImageViewSize = 70.f;
+    CGFloat userImageViewSize = 60.f;
     CGFloat userImageViewFromTop = 20.f;
     CGFloat labelHight = 16.f;
     
     if (!userImageView) {
         userImageView = [[UIImageView alloc] initWithFrame:CGRectMake((320 - userImageViewSize) / 2, userImageViewFromTop, userImageViewSize, userImageViewSize)];
-        userImageView.image = [UIImage imageNamed:@"nobody_male.png"];
         userImageView.backgroundColor = [UIColor whiteColor];
         [userImageView.layer setMasksToBounds:YES];
         CGFloat radius = userImageViewSize / 2;
@@ -152,7 +152,12 @@
 
 - (void)userSetting
 {
-    NSLog(@"hello,world");
+    UserSettingViewController * usvc = [[UserSettingViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:usvc];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [self presentModalViewController:nav animated:YES];
+    [usvc release];
+    [nav release];
 }
 
 

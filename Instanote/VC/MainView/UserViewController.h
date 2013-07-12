@@ -31,6 +31,6 @@
 @property (nonatomic, assign)int userId;
 @property (nonatomic, retain)UsersEntity *userentity;
 
-- (void)allNewsFeedAction;
+//- (void)allNewsFeedAction;
 
 @end
