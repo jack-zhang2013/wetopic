@@ -7,7 +7,7 @@
 //
 
 #import "UserViewController.h"
-//#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
 #import "IndexViewController.h"
 #import "UserSettingViewController.h"
@@ -153,6 +153,8 @@
 - (void)userSetting
 {
     UserSettingViewController * usvc = [[UserSettingViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    usvc.userentity = userentity;
+    usvc.userId = userId;
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:usvc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     [self presentModalViewController:nav animated:YES];
@@ -403,22 +405,19 @@
 
 - (void)userCoverImageSet
 {
-    NSString *ws = userentity.website;
-    if ([ws length] > 0) {
-        char index_usercover = [ws characterAtIndex:([ws length] - 5)];
-        [self userCoverSet:index_usercover];
+    int type = [self covertype];
+    if (type > 0 && type < 13) {
+        userCoverImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"user_cover%d", type]];
     } else {
         userCoverImage.image = [UIImage imageNamed:@"user_cover_default.png"];
     }
 }
 
-- (void)userCoverSet:(char )c
+- (int)covertype
 {
-    if (c < 60 && c > 48) {
-        userCoverImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"user_cover%c", c]];
-    } else {
-        userCoverImage.image = [UIImage imageNamed:@"user_cover_default.png"];
-    }
+    NSCharacterSet* nonDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    int value = [[[userentity.website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
+    return value;
 }
 
 - (void)userImageSet
@@ -450,7 +449,7 @@
     userDescLablel.text = [userentity.what length] == 0 ? @"什么也没有" : userentity.what;
     [userDescLablel sizeToFitFixedWidth:205.f];
     
-    userLevelLabel.text = userentity.sex ? @"骑士" : @"千金";
+    userLevelLabel.text = userentity.sex ? @"千金" : @"骑士";
     
     userAddressLabel.text = [userentity.address length] == 0 ? @"还没有填写地址" : userentity.address;
     

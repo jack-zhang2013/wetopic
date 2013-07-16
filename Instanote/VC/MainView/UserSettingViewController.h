@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "UsersEntity.h"
 
-@interface UserSettingViewController : UITableViewController
+@interface UserSettingViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate>
 {
     UIImageView * userCoverImage;
     UIImageView *userImageView;
     
     UITextField * userNameTextField;
-    UITextView * userDescTextField;
+    UITextView * userDescTextView;
     
     UsersEntity * userentity;
     int userId;

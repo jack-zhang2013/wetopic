@@ -155,6 +155,7 @@
 		8F880A4F176030380001A0D9 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4C176030380001A0D9 /* JASidePanelController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8F880A50176030380001A0D9 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4E176030380001A0D9 /* UIViewController+JASidePanel.m */; };
 		8F880A54176033300001A0D9 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A53176033300001A0D9 /* LeftViewController.m */; };
+		8FC5D2AC1793E35100125A1B /* SelectCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */; };
 		8FC7DF0C177015FB00CDE978 /* UMEGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7DEE9177015FB00CDE978 /* UMEGORefreshTableHeaderView.m */; };
 		8FC7DF0D177015FB00CDE978 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC7DEEB177015FB00CDE978 /* background@2x.png */; };
 		8FC7DF0E177015FB00CDE978 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC7DEEC177015FB00CDE978 /* blueArrow.png */; };
@@ -223,6 +224,8 @@
 		8FE92BEE17784649005B41DD /* fire@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE92BEC17784649005B41DD /* fire@2x.png */; };
 		8FE92BF117784700005B41DD /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE92BEF17784700005B41DD /* list.png */; };
 		8FE92BF217784700005B41DD /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE92BF017784700005B41DD /* list@2x.png */; };
+		8FEC65251795282F00DE223A /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEC65231795282F00DE223A /* bookmark.png */; };
+		8FEC65261795282F00DE223A /* bookmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FEC65241795282F00DE223A /* bookmark@2x.png */; };
 		8FF128E417743E0A00D5E14F /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF128E217743E0A00D5E14F /* feedback.png */; };
 		8FF128E517743E0A00D5E14F /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF128E317743E0A00D5E14F /* feedback@2x.png */; };
 		8FF128E81774456C00D5E14F /* friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FF128E61774456C00D5E14F /* friend.png */; };
@@ -488,6 +491,8 @@
 		8F880A4E176030380001A0D9 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		8F880A52176033300001A0D9 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftViewController.h; path = Menu/LeftViewController.h; sourceTree = "<group>"; };
 		8F880A53176033300001A0D9 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftViewController.m; path = Menu/LeftViewController.m; sourceTree = "<group>"; };
+		8FC5D2AA1793E35100125A1B /* SelectCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectCoverViewController.h; path = MainView/SelectCoverViewController.h; sourceTree = "<group>"; };
+		8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectCoverViewController.m; path = MainView/SelectCoverViewController.m; sourceTree = "<group>"; };
 		8FC7DEE8177015FB00CDE978 /* UMEGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMEGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		8FC7DEE9177015FB00CDE978 /* UMEGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMEGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		8FC7DEEB177015FB00CDE978 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
@@ -562,6 +567,8 @@
 		8FE92BEC17784649005B41DD /* fire@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fire@2x.png"; sourceTree = "<group>"; };
 		8FE92BEF17784700005B41DD /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		8FE92BF017784700005B41DD /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
+		8FEC65231795282F00DE223A /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
+		8FEC65241795282F00DE223A /* bookmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bookmark@2x.png"; sourceTree = "<group>"; };
 		8FF128E217743E0A00D5E14F /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
 		8FF128E317743E0A00D5E14F /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback@2x.png"; sourceTree = "<group>"; };
 		8FF128E61774456C00D5E14F /* friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend.png; sourceTree = "<group>"; };
@@ -897,6 +904,8 @@
 				6BFD87881703E52600DE681E /* CommentDetailViewController.m */,
 				8F17F4C0178EB93F00C1ABC5 /* UserSettingViewController.h */,
 				8F17F4C1178EB93F00C1ABC5 /* UserSettingViewController.m */,
+				8FC5D2AA1793E35100125A1B /* SelectCoverViewController.h */,
+				8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -1040,8 +1049,16 @@
 		8F127F49177C055300CD3C1C /* usercover */ = {
 			isa = PBXGroup;
 			children = (
-				8FD950DE1783F12900754501 /* user_cover_default.png */,
-				8FD950DF1783F12900754501 /* user_cover_default@2x.png */,
+				8FEC65231795282F00DE223A /* bookmark.png */,
+				8FEC65241795282F00DE223A /* bookmark@2x.png */,
+				8F127F4A177C055300CD3C1C /* user_cover1.png */,
+				8FD950F01783F12900754501 /* user_cover10.png */,
+				8FD950F11783F12900754501 /* user_cover10@2x.png */,
+				8FD950F21783F12900754501 /* user_cover11.png */,
+				8FD950F31783F12900754501 /* user_cover11@2x.png */,
+				8FD950F41783F12900754501 /* user_cover12.png */,
+				8FD950F51783F12900754501 /* user_cover12@2x.png */,
+				8F127F4B177C055300CD3C1C /* user_cover1@2x.png */,
 				8FD950E01783F12900754501 /* user_cover2.png */,
 				8FD950E11783F12900754501 /* user_cover2@2x.png */,
 				8FD950E21783F12900754501 /* user_cover3.png */,
@@ -1058,18 +1075,12 @@
 				8FD950ED1783F12900754501 /* user_cover8@2x.png */,
 				8FD950EE1783F12900754501 /* user_cover9.png */,
 				8FD950EF1783F12900754501 /* user_cover9@2x.png */,
-				8FD950F01783F12900754501 /* user_cover10.png */,
-				8FD950F11783F12900754501 /* user_cover10@2x.png */,
-				8FD950F21783F12900754501 /* user_cover11.png */,
-				8FD950F31783F12900754501 /* user_cover11@2x.png */,
-				8FD950F41783F12900754501 /* user_cover12.png */,
-				8FD950F51783F12900754501 /* user_cover12@2x.png */,
 				8F127F52177C189E00CD3C1C /* user_cover_arrow.png */,
 				8F127F53177C189E00CD3C1C /* user_cover_arrow@2x.png */,
 				8F127F4E177C11BC00CD3C1C /* user_cover_banner.png */,
 				8F127F4F177C11BC00CD3C1C /* user_cover_banner@2x.png */,
-				8F127F4A177C055300CD3C1C /* user_cover1.png */,
-				8F127F4B177C055300CD3C1C /* user_cover1@2x.png */,
+				8FD950DE1783F12900754501 /* user_cover_default.png */,
+				8FD950DF1783F12900754501 /* user_cover_default@2x.png */,
 			);
 			path = usercover;
 			sourceTree = "<group>";
@@ -1425,6 +1436,8 @@
 				8FE6EA8717900B65001886FC /* setting_logout@2x.png in Resources */,
 				8FE6EA8817900B65001886FC /* setting_version.png in Resources */,
 				8FE6EA8917900B65001886FC /* setting_version@2x.png in Resources */,
+				8FEC65251795282F00DE223A /* bookmark.png in Resources */,
+				8FEC65261795282F00DE223A /* bookmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1511,6 +1524,7 @@
 				8FC7DF28177015FB00CDE978 /* UMFeedbackViewController.m in Sources */,
 				8FDF380B177A8AAA0006C35E /* CommentCell.m in Sources */,
 				8F17F4C2178EB93F00C1ABC5 /* UserSettingViewController.m in Sources */,
+				8FC5D2AC1793E35100125A1B /* SelectCoverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
