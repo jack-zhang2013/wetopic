@@ -17,6 +17,7 @@
 
 @implementation UserSettingViewController
 @synthesize userId, userentity;
+@synthesize finishAction, finishTarget;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,7 +35,8 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.backgroundView = nil;
     
-    self.navigationItem.leftBarButtonItem = [self rightButtonForCenterPanel];
+    self.navigationItem.rightBarButtonItem = [self rightButtonForCenterPanel];
+    self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
     
     if (!userCoverImage) {
         userCoverImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 11, 284, 145)];
@@ -311,6 +313,20 @@
     [face setImage:faceImage forState:UIControlStateNormal];
     [face addTarget:self action:@selector(saveProfileAction) forControlEvents:UIControlEventTouchUpInside];
     return [[UIBarButtonItem alloc] initWithCustomView:face];
+}
+
+- (UIBarButtonItem *)leftButtonForCenterPanel {
+    UIImage *faceImage = [UIImage imageNamed:@"cancel_button.png"];
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake(0, 10, 40, 25);
+    [face setImage:faceImage forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
+}
+
+- (void)backAction
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)saveProfileAction

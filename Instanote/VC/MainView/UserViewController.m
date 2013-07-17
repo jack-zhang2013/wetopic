@@ -155,6 +155,8 @@
     UserSettingViewController * usvc = [[UserSettingViewController alloc] initWithStyle:UITableViewStyleGrouped];
     usvc.userentity = userentity;
     usvc.userId = userId;
+    usvc.finishTarget = self;
+    usvc.finishAction = @selector(backAction);
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:usvc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     [self presentModalViewController:nav animated:YES];

@@ -156,6 +156,8 @@
 		8F880A50176030380001A0D9 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4E176030380001A0D9 /* UIViewController+JASidePanel.m */; };
 		8F880A54176033300001A0D9 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A53176033300001A0D9 /* LeftViewController.m */; };
 		8FC5D2AC1793E35100125A1B /* SelectCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */; };
+		8FC6956D179686E000A29AB6 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC6956B179686E000A29AB6 /* cancel_button.png */; };
+		8FC6956E179686E000A29AB6 /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC6956C179686E000A29AB6 /* cancel_button@2x.png */; };
 		8FC7DF0C177015FB00CDE978 /* UMEGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7DEE9177015FB00CDE978 /* UMEGORefreshTableHeaderView.m */; };
 		8FC7DF0D177015FB00CDE978 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC7DEEB177015FB00CDE978 /* background@2x.png */; };
 		8FC7DF0E177015FB00CDE978 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC7DEEC177015FB00CDE978 /* blueArrow.png */; };
@@ -493,6 +495,8 @@
 		8F880A53176033300001A0D9 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftViewController.m; path = Menu/LeftViewController.m; sourceTree = "<group>"; };
 		8FC5D2AA1793E35100125A1B /* SelectCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectCoverViewController.h; path = MainView/SelectCoverViewController.h; sourceTree = "<group>"; };
 		8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectCoverViewController.m; path = MainView/SelectCoverViewController.m; sourceTree = "<group>"; };
+		8FC6956B179686E000A29AB6 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
+		8FC6956C179686E000A29AB6 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
 		8FC7DEE8177015FB00CDE978 /* UMEGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMEGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		8FC7DEE9177015FB00CDE978 /* UMEGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMEGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		8FC7DEEB177015FB00CDE978 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
@@ -711,6 +715,8 @@
 		664B288915143AFE00F92B96 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8FC6956B179686E000A29AB6 /* cancel_button.png */,
+				8FC6956C179686E000A29AB6 /* cancel_button@2x.png */,
 				8FE6EA8217900B65001886FC /* setting_logout.png */,
 				8FE6EA8317900B65001886FC /* setting_logout@2x.png */,
 				8FE6EA8417900B65001886FC /* setting_version.png */,
@@ -1438,6 +1444,8 @@
 				8FE6EA8917900B65001886FC /* setting_version@2x.png in Resources */,
 				8FEC65251795282F00DE223A /* bookmark.png in Resources */,
 				8FEC65261795282F00DE223A /* bookmark@2x.png in Resources */,
+				8FC6956D179686E000A29AB6 /* cancel_button.png in Resources */,
+				8FC6956E179686E000A29AB6 /* cancel_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

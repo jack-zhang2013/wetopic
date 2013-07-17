@@ -24,4 +24,7 @@
 @property (nonatomic, assign)int userId;
 @property (nonatomic, retain)UsersEntity *userentity;
 
+@property (nonatomic, assign) id finishTarget;
+@property (nonatomic, assign) SEL finishAction;
+
 @end
