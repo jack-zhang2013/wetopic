@@ -439,7 +439,15 @@
     [def setObject:user.address forKey:@"address"];
     [def setObject:user.hobby forKey:@"hobby"];
     [def setObject:user.website forKey:@"website"];
+    [def setInteger:[self covertype:user.website] forKey:@"covertype"];
     [def synchronize];
+}
+
+- (int)covertype:(NSString *)website
+{
+    NSCharacterSet* nonDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    int value = [[[website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
+    return value;
 }
 
 - (void)signinService

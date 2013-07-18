@@ -216,6 +216,7 @@
 - (void)userAction:(UIButton *)sender;
 {
     UserViewController *uservc = [[UserViewController alloc] init];
+    uservc.usertype = 2;
     uservc.userId = sender.tag;
     [self.navigationController pushViewController:uservc animated:YES];
 //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];

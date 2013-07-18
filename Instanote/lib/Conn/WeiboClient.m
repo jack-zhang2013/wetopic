@@ -100,7 +100,7 @@
 	if (params) {
         fullPath = [self _queryStringWithBase:fullPath parameters:params prefixed:YES];
     }
-//    NSLog(@"%@",fullPath);
+    NSLog(@"%@",fullPath);
 	return fullPath;
 }
 
@@ -209,26 +209,26 @@
 	[super get:[self getURL:path queryParameters:params]];
 }
 
-- (void)updateUserInfo:(NSString *)userId Nick:(NSString *)nick What:(NSString *)what
+- (void)updateUserInfo:(int)userId Nick:(NSString *)nick What:(NSString *)what
 {
     NSString *path = [NSString stringWithFormat:@"userInfoAction_updateUserNickAndWhat.%@", API_FORMAT];
     NSMutableString *postBody = [[NSMutableString alloc] init];
-    [postBody appendFormat:@"userId=%@", userId];
+    [postBody appendFormat:@"userId=%d", userId];
     [postBody appendFormat:@"&nick=%@", nick];
     [postBody appendFormat:@"&what=%@", what];
     [self post:[self getURL:path queryParameters:nil] body:postBody];
 }
 
-- (void)updateUserCover:(NSString *)userId Cover:(int)type
+- (void)updateUserCover:(int)userId Cover:(int)type
 {
-    NSString *path = [NSString stringWithFormat:@"userInfoAction_updateUserNickAndWhat.%@", API_FORMAT];
+    NSString *path = [NSString stringWithFormat:@"userInfoAction_updateUserWebsite.%@", API_FORMAT];
     NSMutableString *postBody = [[NSMutableString alloc] init];
-    [postBody appendFormat:@"userId=%@", userId];
+    [postBody appendFormat:@"userId=%d", userId];
     [postBody appendFormat:@"&coverImgId=%d", type];
     [self post:[self getURL:path queryParameters:nil] body:postBody];
 }
 
-- (void)updateuserAvatar:(NSString *)userId userImage:(NSData *)userimage
+- (void)updateuserAvatar:(int)userId userImage:(NSData *)userimage
 {
     
 }

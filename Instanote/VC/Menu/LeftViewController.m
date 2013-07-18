@@ -303,8 +303,10 @@
 - (void)userAction
 {
     UserViewController *uservc = [[UserViewController alloc] init];
-    uservc.userentity = [self getUserEntity];
-    uservc.userId = [self getUserEntity].userid;
+    UsersEntity * userentity = [self getUserEntity];
+//    uservc.userentity = userentity;
+    uservc.userId = userentity.userid;
+    uservc.usertype = 1;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.sidePanelController.centerPanel = nav;
@@ -335,29 +337,15 @@
     userentity.hobby = [def stringForKey:@"hobby"];
     userentity.what = [def stringForKey:@"what"];
     userentity.website = [def stringForKey:@"website"];
+    userentity.covertype = [userentity.website length] > 0 ? [self covertype:userentity.website] : 0;
     return userentity;
 }
 
--(int)getUserId
+- (int)covertype:(NSString *)ws
 {
-    NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
-    NSUInteger userid = [def integerForKey:aUserId];
-    if (userid) {
-        return userid;
-    } else {
-        return 0;
-    }
-}
-
-- (NSString *)getUserImage
-{
-    NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
-    NSString *userimage = [def objectForKey:@"image"];
-    if (userimage) {
-        return userimage;
-    } else {
-        return @"";
-    }
+    NSCharacterSet* nonDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    int value = [[[ws substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
+    return value;
 }
 
 -(BOOL)getUserIdandEmail

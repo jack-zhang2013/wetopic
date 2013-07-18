@@ -21,7 +21,7 @@
 
 @implementation UserViewController
 
-@synthesize userentity,userId;
+@synthesize userentity, userId, usertype;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -87,19 +87,29 @@
     [self loadUserEntity];
 }
 
+- (void)refreshUserEntity
+{
+    [userentity release];
+    userentity = nil;
+    userentity = [self UserEntity];
+//    NSLog(@"%d", userentity.covertype);
+}
+
 - (void)loadUserEntity
 {
-    if (!userentity) {
+    if (usertype == 1) {
+        
+        self.navigationItem.rightBarButtonItem = [self rightButtonForCenterPanel];
+        
+        [self refreshUserEntity];
+        
+        [self refreshTableView];
+        
+    } else if (usertype == 2){
         
         self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
         
         [self userService];
-        
-    } else {
-        
-        self.navigationItem.rightBarButtonItem = [self rightButtonForCenterPanel];
-        
-        [self refreshTableView];
     }
 }
 
@@ -156,7 +166,7 @@
     usvc.userentity = userentity;
     usvc.userId = userId;
     usvc.finishTarget = self;
-    usvc.finishAction = @selector(backAction);
+    usvc.finishAction = @selector(refeshAll);
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:usvc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     [self presentModalViewController:nav animated:YES];
@@ -181,25 +191,17 @@
         [self alerterror:NSLocalizedString(@"errormessage", nil)];
     }
     else {
-        [self convertdata:obj];
-    }
-}
-
-- (void)convertdata:(NSObject *)data
-{
-//    NSLog(@"%@", data);
-    NSDictionary * dic = (NSDictionary *)data;
-    int status = [dic getIntValueForKey:@"status" defaultValue:0];
-    if (status == 1) {
-        NSDictionary * data = [dic objectForKey:@"data"];
-        NSDictionary * user = [data objectForKey:@"user"];
-        
-        userentity = [UsersEntity entityWithJsonDictionary:user];
-        
-        [self refreshTableView];
-        
-    } else {
-        //show message.
+        NSDictionary * dic = (NSDictionary *)obj;
+        int status = [dic getIntValueForKey:@"status" defaultValue:0];
+        if (status == 1) {
+            NSDictionary * data = [dic objectForKey:@"data"];
+            NSDictionary * user = [data objectForKey:@"user"];
+            userentity = [UsersEntity entityWithJsonDictionary:user];
+            [self refreshTableView];
+            
+        } else {
+            //show message.
+        }
     }
 }
 
@@ -393,21 +395,27 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Navigation logic may go here. Create and push another view controller.
+//    /*
+//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+//     // ...
+//     // Pass the selected object to the new view controller.
+//     [self.navigationController pushViewController:detailViewController animated:YES];
+//     [detailViewController release];
+//     */
+//}
+
+- (void)refeshAll
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    [self refreshUserEntity];
+    [self refreshTableView];
 }
 
 - (void)userCoverImageSet
 {
-    int type = [self covertype];
+    int type = [userentity.website length] ? [self covertype:userentity.website] : 0;
     if (type > 0 && type < 13) {
         userCoverImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"user_cover%d", type]];
     } else {
@@ -415,10 +423,10 @@
     }
 }
 
-- (int)covertype
+- (int)covertype:(NSString *)website
 {
     NSCharacterSet* nonDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    int value = [[[userentity.website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
+    int value = [[[website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
     return value;
 }
 
@@ -436,14 +444,35 @@
     }
 }
 
+- (UsersEntity *)UserEntity
+{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    userentity = [[UsersEntity alloc] init];
+    userentity.email = [def stringForKey:@"email"];
+    userentity.image = [def stringForKey:@"image"];
+    userentity.nick = [def stringForKey:@"nick"];
+    userentity.otheraccountuserimage = [def stringForKey:@"otheraccountuserimage"];
+    userentity.password = [def stringForKey:@"password"];
+    userentity.otheraccount = [def integerForKey:@"otheraccount"];
+    userentity.otheraccountypeid = [def integerForKey:@"otheraccountypeid"];
+    userentity.sex = [def integerForKey:@"sex"];
+    userentity.registertime = [def integerForKey:@"registertime"];
+    userentity.userid = [def integerForKey:@"userid"];
+    userentity.userlevel = [def integerForKey:@"userlevel"];
+    userentity.address = [def stringForKey:@"address"];
+    userentity.hobby = [def stringForKey:@"hobby"];
+    userentity.what = [def stringForKey:@"what"];
+    userentity.website = [def stringForKey:@"website"];
+    userentity.covertype = [userentity.website length] > 0 ? [self covertype:userentity.website] : 0;
+    return userentity;
+}
+
 - (void)refreshTableView
 {
     [self userCoverImageSet];
     
     [self userImageSet];
-    
     userNameLabel.text = userentity.nick;
-    
     
     userHobbyLable.text = [userentity.hobby length] == 0 ? @"还没有添加兴趣" : userentity.hobby;
     [userHobbyLable sizeToFitFixedWidth:205.f];

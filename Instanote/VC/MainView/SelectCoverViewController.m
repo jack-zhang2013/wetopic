@@ -85,7 +85,6 @@
 {
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 160)];
     
-    
     UIButton *imageViewButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 300, 150)];
     imageViewButton.tag = index;
     [imageViewButton addTarget:self action:@selector(coverSelectAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -96,28 +95,21 @@
     imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"user_cover%d.png", index]];
     [view addSubview:imageView];
     [imageView release];
-    if (index == (int)(covertype - 48)) {
+    if (index == covertype) {
         UIImageView * selectView = [[UIImageView alloc] initWithFrame:CGRectMake(272, 10, 30, 60)];
         selectView.image = [UIImage imageNamed:@"bookmark.png"];
         [view addSubview:selectView];
         [selectView release];
     }
     return view;
-    
 }
 
 - (void)coverSelectAction:(UIButton *)sender
 {
-    int index = sender.tag - 48;
-    [self setUserWebSite:index];
-    [self saveAction];
-}
-
-- (void)setUserWebSite:(int)index
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSString stringWithFormat:@"%d", index] forKey:@"website"];
-    [defaults synchronize];
+    
+    int index = sender.tag;
+    
+    [self saveAction:index];
 }
 
 
@@ -160,14 +152,13 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)saveAction
+- (void)saveAction:(int)index
 {
+    NSLog(@"%d", index);
     if ([finishTarget retainCount] > 0 && [finishTarget respondsToSelector:finishAction]) {
-        [finishTarget performSelector:finishAction  withObject:nil];
+        [finishTarget performSelector:finishAction withObject:[NSString stringWithFormat:@"%d", index]];
     }
     [self backAction];
 }
-
-
 
 @end

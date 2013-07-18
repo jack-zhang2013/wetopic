@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SelectCoverViewController.h"
+#import "WeiboClient.h"
+#import "NSDictionaryAdditions.h"
 
 @interface UserSettingViewController ()
 
@@ -38,9 +40,13 @@
     self.navigationItem.rightBarButtonItem = [self rightButtonForCenterPanel];
     self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
     
+    if (!userentity) {
+        userentity = [self UserEntity];
+    }
+    
     if (!userCoverImage) {
         userCoverImage = [[UIImageView alloc] initWithFrame:CGRectMake(18, 11, 284, 145)];
-        [userCoverImage.layer setCornerRadius:8.f];
+        [userCoverImage.layer setCornerRadius:6.f];
         [userCoverImage.layer setMasksToBounds:YES];
     }
     
@@ -74,6 +80,29 @@
     }
     
     [self refreshTableView];
+}
+
+- (UsersEntity *)UserEntity
+{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    userentity = [[UsersEntity alloc] init];
+    userentity.email = [def stringForKey:@"email"];
+    userentity.image = [def stringForKey:@"image"];
+    userentity.nick = [def stringForKey:@"nick"];
+    userentity.otheraccountuserimage = [def stringForKey:@"otheraccountuserimage"];
+    userentity.password = [def stringForKey:@"password"];
+    userentity.otheraccount = [def integerForKey:@"otheraccount"];
+    userentity.otheraccountypeid = [def integerForKey:@"otheraccountypeid"];
+    userentity.sex = [def integerForKey:@"sex"];
+    userentity.registertime = [def integerForKey:@"registertime"];
+    userentity.userid = [def integerForKey:@"userid"];
+    userentity.userlevel = [def integerForKey:@"userlevel"];
+    userentity.address = [def stringForKey:@"address"];
+    userentity.hobby = [def stringForKey:@"hobby"];
+    userentity.what = [def stringForKey:@"what"];
+    userentity.website = [def stringForKey:@"website"];
+    userentity.covertype = [userentity.website length] > 0 ? [self covertype:userentity.website] : 0;
+    return userentity;
 }
 
 - (void)didReceiveMemoryWarning
@@ -185,17 +214,17 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Navigation logic may go here. Create and push another view controller.
+//    /*
+//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+//     // ...
+//     // Pass the selected object to the new view controller.
+//     [self.navigationController pushViewController:detailViewController animated:YES];
+//     [detailViewController release];
+//     */
+//}
 
 #pragma mark - button actions
 
@@ -203,6 +232,8 @@
 {
     SelectCoverViewController * selectCoverVC = [[SelectCoverViewController alloc] init];
     selectCoverVC.covertype = [self covertype];
+    selectCoverVC.finishAction = @selector(changeUserCover:);
+    selectCoverVC.finishTarget = self;
     [self.navigationController pushViewController:selectCoverVC animated:YES];
     [selectCoverVC release];
 }
@@ -210,6 +241,68 @@
 - (void)changeAvatarAction
 {
     
+}
+
+
+#pragma mark connections
+
+
+- (void)loadDataFinishedWithType:(WeiboClient *)sender
+                     obj:(NSObject*)obj
+{
+    NSLog(@"%@",obj);
+    if (sender.hasError) {
+        [self alerterror:NSLocalizedString(@"errormessage", nil)];
+    }
+    else {
+        
+        NSString *status = [(NSDictionary *)obj objectForKey:@"status"];
+        if ([status intValue] == 1) {
+            
+            
+            
+        }
+    }
+}
+
+
+- (void)loadDataFinished:(WeiboClient *)sender
+                     obj:(NSObject*)obj
+{
+    
+    if (sender.hasError) {
+        [self alerterror:NSLocalizedString(@"errormessage", nil)];
+    }
+    else {
+        NSString *status = [(NSDictionary *)obj objectForKey:@"status"];
+        if ([status intValue] == 1) {
+            [userNameTextField resignFirstResponder];
+            [userDescTextView resignFirstResponder];
+            [self setUserName:userNameTextField.text];
+            [self saveAction];
+        }
+    }
+}
+
+- (void)alerterror:(NSString *)title
+{
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)saveAction
+{
+    if ([finishTarget retainCount] > 0 && [finishTarget respondsToSelector:finishAction]) {
+        [finishTarget performSelector:finishAction  withObject:nil];
+    }
+    [self backAction];
+}
+
+- (void)setUserName:(NSString *)username
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:username forKey:@"nick"];
+    [defaults synchronize];
 }
 
 
@@ -274,6 +367,34 @@
     [self.tableView reloadData];
 }
 
+- (void)changeUserCover:(NSString *)index
+{
+    NSLog(@"%d", [index intValue]);
+    WeiboClient *client = [[WeiboClient alloc] initWithTarget:self action:@selector(loadDataFinishedWithType:obj:)];
+    [client updateUserCover:userId Cover:[index intValue]];
+}
+
+- (void)setUserWebSite:(int)index
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSString stringWithFormat:@"%d", index] forKey:@"covertype"];
+    [defaults setObject:[NSString stringWithFormat:@"http://1mily.com/images/usercover/bj%d.jpg", index] forKey:@"website"];
+    [defaults synchronize];
+}
+
+- (void)refeshAll
+{
+    [self refreshUserEntity];
+    [self refreshTableView];
+}
+
+- (void)refreshUserEntity
+{
+    [userentity release];
+    userentity = nil;
+    userentity = [self UserEntity];
+}
+
 - (void)userCoverImageSet
 {
     int type = [self covertype];
@@ -286,8 +407,16 @@
 
 - (int)covertype
 {
+//    NSCharacterSet* nonDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+//    int value = [[[userentity.website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
+//    return value;
+    return userentity.covertype;
+}
+
+- (int)covertype:(NSString *)website
+{
     NSCharacterSet* nonDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    int value = [[[userentity.website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
+    int value = [[[website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
     return value;
 }
 
@@ -326,12 +455,20 @@
 
 - (void)backAction
 {
+    if ([finishTarget retainCount] > 0 && [finishTarget respondsToSelector:finishAction]) {
+        [finishTarget performSelector:finishAction  withObject:nil];
+    }
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)saveProfileAction
 {
-    NSLog(@"saved!");
+    NSString * textName = userNameTextField.text;
+    NSString * textDesc = userDescTextView.text;
+    if ([textName length] > 0 && [textDesc length] > 0 && (![textDesc isEqualToString:userentity.what] || ![textName isEqualToString:userentity.nick])) {
+        WeiboClient *client = [[WeiboClient alloc] initWithTarget:self action:@selector(loadDataFinished:obj:)];
+        [client updateUserInfo:userId Nick:textName What:textDesc];
+    }
 }
 
 - (void)dealloc
@@ -354,9 +491,5 @@
     userDescTextView = nil;
     userentity = nil;
 }
-
-
-
-
 
 @end

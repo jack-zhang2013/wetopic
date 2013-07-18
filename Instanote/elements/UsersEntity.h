@@ -28,6 +28,7 @@
     NSString *hobby;
     NSString *address;
     NSString *website;
+    int covertype;
     
 }
 
@@ -48,6 +49,7 @@
 @property (nonatomic, retain) NSString *hobby;
 @property (nonatomic, retain) NSString *address;
 @property (nonatomic, retain) NSString *website;
+@property (nonatomic, assign) int covertype;
 
 - (UsersEntity *)initWithJsonDictionary:(NSDictionary *)dic;
 

@@ -26,10 +26,12 @@
     
     UsersEntity * userentity;
     int userId;
+    int usertype;
 }
 
 @property (nonatomic, assign)int userId;
 @property (nonatomic, retain)UsersEntity *userentity;
+@property (nonatomic, assign)int usertype;
 
 //- (void)allNewsFeedAction;
 

@@ -12,7 +12,7 @@
 @implementation UsersEntity
 @synthesize declaration,email,nick,otheraccount,otheraccountflag,otheraccountuserimage;
 @synthesize otheraccountypeid,password,registertime,sex,what,userid,userlevel;
-@synthesize image, address, hobby, website;
+@synthesize image, address, hobby, website ,covertype;
 
 - (UsersEntity *)initWithJsonDictionary:(NSDictionary *)dic
 {
@@ -28,12 +28,13 @@
         otheraccountypeid = [dic getIntValueForKey:@"otheraccountypeid" defaultValue:-1];
         password = [[dic getStringValueForKey:@"password" defaultValue:@""] retain];
         registertime = [dic getTimeValueForKey:@"registertimeLong" defaultValue:0];
-        userid = [dic getIntValueForKey:@"userid" defaultValue:-1];
+        userid = [[dic getStringValueForKey:@"userid" defaultValue:@""] intValue];
         userlevel = [dic getIntValueForKey:@"userlevel" defaultValue:-1];
         what = [dic getStringValueForKey:@"what" defaultValue:@""];
         hobby = [dic getStringValueForKey:@"hobby" defaultValue:@""];
         address = [dic getStringValueForKey:@"address" defaultValue:@""];
         website = [dic getStringValueForKey:@"website" defaultValue:@""];
+        covertype = 0;
     }
     return self;
 }

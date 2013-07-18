@@ -49,11 +49,11 @@ typedef enum {
 
 - (void)user:(int)userid;
 
-- (void)updateUserInfo:(NSString *)userId Nick:(NSString *)nick What:(NSString *)what;
+- (void)updateUserInfo:(int)userId Nick:(NSString *)nick What:(NSString *)what;
 
-- (void)updateUserCover:(NSString *)userId Cover:(int)type;
+- (void)updateUserCover:(int)userId Cover:(int)type;
 
-- (void)updateuserAvatar:(NSString *)userId userImage:(NSData *)userimage;
+- (void)updateuserAvatar:(int)userId userImage:(NSData *)userimage;
 
 ///////////end notices
 
