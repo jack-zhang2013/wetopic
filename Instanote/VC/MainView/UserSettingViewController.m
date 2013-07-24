@@ -115,16 +115,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
         return 3;
-    } else if (section == 1) {
-        return 1;
-    } else {
+    }
+//    else if (section == 1) {
+//        return 1;
+//    }
+    else {
         return 0;
     }
 }
@@ -180,7 +182,7 @@
             
         } else if (indexPath.section == 1) {
             
-            [cell addSubview:[self logoutButton]];
+//            [cell addSubview:[self logoutButton]];
             
         } else {
             //nothing
@@ -206,9 +208,10 @@
             height = 130.f;
         }
         
-    } else if (indexPath.section == 1 && indexPath.row == 0) {
-        height = 38.f;
     }
+//    else if (indexPath.section == 1 && indexPath.row == 0) {
+//        height = 38.f;
+//    }
     return height;
 }
 
@@ -250,16 +253,20 @@
 - (void)loadDataFinishedWithType:(WeiboClient *)sender
                      obj:(NSObject*)obj
 {
-    NSLog(@"%@",obj);
     if (sender.hasError) {
         [self alerterror:NSLocalizedString(@"errormessage", nil)];
     }
     else {
         
         NSString *status = [(NSDictionary *)obj objectForKey:@"status"];
+        NSDictionary * data = [(NSDictionary *)obj objectForKey:@"data"];
         if ([status intValue] == 1) {
             
+            NSDictionary * user = [data objectForKey:@"user"];
+            UsersEntity * u = [UsersEntity entityWithJsonDictionary:user];
+            [self saveUser:u];
             
+            [self refeshAll];
             
         }
     }
@@ -278,8 +285,8 @@
         if ([status intValue] == 1) {
             [userNameTextField resignFirstResponder];
             [userDescTextView resignFirstResponder];
-            [self setUserName:userNameTextField.text];
-            [self saveAction];
+            [self setUserName:userNameTextField.text userDesc:userDescTextView.text];
+            [self backAction];
         }
     }
 }
@@ -290,21 +297,43 @@
     [alert show];
 }
 
-- (void)saveAction
-{
-    if ([finishTarget retainCount] > 0 && [finishTarget respondsToSelector:finishAction]) {
-        [finishTarget performSelector:finishAction  withObject:nil];
-    }
-    [self backAction];
-}
-
-- (void)setUserName:(NSString *)username
+- (void)setUserName:(NSString *)username userDesc:(NSString *)desc
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:username forKey:@"nick"];
+    [defaults setObject:desc forKey:@"what"];
     [defaults synchronize];
 }
 
+- (void)saveUser:(UsersEntity *)user
+{
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    [def setObject:user.email forKey:@"email"];
+    [def setObject:user.image forKey:@"image"];
+    [def setObject:user.nick forKey:@"nick"];
+    [def setObject:user.otheraccountflag forKey:@"otheraccountflag"];
+    [def setObject:user.otheraccountuserimage forKey:@"otheraccountuserimage"];
+    [def setObject:user.password forKey:@"password"];
+    [def setObject:user.what forKey:@"what"];
+    [def setInteger:user.otheraccount forKey:@"otheraccount"];
+    [def setInteger:user.otheraccountypeid forKey:@"otheraccountypeid"];
+    [def setInteger:user.sex forKey:@"sex"];
+    [def setInteger:user.registertime forKey:@"registertime"];
+    [def setInteger:user.userid forKey:aUserId];
+    [def setInteger:user.userlevel forKey:@"userlevel"];
+    [def setObject:user.address forKey:@"address"];
+    [def setObject:user.hobby forKey:@"hobby"];
+    [def setObject:user.website forKey:@"website"];
+    [def setInteger:[self covertype:user.website] forKey:@"covertype"];
+    [def synchronize];
+}
+
+- (int)covertype:(NSString *)website
+{
+    NSCharacterSet* nonDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    int value = [[[website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
+    return value;
+}
 
 #pragma mark - button gens
 
@@ -329,16 +358,16 @@
     return changeAvatar;
 }
 
-- (UIButton *)logoutButton
-{
-    UIButton * logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    logoutButton.frame = CGRectMake(10, 0, 300, 38);
-    logoutButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_logout.png"]];
-    logoutButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
-    [logoutButton setTitle:@"登出" forState:UIControlStateNormal];
-    return logoutButton;
-    
-}
+//- (UIButton *)logoutButton
+//{
+//    UIButton * logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    logoutButton.frame = CGRectMake(10, 0, 300, 38);
+//    logoutButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_logout.png"]];
+//    logoutButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+//    [logoutButton setTitle:@"登出" forState:UIControlStateNormal];
+//    return logoutButton;
+//    
+//}
 
 #pragma mark - UITextView, UITextField Delegate
 
@@ -369,7 +398,6 @@
 
 - (void)changeUserCover:(NSString *)index
 {
-    NSLog(@"%d", [index intValue]);
     WeiboClient *client = [[WeiboClient alloc] initWithTarget:self action:@selector(loadDataFinishedWithType:obj:)];
     [client updateUserCover:userId Cover:[index intValue]];
 }
@@ -412,14 +440,6 @@
 //    return value;
     return userentity.covertype;
 }
-
-- (int)covertype:(NSString *)website
-{
-    NSCharacterSet* nonDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    int value = [[[website substringFromIndex:10] stringByTrimmingCharactersInSet:nonDigits] intValue];
-    return value;
-}
-
 
 - (void)userImageSet
 {
@@ -468,6 +488,8 @@
     if ([textName length] > 0 && [textDesc length] > 0 && (![textDesc isEqualToString:userentity.what] || ![textName isEqualToString:userentity.nick])) {
         WeiboClient *client = [[WeiboClient alloc] initWithTarget:self action:@selector(loadDataFinished:obj:)];
         [client updateUserInfo:userId Nick:textName What:textDesc];
+    } else {
+        [self backAction];
     }
 }
 

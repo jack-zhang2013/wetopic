@@ -152,12 +152,24 @@
 		8F17F4BE178EAA4700C1ABC5 /* user_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F17F4BC178EAA4700C1ABC5 /* user_setting.png */; };
 		8F17F4BF178EAA4700C1ABC5 /* user_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F17F4BD178EAA4700C1ABC5 /* user_setting@2x.png */; };
 		8F17F4C2178EB93F00C1ABC5 /* UserSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F17F4C1178EB93F00C1ABC5 /* UserSettingViewController.m */; };
+		8F27154A179CD6DF000ADCFE /* welcome_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271542179CD6DF000ADCFE /* welcome_0.png */; };
+		8F27154B179CD6DF000ADCFE /* welcome_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271543179CD6DF000ADCFE /* welcome_0@2x.png */; };
+		8F27154C179CD6DF000ADCFE /* welcome_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271544179CD6DF000ADCFE /* welcome_1.png */; };
+		8F27154D179CD6DF000ADCFE /* welcome_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271545179CD6DF000ADCFE /* welcome_1@2x.png */; };
+		8F27154E179CD6DF000ADCFE /* welcome_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271546179CD6DF000ADCFE /* welcome_2.png */; };
+		8F27154F179CD6DF000ADCFE /* welcome_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271547179CD6DF000ADCFE /* welcome_2@2x.png */; };
+		8F271550179CD6DF000ADCFE /* welcome_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271548179CD6DF000ADCFE /* welcome_3.png */; };
+		8F271551179CD6DF000ADCFE /* welcome_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271549179CD6DF000ADCFE /* welcome_3@2x.png */; };
+		8F37E821179FB12D0031301E /* CircleEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37E820179FB12D0031301E /* CircleEntity.m */; };
+		8F50AA74179E218A0069306D /* CircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F50AA73179E218A0069306D /* CircleListViewController.m */; };
 		8F880A4F176030380001A0D9 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4C176030380001A0D9 /* JASidePanelController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8F880A50176030380001A0D9 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4E176030380001A0D9 /* UIViewController+JASidePanel.m */; };
 		8F880A54176033300001A0D9 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A53176033300001A0D9 /* LeftViewController.m */; };
 		8FC5D2AC1793E35100125A1B /* SelectCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */; };
 		8FC6956D179686E000A29AB6 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC6956B179686E000A29AB6 /* cancel_button.png */; };
 		8FC6956E179686E000A29AB6 /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC6956C179686E000A29AB6 /* cancel_button@2x.png */; };
+		8FC69571179942DB00A29AB6 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC69570179942DB00A29AB6 /* CycleScrollView.m */; };
+		8FC695741799432500A29AB6 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC695731799432500A29AB6 /* WelcomeViewController.m */; };
 		8FC7DF0C177015FB00CDE978 /* UMEGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7DEE9177015FB00CDE978 /* UMEGORefreshTableHeaderView.m */; };
 		8FC7DF0D177015FB00CDE978 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC7DEEB177015FB00CDE978 /* background@2x.png */; };
 		8FC7DF0E177015FB00CDE978 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC7DEEC177015FB00CDE978 /* blueArrow.png */; };
@@ -487,6 +499,18 @@
 		8F17F4BD178EAA4700C1ABC5 /* user_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_setting@2x.png"; sourceTree = "<group>"; };
 		8F17F4C0178EB93F00C1ABC5 /* UserSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserSettingViewController.h; path = MainView/UserSettingViewController.h; sourceTree = "<group>"; };
 		8F17F4C1178EB93F00C1ABC5 /* UserSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserSettingViewController.m; path = MainView/UserSettingViewController.m; sourceTree = "<group>"; };
+		8F271542179CD6DF000ADCFE /* welcome_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_0.png; sourceTree = "<group>"; };
+		8F271543179CD6DF000ADCFE /* welcome_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_0@2x.png"; sourceTree = "<group>"; };
+		8F271544179CD6DF000ADCFE /* welcome_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_1.png; sourceTree = "<group>"; };
+		8F271545179CD6DF000ADCFE /* welcome_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_1@2x.png"; sourceTree = "<group>"; };
+		8F271546179CD6DF000ADCFE /* welcome_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_2.png; sourceTree = "<group>"; };
+		8F271547179CD6DF000ADCFE /* welcome_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_2@2x.png"; sourceTree = "<group>"; };
+		8F271548179CD6DF000ADCFE /* welcome_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_3.png; sourceTree = "<group>"; };
+		8F271549179CD6DF000ADCFE /* welcome_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_3@2x.png"; sourceTree = "<group>"; };
+		8F37E81F179FB12D0031301E /* CircleEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleEntity.h; path = elements/CircleEntity.h; sourceTree = "<group>"; };
+		8F37E820179FB12D0031301E /* CircleEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleEntity.m; path = elements/CircleEntity.m; sourceTree = "<group>"; };
+		8F50AA72179E218A0069306D /* CircleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListViewController.h; path = MainView/CircleListViewController.h; sourceTree = "<group>"; };
+		8F50AA73179E218A0069306D /* CircleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListViewController.m; path = MainView/CircleListViewController.m; sourceTree = "<group>"; };
 		8F880A4B176030380001A0D9 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
 		8F880A4C176030380001A0D9 /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
 		8F880A4D176030380001A0D9 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
@@ -497,6 +521,10 @@
 		8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectCoverViewController.m; path = MainView/SelectCoverViewController.m; sourceTree = "<group>"; };
 		8FC6956B179686E000A29AB6 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		8FC6956C179686E000A29AB6 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
+		8FC6956F179942DB00A29AB6 /* CycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleScrollView.h; sourceTree = "<group>"; };
+		8FC69570179942DB00A29AB6 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
+		8FC695721799432500A29AB6 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WelcomeViewController.h; path = VC/Login/WelcomeViewController.h; sourceTree = "<group>"; };
+		8FC695731799432500A29AB6 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WelcomeViewController.m; path = VC/Login/WelcomeViewController.m; sourceTree = "<group>"; };
 		8FC7DEE8177015FB00CDE978 /* UMEGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMEGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		8FC7DEE9177015FB00CDE978 /* UMEGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMEGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		8FC7DEEB177015FB00CDE978 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
@@ -715,6 +743,7 @@
 		664B288915143AFE00F92B96 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8F271541179CD6DF000ADCFE /* welcome */,
 				8FC6956B179686E000A29AB6 /* cancel_button.png */,
 				8FC6956C179686E000A29AB6 /* cancel_button@2x.png */,
 				8FE6EA8217900B65001886FC /* setting_logout.png */,
@@ -827,6 +856,8 @@
 				6BC80E7D163A232B00FFA57B /* LoginViewController.m */,
 				6BC80E7E163A232B00FFA57B /* RegisterViewController.h */,
 				6BC80E7F163A232B00FFA57B /* RegisterViewController.m */,
+				8FC695721799432500A29AB6 /* WelcomeViewController.h */,
+				8FC695731799432500A29AB6 /* WelcomeViewController.m */,
 			);
 			name = Login;
 			path = ..;
@@ -912,6 +943,8 @@
 				8F17F4C1178EB93F00C1ABC5 /* UserSettingViewController.m */,
 				8FC5D2AA1793E35100125A1B /* SelectCoverViewController.h */,
 				8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */,
+				8F50AA72179E218A0069306D /* CircleListViewController.h */,
+				8F50AA73179E218A0069306D /* CircleListViewController.m */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -984,6 +1017,8 @@
 		6BFCF768151CE30E008502A8 /* elements */ = {
 			isa = PBXGroup;
 			children = (
+				8FC6956F179942DB00A29AB6 /* CycleScrollView.h */,
+				8FC69570179942DB00A29AB6 /* CycleScrollView.m */,
 				8FC7DEE6177015FB00CDE978 /* chat */,
 				8F880A4A176030380001A0D9 /* JASidePanels */,
 				6B1C312017001C980032F9E5 /* NSDate+InternetDateTime.h */,
@@ -1048,6 +1083,8 @@
 				6BC6820F168C0D7500221FAF /* CircleDetailImgsEntity.m */,
 				6B5C4F9017014A22009C0E34 /* BaseEnity.h */,
 				6B5C4F9117014A22009C0E34 /* BaseEnity.m */,
+				8F37E81F179FB12D0031301E /* CircleEntity.h */,
+				8F37E820179FB12D0031301E /* CircleEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1089,6 +1126,21 @@
 				8FD950DF1783F12900754501 /* user_cover_default@2x.png */,
 			);
 			path = usercover;
+			sourceTree = "<group>";
+		};
+		8F271541179CD6DF000ADCFE /* welcome */ = {
+			isa = PBXGroup;
+			children = (
+				8F271542179CD6DF000ADCFE /* welcome_0.png */,
+				8F271543179CD6DF000ADCFE /* welcome_0@2x.png */,
+				8F271544179CD6DF000ADCFE /* welcome_1.png */,
+				8F271545179CD6DF000ADCFE /* welcome_1@2x.png */,
+				8F271546179CD6DF000ADCFE /* welcome_2.png */,
+				8F271547179CD6DF000ADCFE /* welcome_2@2x.png */,
+				8F271548179CD6DF000ADCFE /* welcome_3.png */,
+				8F271549179CD6DF000ADCFE /* welcome_3@2x.png */,
+			);
+			path = welcome;
 			sourceTree = "<group>";
 		};
 		8F880A4A176030380001A0D9 /* JASidePanels */ = {
@@ -1446,6 +1498,14 @@
 				8FEC65261795282F00DE223A /* bookmark@2x.png in Resources */,
 				8FC6956D179686E000A29AB6 /* cancel_button.png in Resources */,
 				8FC6956E179686E000A29AB6 /* cancel_button@2x.png in Resources */,
+				8F27154A179CD6DF000ADCFE /* welcome_0.png in Resources */,
+				8F27154B179CD6DF000ADCFE /* welcome_0@2x.png in Resources */,
+				8F27154C179CD6DF000ADCFE /* welcome_1.png in Resources */,
+				8F27154D179CD6DF000ADCFE /* welcome_1@2x.png in Resources */,
+				8F27154E179CD6DF000ADCFE /* welcome_2.png in Resources */,
+				8F27154F179CD6DF000ADCFE /* welcome_2@2x.png in Resources */,
+				8F271550179CD6DF000ADCFE /* welcome_3.png in Resources */,
+				8F271551179CD6DF000ADCFE /* welcome_3@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1533,6 +1593,10 @@
 				8FDF380B177A8AAA0006C35E /* CommentCell.m in Sources */,
 				8F17F4C2178EB93F00C1ABC5 /* UserSettingViewController.m in Sources */,
 				8FC5D2AC1793E35100125A1B /* SelectCoverViewController.m in Sources */,
+				8FC69571179942DB00A29AB6 /* CycleScrollView.m in Sources */,
+				8FC695741799432500A29AB6 /* WelcomeViewController.m in Sources */,
+				8F50AA74179E218A0069306D /* CircleListViewController.m in Sources */,
+				8F37E821179FB12D0031301E /* CircleEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

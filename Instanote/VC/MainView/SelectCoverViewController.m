@@ -33,7 +33,7 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = [self doneButton];
+//    self.navigationItem.rightBarButtonItem = [self doneButton];
     self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
     
 }
@@ -138,14 +138,14 @@
     return [[UIBarButtonItem alloc] initWithCustomView:face];
 }
 
-- (UIBarButtonItem *)doneButton {
-    UIImage *faceImage = [UIImage imageNamed:@"done_button.png"];
-    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
-    face.bounds = CGRectMake( 12, 12, 40, 25 );
-    [face setImage:faceImage forState:UIControlStateNormal];
-    [face addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
-    return [[UIBarButtonItem alloc] initWithCustomView:face];
-}
+//- (UIBarButtonItem *)doneButton {
+//    UIImage *faceImage = [UIImage imageNamed:@"done_button.png"];
+//    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+//    face.bounds = CGRectMake( 12, 12, 40, 25 );
+//    [face setImage:faceImage forState:UIControlStateNormal];
+//    [face addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+//    return [[UIBarButtonItem alloc] initWithCustomView:face];
+//}
 
 - (void)backAction
 {
@@ -154,7 +154,6 @@
 
 - (void)saveAction:(int)index
 {
-    NSLog(@"%d", index);
     if ([finishTarget retainCount] > 0 && [finishTarget respondsToSelector:finishAction]) {
         [finishTarget performSelector:finishAction withObject:[NSString stringWithFormat:@"%d", index]];
     }

@@ -17,6 +17,7 @@
 #import "TopicViewController.h"
 #import "NewsFeedCell.h"
 #import "UserViewController.h"
+#import "WelcomeViewController.h"
 
 @interface IndexViewController ()
 
@@ -38,14 +39,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     if (!loadMoreLabel) {
         loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 14, 150, 17)];
         [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
         [loadMoreLabel setTextColor:[UIColor grayColor]];
         [loadMoreLabel setBackgroundColor:[UIColor clearColor]];
     }
+    [self firstsignin];
     
-    
+}
+
+- (void)firstsignin
+{
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
+    if (![[df objectForKey:@"amilogin"] isEqual:@"yes"]) {
+        [df setObject:@"yes" forKey:@"amilogin"];
+        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
+        [self presentModalViewController:welcomeVC animated:NO];
+        [welcomeVC release];
+    }
 }
 
 //- (void)avatarAction

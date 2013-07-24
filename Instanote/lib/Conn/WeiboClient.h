@@ -55,8 +55,14 @@ typedef enum {
 
 - (void)updateuserAvatar:(int)userId userImage:(NSData *)userimage;
 
+- (void)getCircles;
+
+- (void)getCircleDetailInfos:(NSString *)CircleId pageNum:(int)pn pageSize:(int)ps;
+
 ///////////end notices
 
 - (void)alert;
+
+- (void)alerterror:(NSString *)title;
 
 @end

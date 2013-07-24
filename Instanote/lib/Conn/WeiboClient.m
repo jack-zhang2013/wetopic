@@ -100,7 +100,7 @@
 	if (params) {
         fullPath = [self _queryStringWithBase:fullPath parameters:params prefixed:YES];
     }
-    NSLog(@"%@",fullPath);
+//    NSLog(@"%@",fullPath);
 	return fullPath;
 }
 
@@ -233,7 +233,21 @@
     
 }
 
+- (void)getCircles
+{
+    NSString *path = [NSString stringWithFormat:@"circleInfoAction_getAppCircle.%@", API_FORMAT];
+	[super get:[self getURL:path queryParameters:nil]];
+}
 
+- (void)getCircleDetailInfos:(NSString *)CircleId pageNum:(int)pn pageSize:(int)ps
+{
+    NSString *path = [NSString stringWithFormat:@"circleInfoAction_findAppCircleDetailInfo.%@", API_FORMAT];
+    NSMutableString *postBody = [[NSMutableString alloc] init];
+    [postBody appendFormat:@"id=%@", CircleId];
+    [postBody appendFormat:@"&pageNum=%d", pn];
+    [postBody appendFormat:@"&pageSize=%d", ps];
+    [self post:[self getURL:path queryParameters:nil] body:postBody];
+}
 
 - (void)getComments:(long long)statusId 
 	 startingAtPage:(int)page 
@@ -694,6 +708,13 @@
 							  otherButtonTitles:nil] autorelease];
     [sAlert show];
 }
+
+- (void)alerterror:(NSString *)title
+{
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
+    [alert show];
+}
+
 
 - (void)cancel
 {

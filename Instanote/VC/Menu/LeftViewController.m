@@ -47,8 +47,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(218, 14, 20, 20)];
-    [settingButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
-    //    [settingButton addTarget:self action:@selector(tapSettingView) forControlEvents:UIControlEventTouchUpInside];
+    [settingButton setImage:[UIImage imageNamed:@"about.png"] forState:UIControlStateNormal];
+    [settingButton addTarget:self action:@selector(tapSettingView) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar addSubview:settingButton];
     [settingButton release];
     
@@ -205,10 +205,10 @@
             
         } else if (indexPath.row == 4) {
             
-            UIImageView * aboutImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"about.png"]];
+            UIImageView * aboutImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"setting.png"]];
             aboutImageView.frame = CGRectMake(10, 10, 20, 20);
             UILabel * aboutLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
-            aboutLable.text = @"关于";
+            aboutLable.text = @"设置";
             aboutLable.font = [UIFont fontWithName:FONT_NAME size:15];
             
             [cell addSubview:aboutImageView];
@@ -291,6 +291,11 @@
     [self presentModalViewController:nav animated:YES];
     [settingvc release];
     [nav release];
+}
+
+- (void)tapHelp
+{
+    
 }
 
 - (void)tapFeedbackView {
