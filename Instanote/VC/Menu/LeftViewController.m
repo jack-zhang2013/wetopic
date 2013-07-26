@@ -296,12 +296,12 @@
 
 - (void)circleListView
 {
-    CircleListViewController *homevc = [[CircleListViewController alloc] init];
-    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
-    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
-    self.sidePanelController.centerPanel = nav;
-    [homevc release];
-    [nav release];
+    CircleListViewController *circlevc = [[CircleListViewController alloc] init];
+//    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:circlevc];
+//    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [self presentModalViewController:circlevc animated:YES];
+    [circlevc release];
+//    [nav release];
 }
 
 - (void)tapHelp

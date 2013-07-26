@@ -7,9 +7,9 @@
 //
 
 #import "CircleListViewController.h"
-#import "CycleScrollView.h"
 #import "WeiboClient.h"
 #import "CircleEntity.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface CircleListViewController ()
 
@@ -26,30 +26,54 @@
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    picArray = [[NSMutableArray alloc] init];
-    [self genCircles];
     
     [self getCircles];
-    
-    [self genPages];
     
 }
 
 - (void)genPages
 {
+    XLCycleScrollView *csView = [[XLCycleScrollView alloc] initWithFrame:self.view.bounds];
+    csView.delegate = self;
+    csView.datasource = self;
+    [self.view addSubview:csView];
+}
+
+- (NSInteger)numberOfPages
+{
+    return 3;
+}
+
+- (UIView *)pageAtIndex:(NSInteger)index
+{
     CGRect bound = [[UIScreen mainScreen] bounds];
-    
-    CycleScrollView *cycle = [[CycleScrollView alloc] initWithFrame:bound
-                                                     cycleDirection:CycleDirectionLandscape
-                                                           pictures:picArray];
-    cycle.delegate = self;
-    [self.view addSubview:cycle];
-    [cycle release];
+    UIView * view = [[[UIView alloc] initWithFrame:bound] autorelease];
+    view.backgroundColor = [UIColor grayColor];
+//    if (index < 3) {
+//        if (circleArray.count > 0) {
+//            for (int i = index * 6, j = 1; i < (index + 1) * 6; i ++, j ++) {
+//                
+//                [view addSubview:[self circleView:circleArray[i] Frame:CGRectMake(160 * (j % 2), 44 + 130 * (int)(j / 2), 160, 130)]];
+//                
+//            }
+//        }
+//        
+//    }
+    return view;
+}
+
+- (void)didClickPage:(XLCycleScrollView *)csView atIndex:(NSInteger)index
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                    message:[NSString stringWithFormat:@"当前点击第%d个页面",index]
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 // first get the UserDefaults object,if null,request the API.
@@ -76,12 +100,13 @@
     }
     else {
         [self convertdata:obj];
-        NSLog(@"%d", [circleArray count]);
+        [self genPages];
     }
 }
 
 - (void)convertdata:(NSObject *)obj
 {
+    circleArray = [[NSMutableArray alloc] init];
     NSDictionary *jsondata = [(NSDictionary *)obj objectForKey:@"data"];
 //    totalcommentcount = [jsondata getIntValueForKey:@"count" defaultValue:0];
     NSDictionary *circleInfoList = [jsondata objectForKey:@"circleInfoList"];
@@ -96,42 +121,39 @@
     }
 }
 
-- (void)genCircles
+- (UIView *)circleView:(CircleEntity *)entity Frame:(CGRect)rect
 {
-    CGRect bound = [[UIScreen mainScreen] bounds];
-    UIView *firstviews = [[UIView alloc] initWithFrame:bound];
-    firstviews.backgroundColor = [UIColor greenColor];
+    UIView * cv = [[UIView alloc] initWithFrame:rect];
+    UIImageView *ringImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 110, 110)];
+    ringImageView.image = [UIImage imageNamed:@"circle_ring.png"];
+    [cv addSubview:ringImageView];
+    [ringImageView release];
     
-    UIView *secondviews = [[UIView alloc] initWithFrame:bound];
-    secondviews.backgroundColor = [UIColor redColor];
+    UIImageView *circleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 14, 106, 106)];
+    NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, entity.circlebigimg];
+    [circleImageView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
-    UIView *thirdviews = [[UIView alloc] initWithFrame:bound];
-    thirdviews.backgroundColor = [UIColor blueColor];
+    [cv addSubview:circleImageView];
+    [circleImageView release];
     
-    [picArray addObject:firstviews];
-    [picArray addObject:secondviews];
-    [picArray addObject:thirdviews];
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 125, 160, 20)];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont fontWithName:FONT_NAME size:16];
+    titleLabel.text = entity.circlename;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [cv addSubview:titleLabel];
+    [titleLabel release];
     
-    [firstviews release];
-    [secondviews release];
-    [thirdviews release];
-}
-
-- (UIView *)circleView:(CircleEntity *)entity
-{
-    return nil;
-}
-
-
-- (void)cycleScrollViewDelegate:(CycleScrollView *)cycleScrollView didSelectImageView:(int)index {
-    if (index == 4) {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-}
-
-- (void)cycleScrollViewDelegate:(CycleScrollView *)cycleScrollView didScrollImageView:(int)index {
+    UILabel * circleOwnLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 145, 160, 16)];
+    circleOwnLabel.textColor = [UIColor whiteColor];
+    circleOwnLabel.font = [UIFont fontWithName:FONT_NAME size:16];
+    circleOwnLabel.text = entity.userinfo.nick;
+    circleOwnLabel.textAlignment = NSTextAlignmentCenter;
+    [cv addSubview:circleOwnLabel];
+    [circleOwnLabel release];
     
-    //    self.title = [NSString stringWithFormat:@"第%d张", index];
+    return cv;
+    
 }
 
 
@@ -144,13 +166,13 @@
 - (void)dealloc
 {
     [super dealloc];
-    [picArray release];
+    [circleArray release];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    picArray = nil;
+    circleArray = nil;
 }
 
 @end

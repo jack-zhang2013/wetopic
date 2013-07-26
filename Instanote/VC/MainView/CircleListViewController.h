@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XLCycleScrollView.h"
 
-@interface CircleListViewController : UIViewController
+@interface CircleListViewController : UIViewController <XLCycleScrollViewDatasource,XLCycleScrollViewDelegate>
 {
-    NSMutableArray *picArray;
     NSMutableArray *circleArray;
 }
 

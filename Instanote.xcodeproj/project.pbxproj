@@ -174,7 +174,6 @@
 		8FC5D2AC1793E35100125A1B /* SelectCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */; };
 		8FC6956D179686E000A29AB6 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC6956B179686E000A29AB6 /* cancel_button.png */; };
 		8FC6956E179686E000A29AB6 /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC6956C179686E000A29AB6 /* cancel_button@2x.png */; };
-		8FC69571179942DB00A29AB6 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC69570179942DB00A29AB6 /* CycleScrollView.m */; };
 		8FC695741799432500A29AB6 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC695731799432500A29AB6 /* WelcomeViewController.m */; };
 		8FC7DF0C177015FB00CDE978 /* UMEGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7DEE9177015FB00CDE978 /* UMEGORefreshTableHeaderView.m */; };
 		8FC7DF0D177015FB00CDE978 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FC7DEEB177015FB00CDE978 /* background@2x.png */; };
@@ -236,6 +235,9 @@
 		8FDF380B177A8AAA0006C35E /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDF380A177A8AAA0006C35E /* CommentCell.m */; };
 		8FE2264117A21E80008BDB57 /* start_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE2263F17A21E80008BDB57 /* start_button.png */; };
 		8FE2264217A21E80008BDB57 /* start_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE2264017A21E80008BDB57 /* start_button@2x.png */; };
+		8FE2264517A24BDC008BDB57 /* XLCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE2264417A24BDC008BDB57 /* XLCycleScrollView.m */; };
+		8FE2264817A27239008BDB57 /* circle_ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE2264617A27239008BDB57 /* circle_ring.png */; };
+		8FE2264917A27239008BDB57 /* circle_ring@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE2264717A27239008BDB57 /* circle_ring@2x.png */; };
 		8FE6EA80178FECEB001886FC /* user_setting_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE6EA7E178FECEB001886FC /* user_setting_button.png */; };
 		8FE6EA81178FECEB001886FC /* user_setting_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE6EA7F178FECEB001886FC /* user_setting_button@2x.png */; };
 		8FE6EA8617900B65001886FC /* setting_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE6EA8217900B65001886FC /* setting_logout.png */; };
@@ -539,8 +541,6 @@
 		8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectCoverViewController.m; path = MainView/SelectCoverViewController.m; sourceTree = "<group>"; };
 		8FC6956B179686E000A29AB6 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		8FC6956C179686E000A29AB6 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
-		8FC6956F179942DB00A29AB6 /* CycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleScrollView.h; sourceTree = "<group>"; };
-		8FC69570179942DB00A29AB6 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
 		8FC695721799432500A29AB6 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WelcomeViewController.h; path = VC/Login/WelcomeViewController.h; sourceTree = "<group>"; };
 		8FC695731799432500A29AB6 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WelcomeViewController.m; path = VC/Login/WelcomeViewController.m; sourceTree = "<group>"; };
 		8FC7DEE8177015FB00CDE978 /* UMEGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMEGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -609,6 +609,10 @@
 		8FDF380A177A8AAA0006C35E /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		8FE2263F17A21E80008BDB57 /* start_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_button.png; sourceTree = "<group>"; };
 		8FE2264017A21E80008BDB57 /* start_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start_button@2x.png"; sourceTree = "<group>"; };
+		8FE2264317A24BDC008BDB57 /* XLCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCycleScrollView.h; sourceTree = "<group>"; };
+		8FE2264417A24BDC008BDB57 /* XLCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCycleScrollView.m; sourceTree = "<group>"; };
+		8FE2264617A27239008BDB57 /* circle_ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_ring.png; sourceTree = "<group>"; };
+		8FE2264717A27239008BDB57 /* circle_ring@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_ring@2x.png"; sourceTree = "<group>"; };
 		8FE6EA7E178FECEB001886FC /* user_setting_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_setting_button.png; sourceTree = "<group>"; };
 		8FE6EA7F178FECEB001886FC /* user_setting_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_setting_button@2x.png"; sourceTree = "<group>"; };
 		8FE6EA8217900B65001886FC /* setting_logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_logout.png; sourceTree = "<group>"; };
@@ -763,6 +767,8 @@
 		664B288915143AFE00F92B96 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8FE2264617A27239008BDB57 /* circle_ring.png */,
+				8FE2264717A27239008BDB57 /* circle_ring@2x.png */,
 				8F271541179CD6DF000ADCFE /* welcome */,
 				8FC6956B179686E000A29AB6 /* cancel_button.png */,
 				8FC6956C179686E000A29AB6 /* cancel_button@2x.png */,
@@ -1037,9 +1043,9 @@
 		6BFCF768151CE30E008502A8 /* elements */ = {
 			isa = PBXGroup;
 			children = (
+				8FE2264317A24BDC008BDB57 /* XLCycleScrollView.h */,
+				8FE2264417A24BDC008BDB57 /* XLCycleScrollView.m */,
 				8F37E82817A111140031301E /* IntroControll */,
-				8FC6956F179942DB00A29AB6 /* CycleScrollView.h */,
-				8FC69570179942DB00A29AB6 /* CycleScrollView.m */,
 				8FC7DEE6177015FB00CDE978 /* chat */,
 				8F880A4A176030380001A0D9 /* JASidePanels */,
 				6B1C312017001C980032F9E5 /* NSDate+InternetDateTime.h */,
@@ -1550,6 +1556,8 @@
 				8F37E83517A11CC20031301E /* shadow@2x.png in Resources */,
 				8FE2264117A21E80008BDB57 /* start_button.png in Resources */,
 				8FE2264217A21E80008BDB57 /* start_button@2x.png in Resources */,
+				8FE2264817A27239008BDB57 /* circle_ring.png in Resources */,
+				8FE2264917A27239008BDB57 /* circle_ring@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1637,7 +1645,6 @@
 				8FDF380B177A8AAA0006C35E /* CommentCell.m in Sources */,
 				8F17F4C2178EB93F00C1ABC5 /* UserSettingViewController.m in Sources */,
 				8FC5D2AC1793E35100125A1B /* SelectCoverViewController.m in Sources */,
-				8FC69571179942DB00A29AB6 /* CycleScrollView.m in Sources */,
 				8FC695741799432500A29AB6 /* WelcomeViewController.m in Sources */,
 				8F50AA74179E218A0069306D /* CircleListViewController.m in Sources */,
 				8F37E821179FB12D0031301E /* CircleEntity.m in Sources */,
@@ -1645,6 +1652,7 @@
 				8F37E82F17A111140031301E /* IntroControll.m in Sources */,
 				8F37E83017A111140031301E /* IntroModel.m in Sources */,
 				8F37E83117A111140031301E /* IntroView.m in Sources */,
+				8FE2264517A24BDC008BDB57 /* XLCycleScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
