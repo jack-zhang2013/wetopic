@@ -167,9 +167,15 @@
         
         [alert release];
         
-        [self.navigationController popViewControllerAnimated:NO];
+        [self backAction];
     }
 }
+
+//- (void)backAction
+//{
+////    [self.navigationController popViewControllerAnimated:NO];
+//    [self dismissModalViewControllerAnimated:YES];
+//}
 
 - (BOOL)statusto:(int)status
 {
@@ -211,20 +217,37 @@
 {
     
     if (sender.hasError) {
-        [self alerterror:NSLocalizedString(@"errormessage", nil)];
+        [sender alerterror:NSLocalizedString(@"errormessage", nil)];
     }
     else {
-        [self convertdata:obj];
+        
+        NSDictionary * dic = (NSDictionary *)obj;
+        int status;
+        status = [dic getIntValueForKey:@"status" defaultValue:0];
+        if ([self statusto:status]) {
+            
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"forgot_message_checkmail", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
+            [alert show];
+            
+            [alert release];
+            
+            [self backAction];
+        }
+
+        
+//        [self convertdata:obj];
     }
 }
 
 
-- (void)alerterror:(NSString *)title
-{
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-}
+//- (void)alerterror:(NSString *)title
+//{
+//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
+//    [alert show];
+//    [alert release];
+//}
+
+
 - (void)msgShow:(UIView *)view
 {
     [view setHidden:NO];

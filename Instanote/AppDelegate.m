@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "SettingViewController.h"
 #import "IndexViewController.h"
+#import "CircleListViewController.h"
 #import "MobClick.h"
 #import "UMSocialData.h"
 #import "UMSocialSnsService.h"
@@ -57,14 +58,22 @@
     [leftviewcontroller release];
     [leftnav release];
     
-    IndexViewController * indexvc = [[IndexViewController alloc] init];
-    indexvc.pagetype = 1;
-    indexvc.title = @"最新话题";
-    UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:indexvc];
+//    IndexViewController * indexvc = [[IndexViewController alloc] init];
+//    indexvc.pagetype = 1;
+//    indexvc.title = @"最新话题";
+//    UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:indexvc];
+//    [indexnav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+//    self.viewController.centerPanel = indexnav;
+//    [indexvc release];
+//    [indexnav release];
+    
+    CircleListViewController * circlevc = [[CircleListViewController alloc] init];
+    UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:circlevc];
     [indexnav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.viewController.centerPanel = indexnav;
-    [indexvc release];
+    [circlevc release];
     [indexnav release];
+    
     
     [self.window setRootViewController:self.viewController];
     [self.window makeKeyAndVisible];

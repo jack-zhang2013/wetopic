@@ -254,7 +254,7 @@
                      obj:(NSObject*)obj
 {
     if (sender.hasError) {
-        [self alerterror:NSLocalizedString(@"errormessage", nil)];
+        [sender alerterror:NSLocalizedString(@"errormessage", nil)];
     }
     else {
         
@@ -278,7 +278,7 @@
 {
     
     if (sender.hasError) {
-        [self alerterror:NSLocalizedString(@"errormessage", nil)];
+        [sender alerterror:NSLocalizedString(@"errormessage", nil)];
     }
     else {
         NSString *status = [(NSDictionary *)obj objectForKey:@"status"];
@@ -291,11 +291,11 @@
     }
 }
 
-- (void)alerterror:(NSString *)title
-{
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
-    [alert show];
-}
+//- (void)alerterror:(NSString *)title
+//{
+//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
+//    [alert show];
+//}
 
 - (void)setUserName:(NSString *)username userDesc:(NSString *)desc
 {

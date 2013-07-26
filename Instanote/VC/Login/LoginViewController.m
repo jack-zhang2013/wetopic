@@ -467,7 +467,7 @@
 {
     
     if (sender.hasError) {
-        [self alerterror:NSLocalizedString(@"errormessage", nil)];
+        [sender alerterror:NSLocalizedString(@"errormessage", nil)];
     }
     else {
         [self convertdata:obj];
@@ -475,12 +475,12 @@
 }
 
 
-- (void)alerterror:(NSString *)title
-{
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-}
+//- (void)alerterror:(NSString *)title
+//{
+//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
+//    [alert show];
+//    [alert release];
+//}
 
 - (void)forgotPasswordAction
 {

@@ -32,7 +32,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     picArray = [[NSMutableArray alloc] init];
+    [self genCircles];
     
+    [self getCircles];
+    
+    [self genPages];
+    
+}
+
+- (void)genPages
+{
     CGRect bound = [[UIScreen mainScreen] bounds];
     
     CycleScrollView *cycle = [[CycleScrollView alloc] initWithFrame:bound
@@ -41,8 +50,6 @@
     cycle.delegate = self;
     [self.view addSubview:cycle];
     [cycle release];
-    
-    [self getCircles];
 }
 
 // first get the UserDefaults object,if null,request the API.
@@ -69,6 +76,7 @@
     }
     else {
         [self convertdata:obj];
+        NSLog(@"%d", [circleArray count]);
     }
 }
 
@@ -109,7 +117,10 @@
     [thirdviews release];
 }
 
-//- (UIView *)circleView:(CircleView)
+- (UIView *)circleView:(CircleEntity *)entity
+{
+    return nil;
+}
 
 
 - (void)cycleScrollViewDelegate:(CycleScrollView *)cycleScrollView didSelectImageView:(int)index {

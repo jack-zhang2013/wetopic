@@ -14,6 +14,7 @@
 #import "UMFeedbackViewController.h"
 #import "LoginViewController.h"
 #import "UserViewController.h"
+#import "CircleListViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -231,7 +232,7 @@
     if (indexPath.row == 0) {
         [self avatarAction];
     } else if (indexPath.row == 1) {
-        [self tapHomeView];
+        [self circleListView];
     } else if (indexPath.row == 2) {
         [self tapHomeViewHot];
     } else if (indexPath.row == 3) {
@@ -290,6 +291,16 @@
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
     [self presentModalViewController:nav animated:YES];
     [settingvc release];
+    [nav release];
+}
+
+- (void)circleListView
+{
+    CircleListViewController *homevc = [[CircleListViewController alloc] init];
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    self.sidePanelController.centerPanel = nav;
+    [homevc release];
     [nav release];
 }
 

@@ -40,14 +40,14 @@
         if (!authorNameLabel) {
             authorNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
             authorNameLabel.textColor = [UIColor orangeColor];
-            authorNameLabel.font = [UIFont fontWithName:FONT_NAME size:13];
+            authorNameLabel.font = [UIFont fontWithName:FONT_NAME size:15];
             [self addSubview:authorNameLabel];
         }
         
         
         if (!descLabel) {
             descLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            descLabel.font = [UIFont fontWithName:FONT_NAME size:13];
+            descLabel.font = [UIFont fontWithName:FONT_NAME size:14];
             descLabel.textColor = [UIColor grayColor];
             [self addSubview:descLabel];
         }
@@ -64,14 +64,14 @@
         
         if (!timeLabel) {
             timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            timeLabel.font = [UIFont fontWithName:FONT_NAME size:12];
+            timeLabel.font = [UIFont fontWithName:FONT_NAME size:14];
             timeLabel.textColor = [UIColor grayColor];
             [self addSubview:timeLabel];
         }
         
         if (!contentLabel) {
             contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            contentLabel.font = [UIFont fontWithName:FONT_NAME size:15];
+            contentLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
             contentLabel.lineBreakMode = NSLineBreakByWordWrapping;
             [self addSubview:contentLabel];
         }
@@ -83,7 +83,7 @@
         
         if (!commentLabel) {
             commentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            commentLabel.font = [UIFont fontWithName:FONT_NAME size:13];
+            commentLabel.font = [UIFont fontWithName:FONT_NAME size:14];
             commentLabel.textColor = [UIColor darkGrayColor];
             [self addSubview:commentLabel];
         }
@@ -102,7 +102,7 @@
 
 - (void)configurecell:(TopicsEntity *)top
 {
-    authorNameLabel.frame = CGRectMake(5, 5, 50, 14);
+    authorNameLabel.frame = CGRectMake(5, 5, 50, 16);
     authorNameLabel.text = top.userinfo.nick;
     [authorNameLabel sizeToFit];
     CGRect authorNameLabelRect = authorNameLabel.frame;
@@ -118,7 +118,7 @@
     descLabel.frame = descLabelRect;
     descLabel.text = @"创建了此话题";
     
-    CGRect authorViewRect = CGRectMake(320 - 5 - 15, 5, 15, 15);
+    CGRect authorViewRect = CGRectMake(320 - 5 - 20, 5, 20, 20);
     authorView.frame = authorViewRect;
     
     NSString * image = top.userinfo.image;
@@ -136,17 +136,17 @@
     authorViewButton.frame = authorViewRect;
     authorViewButton.tag = top.userid;
     
-    CGRect timeLabelRect = CGRectMake(177, 7, 120, 13);
+    CGRect timeLabelRect = CGRectMake(172, 7, 120, 16);
     timeLabel.frame = timeLabelRect;
     timeLabel.text = [top timestamp:top.createdatetime];
     timeLabel.textAlignment = NSTextAlignmentRight;
     
-    contentLabel.frame = CGRectMake(5, 25, 310, 15);
+    contentLabel.frame = CGRectMake(5, 27, 310, 16);
     contentLabel.text = top.title;
     [contentLabel sizeToFitFixedWidth:310];
     CGRect contentButtonRect = contentLabel.frame;
     
-    int indexAt = 68;
+    int indexAt = 86;
     commentLabel.frame = CGRectMake(5, contentButtonRect.origin.y + contentButtonRect.size.height + 5, 310, 13);
     NSString *content = [top.circlecontent length] > indexAt ? [NSString stringWithFormat:@"%@...", [top.circlecontent substringToIndex:indexAt]] : top.circlecontent;
     

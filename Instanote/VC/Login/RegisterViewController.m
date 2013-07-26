@@ -294,38 +294,6 @@
 
 - (void)convertdata:(NSObject *)data
 {
-    NSDictionary * dic = (NSDictionary *)data;
-    int status;
-    status = [dic getIntValueForKey:@"status" defaultValue:0];
-    if ([self statusto:status]) {
-        
-        //NSLog(@"%@", data);
-        
-        //NSDictionary * data = [dic objectForKey:@"data"];
-        //NSDictionary * user = [data objectForKey:@"user"];
-        //UsersEntity * u = [UsersEntity entityWithJsonDictionary:user];
-        //remember the user
-        //[self saveUser:u];
-        //dismiss this view
-        
-        [self alerterror:NSLocalizedString(@"register_success", nil)];
-        
-        [self.navigationController popViewControllerAnimated:NO];
-        
-//        if ([[dic getStringValueForKey:@"data" defaultValue:@"null"] isEqualToString:@"null"]) {
-//            
-//            
-//        } else {
-//            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"注册失败，请稍后重试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//            [alert show];
-//            [alert release];
-//            
-//            [self.navigationController popViewControllerAnimated:NO];
-//        }
-        
-        
-        
-    }
 }
 
 - (BOOL)statusto:(int)status
@@ -388,20 +356,60 @@
 {
     
     if (sender.hasError) {
-        [self alerterror:NSLocalizedString(@"errormessage", nil)];
+        [sender alerterror:NSLocalizedString(@"errormessage", nil)];
     }
     else {
-        [self convertdata:obj];
+        
+        NSDictionary * dic = (NSDictionary *)obj;
+        int status;
+        status = [dic getIntValueForKey:@"status" defaultValue:0];
+        if ([self statusto:status]) {
+            
+            //NSLog(@"%@", data);
+            
+            //NSDictionary * data = [dic objectForKey:@"data"];
+            //NSDictionary * user = [data objectForKey:@"user"];
+            //UsersEntity * u = [UsersEntity entityWithJsonDictionary:user];
+            //remember the user
+            //[self saveUser:u];
+            //dismiss this view
+            
+            [sender alerterror:NSLocalizedString(@"register_success", nil)];
+            
+            [self backAction];
+            
+            //        if ([[dic getStringValueForKey:@"data" defaultValue:@"null"] isEqualToString:@"null"]) {
+            //
+            //
+            //        } else {
+            //            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"注册失败，请稍后重试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            //            [alert show];
+            //            [alert release];
+            //            
+            //            [self.navigationController popViewControllerAnimated:NO];
+            //        }
+            
+            
+            
+        }
+//        [self convertdata:obj];
     }
 }
 
+//- (void)backAction
+//{
+////    [self.navigationController popViewControllerAnimated:NO];
+//    [self dismissModalViewControllerAnimated:YES];
+//}
 
-- (void)alerterror:(NSString *)title
-{
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
-    [alert show];
-    [alert release];
-}
+//- (void)alerterror:(NSString *)title
+//{
+//    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_yes", nil) otherButtonTitles:nil, nil];
+//    [alert show];
+//    [alert release];
+//}
+
+
 - (void)msgShow:(UIView *)view
 {
     [view setHidden:NO];

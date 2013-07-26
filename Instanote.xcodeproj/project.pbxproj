@@ -161,6 +161,12 @@
 		8F271550179CD6DF000ADCFE /* welcome_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271548179CD6DF000ADCFE /* welcome_3.png */; };
 		8F271551179CD6DF000ADCFE /* welcome_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F271549179CD6DF000ADCFE /* welcome_3@2x.png */; };
 		8F37E821179FB12D0031301E /* CircleEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37E820179FB12D0031301E /* CircleEntity.m */; };
+		8F37E82717A0D5440031301E /* CircleDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37E82617A0D5440031301E /* CircleDetailEntity.m */; };
+		8F37E82F17A111140031301E /* IntroControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37E82A17A111140031301E /* IntroControll.m */; };
+		8F37E83017A111140031301E /* IntroModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37E82C17A111140031301E /* IntroModel.m */; };
+		8F37E83117A111140031301E /* IntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37E82E17A111140031301E /* IntroView.m */; };
+		8F37E83417A11CC20031301E /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F37E83217A11CC20031301E /* shadow.png */; };
+		8F37E83517A11CC20031301E /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F37E83317A11CC20031301E /* shadow@2x.png */; };
 		8F50AA74179E218A0069306D /* CircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F50AA73179E218A0069306D /* CircleListViewController.m */; };
 		8F880A4F176030380001A0D9 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4C176030380001A0D9 /* JASidePanelController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8F880A50176030380001A0D9 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4E176030380001A0D9 /* UIViewController+JASidePanel.m */; };
@@ -228,6 +234,8 @@
 		8FDF3808177A898F0006C35E /* nobody_male_origin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FDF3806177A898F0006C35E /* nobody_male_origin.png */; };
 		8FDF3809177A898F0006C35E /* nobody_male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FDF3807177A898F0006C35E /* nobody_male@2x.png */; };
 		8FDF380B177A8AAA0006C35E /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDF380A177A8AAA0006C35E /* CommentCell.m */; };
+		8FE2264117A21E80008BDB57 /* start_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE2263F17A21E80008BDB57 /* start_button.png */; };
+		8FE2264217A21E80008BDB57 /* start_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE2264017A21E80008BDB57 /* start_button@2x.png */; };
 		8FE6EA80178FECEB001886FC /* user_setting_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE6EA7E178FECEB001886FC /* user_setting_button.png */; };
 		8FE6EA81178FECEB001886FC /* user_setting_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE6EA7F178FECEB001886FC /* user_setting_button@2x.png */; };
 		8FE6EA8617900B65001886FC /* setting_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE6EA8217900B65001886FC /* setting_logout.png */; };
@@ -509,6 +517,16 @@
 		8F271549179CD6DF000ADCFE /* welcome_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_3@2x.png"; sourceTree = "<group>"; };
 		8F37E81F179FB12D0031301E /* CircleEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleEntity.h; path = elements/CircleEntity.h; sourceTree = "<group>"; };
 		8F37E820179FB12D0031301E /* CircleEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleEntity.m; path = elements/CircleEntity.m; sourceTree = "<group>"; };
+		8F37E82517A0D5440031301E /* CircleDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleDetailEntity.h; path = elements/CircleDetailEntity.h; sourceTree = "<group>"; };
+		8F37E82617A0D5440031301E /* CircleDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleDetailEntity.m; path = elements/CircleDetailEntity.m; sourceTree = "<group>"; };
+		8F37E82917A111140031301E /* IntroControll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroControll.h; sourceTree = "<group>"; };
+		8F37E82A17A111140031301E /* IntroControll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroControll.m; sourceTree = "<group>"; };
+		8F37E82B17A111140031301E /* IntroModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroModel.h; sourceTree = "<group>"; };
+		8F37E82C17A111140031301E /* IntroModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroModel.m; sourceTree = "<group>"; };
+		8F37E82D17A111140031301E /* IntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroView.h; sourceTree = "<group>"; };
+		8F37E82E17A111140031301E /* IntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroView.m; sourceTree = "<group>"; };
+		8F37E83217A11CC20031301E /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
+		8F37E83317A11CC20031301E /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
 		8F50AA72179E218A0069306D /* CircleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListViewController.h; path = MainView/CircleListViewController.h; sourceTree = "<group>"; };
 		8F50AA73179E218A0069306D /* CircleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListViewController.m; path = MainView/CircleListViewController.m; sourceTree = "<group>"; };
 		8F880A4B176030380001A0D9 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
@@ -589,6 +607,8 @@
 		8FDF3806177A898F0006C35E /* nobody_male_origin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nobody_male_origin.png; sourceTree = "<group>"; };
 		8FDF3807177A898F0006C35E /* nobody_male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nobody_male@2x.png"; sourceTree = "<group>"; };
 		8FDF380A177A8AAA0006C35E /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		8FE2263F17A21E80008BDB57 /* start_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_button.png; sourceTree = "<group>"; };
+		8FE2264017A21E80008BDB57 /* start_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start_button@2x.png"; sourceTree = "<group>"; };
 		8FE6EA7E178FECEB001886FC /* user_setting_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_setting_button.png; sourceTree = "<group>"; };
 		8FE6EA7F178FECEB001886FC /* user_setting_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_setting_button@2x.png"; sourceTree = "<group>"; };
 		8FE6EA8217900B65001886FC /* setting_logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_logout.png; sourceTree = "<group>"; };
@@ -1017,6 +1037,7 @@
 		6BFCF768151CE30E008502A8 /* elements */ = {
 			isa = PBXGroup;
 			children = (
+				8F37E82817A111140031301E /* IntroControll */,
 				8FC6956F179942DB00A29AB6 /* CycleScrollView.h */,
 				8FC69570179942DB00A29AB6 /* CycleScrollView.m */,
 				8FC7DEE6177015FB00CDE978 /* chat */,
@@ -1085,6 +1106,8 @@
 				6B5C4F9117014A22009C0E34 /* BaseEnity.m */,
 				8F37E81F179FB12D0031301E /* CircleEntity.h */,
 				8F37E820179FB12D0031301E /* CircleEntity.m */,
+				8F37E82517A0D5440031301E /* CircleDetailEntity.h */,
+				8F37E82617A0D5440031301E /* CircleDetailEntity.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1131,6 +1154,10 @@
 		8F271541179CD6DF000ADCFE /* welcome */ = {
 			isa = PBXGroup;
 			children = (
+				8FE2263F17A21E80008BDB57 /* start_button.png */,
+				8FE2264017A21E80008BDB57 /* start_button@2x.png */,
+				8F37E83217A11CC20031301E /* shadow.png */,
+				8F37E83317A11CC20031301E /* shadow@2x.png */,
 				8F271542179CD6DF000ADCFE /* welcome_0.png */,
 				8F271543179CD6DF000ADCFE /* welcome_0@2x.png */,
 				8F271544179CD6DF000ADCFE /* welcome_1.png */,
@@ -1141,6 +1168,19 @@
 				8F271549179CD6DF000ADCFE /* welcome_3@2x.png */,
 			);
 			path = welcome;
+			sourceTree = "<group>";
+		};
+		8F37E82817A111140031301E /* IntroControll */ = {
+			isa = PBXGroup;
+			children = (
+				8F37E82917A111140031301E /* IntroControll.h */,
+				8F37E82A17A111140031301E /* IntroControll.m */,
+				8F37E82B17A111140031301E /* IntroModel.h */,
+				8F37E82C17A111140031301E /* IntroModel.m */,
+				8F37E82D17A111140031301E /* IntroView.h */,
+				8F37E82E17A111140031301E /* IntroView.m */,
+			);
+			path = IntroControll;
 			sourceTree = "<group>";
 		};
 		8F880A4A176030380001A0D9 /* JASidePanels */ = {
@@ -1506,6 +1546,10 @@
 				8F27154F179CD6DF000ADCFE /* welcome_2@2x.png in Resources */,
 				8F271550179CD6DF000ADCFE /* welcome_3.png in Resources */,
 				8F271551179CD6DF000ADCFE /* welcome_3@2x.png in Resources */,
+				8F37E83417A11CC20031301E /* shadow.png in Resources */,
+				8F37E83517A11CC20031301E /* shadow@2x.png in Resources */,
+				8FE2264117A21E80008BDB57 /* start_button.png in Resources */,
+				8FE2264217A21E80008BDB57 /* start_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1597,6 +1641,10 @@
 				8FC695741799432500A29AB6 /* WelcomeViewController.m in Sources */,
 				8F50AA74179E218A0069306D /* CircleListViewController.m in Sources */,
 				8F37E821179FB12D0031301E /* CircleEntity.m in Sources */,
+				8F37E82717A0D5440031301E /* CircleDetailEntity.m in Sources */,
+				8F37E82F17A111140031301E /* IntroControll.m in Sources */,
+				8F37E83017A111140031301E /* IntroModel.m in Sources */,
+				8F37E83117A111140031301E /* IntroView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

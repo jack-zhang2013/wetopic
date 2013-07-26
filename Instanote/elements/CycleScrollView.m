@@ -59,9 +59,9 @@
     [self getDisplayImagesWithCurpage:curPage];
     
     for (int i = 0; i < 3; i++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:scrollFrame];
+        UIView *imageView = [[UIView alloc] initWithFrame:scrollFrame];
         imageView.userInteractionEnabled = YES;
-        imageView.image = [curImages objectAtIndex:i];
+        imageView = [curImages objectAtIndex:i];
         
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(handleTap:)];
