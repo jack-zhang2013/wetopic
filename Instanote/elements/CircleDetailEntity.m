@@ -35,7 +35,6 @@
         NSDictionary *imgDic = [[dic objectForKey:@"circleDetailImg"] retain];
         
         circleDetailImg = [[NSMutableArray alloc] initWithCapacity:0];
-        
         for (NSDictionary * imgdetial in imgDic) {
             if (![imgdetial isKindOfClass:[NSDictionary class]]) {
                 continue;

@@ -7,6 +7,7 @@
 //
 
 #import "CircleListViewController.h"
+#import "CircleViewController.h"
 #import "WeiboClient.h"
 #import "CircleEntity.h"
 #import <QuartzCore/QuartzCore.h>
@@ -33,27 +34,38 @@ static int cellSize;
 {
     [super viewDidLoad];
     
+    self.title = @"圈子列表";
+    
+    self.view.backgroundColor = [UIColor colorWithRed:219/255.f green:108/255.f blue:86/255.f alpha:1];
+    
     [self cellSizeGen];
     
     [self getCircles];
     
-    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, 320, 15)];
-    titleLabel.text = @"圈子列表";
-    titleLabel.font = [UIFont fontWithName:FONT_NAME size:15];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = [UIColor whiteColor];
-    [self.view insertSubview:titleLabel atIndex:1];
-    [titleLabel release];
     
     
-    UIButton *circle_left_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *faceImage = [UIImage imageNamed:@"circle_left_button.png"];
-    [circle_left_button setImage:faceImage forState:UIControlStateNormal];
-    [circle_left_button addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    circle_left_button.frame = CGRectMake(14, 14, 22, 16);
+    self.navigationItem.leftBarButtonItem = [self leftBarButton];
     
-    [self.view insertSubview:circle_left_button atIndex:2];
+    
+    
+//    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, 320, 15)];
+//    titleLabel.text = @"圈子列表";
+//    titleLabel.font = [UIFont fontWithName:FONT_NAME size:15];
+//    titleLabel.textAlignment = NSTextAlignmentCenter;
+//    titleLabel.backgroundColor = [UIColor clearColor];
+//    titleLabel.textColor = [UIColor whiteColor];
+//    [self.view insertSubview:titleLabel atIndex:1];
+//    [titleLabel release];
+    
+}
+
+- (UIBarButtonItem *)leftBarButton
+{
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake(14, 14, 22, 16);
+    [face setImage:[UIImage imageNamed:@"circle_left_button.png"] forState:UIControlStateNormal];
+    [face addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
     
 }
 
@@ -82,19 +94,21 @@ static int cellSize;
 
 - (NSInteger)numberOfPages
 {
-    return 1;
+    return 2;
 }
 
 - (UIView *)pageAtIndex:(NSInteger)index
 {
-    CGRect bound = [[UIScreen mainScreen] bounds];
+    CGRect bound = [[UIScreen mainScreen] bounds]; 
     UIView * view = [[[UIView alloc] initWithFrame:bound] autorelease];
-    view.backgroundColor = [UIColor colorWithRed:219/255.f green:108/255.f blue:86/255.f alpha:1];
-    if (index < 3) {
-        if (circleArray.count > 0) {
-            for (int i = index * 6, j = 1; i < (index + 1) * 6; i ++, j ++) {
-                [view addSubview:[self circleView:circleArray[i] Frame:CGRectMake((160 * ((j - 1) % 2)), 44 + cellSize * (((j + 1) / 2) - 1), 160, cellSize)]];
+    if (index < 2 && circleArray.count > 0) {
+        for (int i = index * 6, j = 1; i < (index + 1) * 6; i ++, j ++) {
+            if (i == 11) {
+                
+            } else if (i < 11 && i >= 0) {
+                [view addSubview:[self circleView:circleArray[i] Frame:CGRectMake((160 * ((j - 1) % 2)), 5 + cellSize * (((j + 1) / 2) - 1), 160, cellSize) Index:i]];
             }
+            
         }
         
     }
@@ -142,6 +156,7 @@ static int cellSize;
 
 - (void)convertdata:(NSObject *)obj
 {
+//    NSLog(@"%@", obj);
     circleArray = [[NSMutableArray alloc] init];
     NSDictionary *jsondata = [(NSDictionary *)obj objectForKey:@"data"];
 //    totalcommentcount = [jsondata getIntValueForKey:@"count" defaultValue:0];
@@ -157,7 +172,7 @@ static int cellSize;
     }
 }
 
-- (UIView *)circleView:(CircleEntity *)entity Frame:(CGRect)rect
+- (UIView *)circleView:(CircleEntity *)entity Frame:(CGRect)rect Index:(int)index
 {
     CGFloat ringImageviewLeft = 0, ringImageviewSize = 0;
     CGFloat circleImageViewLeft = 0, circleImageviewSize = 0;
@@ -198,7 +213,7 @@ static int cellSize;
     [circleImageView.layer setBorderWidth:2.5];
     [circleImageView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, entity.circlebigimg];
-    [circleImageView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [circleImageView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"circle_placeholder.png"]];
     
     [cv addSubview:circleImageView];
     [circleImageView release];
@@ -221,7 +236,26 @@ static int cellSize;
     [cv addSubview:circleOwnLabel];
     [circleOwnLabel release];
     
+    UIButton * circleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 110)];
+    circleButton.titleLabel.text = entity.circleid;
+    circleButton.tag = index;
+    [circleButton addTarget:self action:@selector(circleAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cv addSubview:circleButton];
+    [circleButton release];
+    
     return cv;
+}
+
+- (void)circleAction:(UIButton *)sender
+{
+    CircleViewController *circleVC = [[CircleViewController alloc] init];
+    circleVC.circleId = sender.titleLabel.text;
+    circleVC.cEntity = circleArray[sender.tag];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:circleVC];
+//    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController pushViewController:circleVC animated:YES];
+    [circleVC release];
+//    [nav release];
     
 }
 

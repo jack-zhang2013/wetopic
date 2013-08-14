@@ -491,8 +491,8 @@
     [mytopic release];
     [fetchArray release];
 //    [msgview release];
-    [btn_comment release];
-    [btn_back release];
+//    [btn_comment release];
+//    [btn_back release];
     [super dealloc];
 }
 
@@ -502,8 +502,8 @@
     mytopic = nil;
     fetchArray = nil;
 //    msgview = nil;
-    btn_comment = nil;
-    btn_back = nil;
+//    btn_comment = nil;
+//    btn_back = nil;
     [super viewDidUnload];
 }
 

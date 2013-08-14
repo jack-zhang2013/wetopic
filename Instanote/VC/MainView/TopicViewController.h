@@ -28,8 +28,8 @@
     
 //    UIButton * loadMoreButton;
 
-    UIButton * btn_comment;
-    UIButton * btn_back;
+//    UIButton * btn_comment;
+//    UIButton * btn_back;
     
     CommentDetailViewController * commentdetailvc;
     

@@ -14,4 +14,6 @@
     NSMutableArray *circleArray;
 }
 
+- (void)circleAction:(UIButton *)sender;
+
 @end

@@ -297,11 +297,11 @@
 - (void)circleListView
 {
     CircleListViewController *circlevc = [[CircleListViewController alloc] init];
-//    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:circlevc];
-//    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
-    [self presentModalViewController:circlevc animated:YES];
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:circlevc];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [self presentModalViewController:nav animated:YES];
     [circlevc release];
-//    [nav release];
+    [nav release];
 }
 
 - (void)tapHelp

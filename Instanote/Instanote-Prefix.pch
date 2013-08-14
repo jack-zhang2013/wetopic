@@ -24,6 +24,7 @@
 #define TWITTERFON_FORM_BOUNDARY  @"0194784892923"
 
 #define FONT_NAME @"Helvetica"
+#define FONT_NAME_BOLD @"Helvetica-Bold"
 
 #define aUserId @"userid"
 

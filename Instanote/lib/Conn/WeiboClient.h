@@ -59,6 +59,10 @@ typedef enum {
 
 - (void)getCircleDetailInfos:(NSString *)CircleId pageNum:(int)pn pageSize:(int)ps;
 
+- (void)getCircleDetailInfo:(NSString *)CircleId;
+
+- (void)getCircleDetailCommentInfos:(NSString *)circleDetailId pageNum:(int)pn pageSize:(int)ps;
+
 ///////////end notices
 
 - (void)alert;
