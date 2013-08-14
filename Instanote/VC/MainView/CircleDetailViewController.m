@@ -66,8 +66,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    int numner = 2;
-    return numner + [fetchArray count];
+    int numner = 2 + [fetchArray count];
+    return numner;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -92,14 +92,13 @@
     static NSString *CellIdentifier = @"Cell";
     if (indexPath.row == 0) {
         static NSString *cellid = @"circledetailcell";
-        return nil;
         CircleDetailCell * cell = (CircleDetailCell *)[tableView dequeueReusableCellWithIdentifier:cellid];
         if (cell == nil){
             cell = [[[CircleDetailCell alloc] init] autorelease];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            
         }
         [cell configurecellIndetail:circleDetailEntity];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     } else if (indexPath.row >= 1 && indexPath.row < [fetchArray count] + 1) {
@@ -111,14 +110,16 @@
         int index = indexPath.row - 1;
         CircleCommentInfosEntity * cce = [fetchArray objectAtIndex:index];
         [cell configurecell:cce];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     } else if (indexPath.row == [fetchArray count] + 1) {
-        
-        UITableViewCell * cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                         reuseIdentifier:@"cell_loadmore_style2"] autorelease];
-        
+        static NSString *loadmore_CellId = @"cell_loadmore_style2";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:loadmore_CellId];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                             reuseIdentifier:loadmore_CellId] autorelease];
+        }
         UILabel * loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 14, 150, 17)];
         [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
         [loadMoreLabel setTextColor:[UIColor grayColor]];
@@ -137,14 +138,14 @@
             
         }
         
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
         return cell;
         
     } else {
         
-        UITableViewCell *bcell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        UITableViewCell *bcell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (bcell == nil) {
             bcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
