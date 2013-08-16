@@ -108,7 +108,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -232,14 +232,15 @@
     if (indexPath.row == 0) {
         [self avatarAction];
     } else if (indexPath.row == 1) {
-        [self circleListView];
+        [self tapHomeView];
     } else if (indexPath.row == 2) {
         [self tapHomeViewHot];
     } else if (indexPath.row == 3) {
         [self tapFeedbackView];
-    } else if (indexPath.row == 4) {
-        [self tapSettingView];
     }
+//    else if (indexPath.row == 4) {
+//        [self tapSettingView];
+//    }
 }
 
 - (void)signinAction

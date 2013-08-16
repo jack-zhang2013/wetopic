@@ -45,7 +45,7 @@
     
     [self getCircleDetailInfo];
     
-//    [self getCircleCommentInfos];
+    [self getCircleCommentInfos];
     
 }
 
@@ -95,9 +95,10 @@
         CircleDetailCell * cell = (CircleDetailCell *)[tableView dequeueReusableCellWithIdentifier:cellid];
         if (cell == nil){
             cell = [[[CircleDetailCell alloc] init] autorelease];
-            
         }
         [cell configurecellIndetail:circleDetailEntity];
+        
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -111,6 +112,11 @@
         CircleCommentInfosEntity * cce = [fetchArray objectAtIndex:index];
         [cell configurecell:cce];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (indexPath.row % 2 != 0) {
+            cell.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1];
+        }
+        
         return cell;
         
     } else if (indexPath.row == [fetchArray count] + 1) {
@@ -229,31 +235,31 @@
         }
         [self convertCommentInfosdata:obj];
         [self endLoadData];
-        
-        [[self tableView] reloadData];
     }
 }
 
 - (void)convertdata:(NSObject *)obj
 {
-    NSLog(@"%@", obj);
+//    NSLog(@"%@", obj);
     int status = [[(NSDictionary *)obj objectForKey:@"status"] intValue];
     if (status == 1) {
         NSDictionary *jsondata = [(NSDictionary *)obj objectForKey:@"data"];
         NSDictionary *circleDetailInfo = [jsondata objectForKey:@"circleDetail"];
         if (circleDetailInfo) {
-            circleDetailEntity = [CircleDetailEntity entityWithJsonDictionary:circleDetailInfo];
+            CircleDetailEntity * ce = [CircleDetailEntity entityWithJsonDictionary:circleDetailInfo];
+            circleDetailEntity.circlecontent = ce.circlecontent;
         }
+        [self reloadtableivew];
     }
 }
 
 - (void)convertCommentInfosdata:(NSObject *)obj
 {
-    NSLog(@"%@", obj);
+//    NSLog(@"%@", obj);
     int status = [[(NSDictionary *)obj objectForKey:@"status"] intValue];
     if (status == 1) {
         NSDictionary *jsondata = [(NSDictionary *)obj objectForKey:@"data"];
-//        totalcommentcount = [jsondata getIntValueForKey:@"comCount" defaultValue:0];
+        totalcommentcount = [jsondata getIntValueForKey:@"countComment" defaultValue:0];
         NSDictionary *circleCommentinfoList = [jsondata objectForKey:@"detailComment"];
         if (circleCommentinfoList) {
             for (NSDictionary * commentinfo in circleCommentinfoList) {

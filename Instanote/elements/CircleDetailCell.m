@@ -14,6 +14,7 @@
 
 @implementation CircleDetailCell
 @synthesize circleCommentCount, circleDesc, cellheight, circleImage, circleTime, circleTitle;
+@synthesize userImageView, userName;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -74,7 +75,7 @@
         if (!userName) {
             userName = [[UILabel alloc] initWithFrame:CGRectZero];
             userName.textColor = [UIColor colorWithRed:219/255.f green:108/255.f blue:86/255.f alpha:1];
-            userName.font = [UIFont fontWithName:FONT_NAME size:14];
+            userName.font = [UIFont fontWithName:FONT_NAME size:12];
         }
         
     }
@@ -92,14 +93,15 @@
 
 - (void)configurecell:(CircleDetailEntity *)circleentity
 {
-    circleTitle.frame = CGRectMake(15, 15, 222, 17);
-    circleTitle.text = circleentity.title;
+    circleTitle.frame = CGRectMake(10, 15, 222, 17);
+    circleTitle.text = [self stringWithoutNbsp:circleentity.title];
     [circleTitle sizeToFitFixedWidth:222.f];
     
+    CGFloat circleDescWidth = 220.f;
     CGFloat circleDescTop = circleTitle.frame.size.height + circleTitle.frame.origin.y + 10;
-    circleDesc.frame = CGRectMake(15, circleDescTop, 222, 17);
-    circleDesc.text = circleentity.circlecontent;//[self stringWithoutNbsp:circleentity.circlecontent];
-    [circleDesc sizeToFitFixedWidth:222];
+    circleDesc.frame = CGRectMake(15, circleDescTop, circleDescWidth, 17);
+    circleDesc.text = [self stringWithoutNbsp:circleentity.circlecontent];
+    [circleDesc sizeToFitFixedWidth:circleDescWidth];
     
     CGFloat circleTimeTop = circleDescTop + circleDesc.frame.size.height + 10;
     circleTime.text = [circleentity timestamp:circleentity.createdatetime];
@@ -128,8 +130,8 @@
 
 - (void)configurecellIndetail:(CircleDetailEntity *)circleentity
 {
-    circleTitle.frame = CGRectMake(15, 15, 290, 17);
-    circleTitle.text = circleentity.title;
+    circleTitle.frame = CGRectMake(10, 15, 290, 17);
+    circleTitle.text = [self stringWithoutNbsp:circleentity.title];
     [circleTitle sizeToFitFixedWidth:290];
     
     CGFloat ImageSize = 55.f;
@@ -142,16 +144,16 @@
     
     CGFloat circleUserNameTop = circleTitle.frame.size.height + circleTitle.frame.origin.y + 25;
     userName.text = circleentity.userinfo.nick;
-    userName.frame = CGRectMake(90, circleUserNameTop, 200, 15);
+    userName.frame = CGRectMake(80, circleUserNameTop, 200, 15);
     [self addSubview:userName];
     
-    CGFloat circleTimeTop = userName.frame.size.height + userName.frame.origin.y + 25;
+    CGFloat circleTimeTop = userName.frame.size.height + userName.frame.origin.y + 15;
     circleTime.text = [circleentity timestamp:circleentity.createdatetime];
-    circleTime.frame = CGRectMake(90, circleTimeTop, 200, 15);
+    circleTime.frame = CGRectMake(83, circleTimeTop, 200, 15);
     
-    CGFloat circleDescTop = circleTitle.frame.size.height + circleTitle.frame.origin.y + 10;
+    CGFloat circleDescTop = userImageView.frame.size.height + userImageView.frame.origin.y + 10;
     circleDesc.frame = CGRectMake(15, circleDescTop, 290, 17);
-    circleDesc.text = circleentity.circlecontent;//[self stringWithoutNbsp:circleentity.circlecontent];
+    circleDesc.text = [self stringWithoutNbsp:circleentity.circlecontent];
     [circleDesc sizeToFitFixedWidth:290];
     
     cellheight = circleDesc.frame.origin.y + circleDesc.frame.size.height + 30.f;
