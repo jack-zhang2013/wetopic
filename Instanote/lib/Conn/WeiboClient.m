@@ -268,6 +268,16 @@
     [self post:[self getURL:path queryParameters:nil] body:postBody];
 }
 
+- (void)getCircleUsers:(NSString *)CircleId pageNum:(int)pn pageSize:(int)ps
+{
+    NSString *path = [NSString stringWithFormat:@"circleInfoAction_finUserInCircleInfo.%@", API_FORMAT];
+    NSMutableString *postBody = [[NSMutableString alloc] init];
+    [postBody appendFormat:@"id=%@", CircleId];
+    [postBody appendFormat:@"&pageNum=%d", pn];
+    [postBody appendFormat:@"&pageSize=%d", ps];
+    [self post:[self getURL:path queryParameters:nil] body:postBody];
+}
+
 
 - (void)getComments:(long long)statusId 
 	 startingAtPage:(int)page 

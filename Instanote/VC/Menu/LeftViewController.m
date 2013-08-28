@@ -20,6 +20,7 @@
 
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
+#import "MLNavigationController.h"
 
 @interface LeftViewController ()
 
@@ -232,7 +233,7 @@
     if (indexPath.row == 0) {
         [self avatarAction];
     } else if (indexPath.row == 1) {
-        [self tapHomeView];
+        [self circleListView];
     } else if (indexPath.row == 2) {
         [self tapHomeViewHot];
     } else if (indexPath.row == 3) {
@@ -298,7 +299,7 @@
 - (void)circleListView
 {
     CircleListViewController *circlevc = [[CircleListViewController alloc] init];
-    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:circlevc];
+    MLNavigationController * nav = [[MLNavigationController alloc] initWithRootViewController:circlevc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
     [self presentModalViewController:nav animated:YES];
     [circlevc release];

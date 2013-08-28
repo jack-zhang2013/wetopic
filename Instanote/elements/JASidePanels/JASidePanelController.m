@@ -933,7 +933,7 @@ static char ja_kvoContext;
 #pragma mark - Public Methods
 
 - (UIBarButtonItem *)leftButtonForCenterPanel {
-    UIImage *faceImage = [UIImage imageNamed:@"btn_comment.png"];
+    UIImage *faceImage = [UIImage imageNamed:@"circle_left_button.png"];
     UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
     face.bounds = CGRectMake( 0, 0, faceImage.size.width, faceImage.size.height );
     [face setImage:faceImage forState:UIControlStateNormal];

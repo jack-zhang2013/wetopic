@@ -18,6 +18,8 @@
 #import "LeftViewController.h"
 #import "JASidePanelController.h"
 #import "IndexViewController.h"
+#import "MLNavigationController.h"
+#import "CircleListViewController.h"
 
 @implementation AppDelegate
 
@@ -58,14 +60,22 @@
     [leftviewcontroller release];
     [leftnav release];
     
-    IndexViewController * indexvc = [[IndexViewController alloc] init];
-    indexvc.pagetype = 1;
-    indexvc.title = @"最新话题";
-    UINavigationController * indexnav = [[UINavigationController alloc] initWithRootViewController:indexvc];
-    [indexnav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
-    self.viewController.centerPanel = indexnav;
-    [indexvc release];
-    [indexnav release];
+//    IndexViewController * indexvc = [[IndexViewController alloc] init];
+//    indexvc.pagetype = 1;
+//    indexvc.title = @"最新话题";
+//    MLNavigationController * indexnav = [[MLNavigationController alloc] initWithRootViewController:indexvc];
+//    [indexnav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+//    self.viewController.centerPanel = indexnav;
+//    [indexvc release];
+//    [indexnav release];
+    
+    CircleListViewController *circleListView = [[CircleListViewController alloc] init];
+    MLNavigationController * circleListNav = [[MLNavigationController alloc] initWithRootViewController:circleListView];
+    [circleListNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
+    self.viewController.centerPanel = circleListNav;
+    [circleListView release];
+    [circleListNav release];
+    
     
     
     [self.window setRootViewController:self.viewController];

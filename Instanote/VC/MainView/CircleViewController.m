@@ -7,6 +7,7 @@
 //
 
 #import "CircleViewController.h"
+#import "CircleDescriptionViewController.h"
 #import "WeiboClient.h"
 #import "CircleDetailEntity.h"
 #import "CircleDetailCell.h"
@@ -72,6 +73,18 @@
 - (void)newTweetAction
 {
     NSLog(@"hello,world!");
+}
+
+- (void)usercountAction
+{
+    NSLog(@"hello,world!");
+}
+
+- (void)circleDescriptionAction
+{
+    CircleDescriptionViewController * circledescriptionVC = [[CircleDescriptionViewController alloc] init];
+    circledescriptionVC.circleentity = cEntity;
+    [self.navigationController pushViewController:circledescriptionVC animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -229,6 +242,11 @@
         [cell addSubview:userCountView];
         [userCountView release];
         
+        UIButton *usercountbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+        usercountbutton.frame = CGRectMake(160 + 43, 28, userCountViewSize, userCountViewSize);
+        [usercountbutton addTarget:self action:@selector(usercountAction) forControlEvents:UIControlEventTouchUpInside];
+        [cell addSubview:usercountbutton];
+        
         UIView * circleImageBg = [[UIView alloc] initWithFrame:CGRectMake(43, 28, userCountViewSize, userCountViewSize)];
         circleImageBg.backgroundColor = [UIColor colorWithRed:219/255.f green:108/255.f blue:86/255.f alpha:1];
         [circleImageBg.layer setMasksToBounds:YES];
@@ -238,6 +256,12 @@
         [circleImageBg.layer setBorderColor:[pinkorangee CGColor]];
         [cell addSubview:circleImageBg];
         [circleImageBg release];
+        
+        UIButton *circleDescriptionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        circleDescriptionButton.frame = CGRectMake(43, 28, userCountViewSize, userCountViewSize);
+        [circleDescriptionButton addTarget:self action:@selector(circleDescriptionAction) forControlEvents:UIControlEventTouchUpInside];
+        [cell addSubview:circleDescriptionButton];
+        
         
         CGFloat circleImageViewLeft = 52.5, circleImageviewSize = 55;
         UIImageView *circleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(circleImageViewLeft, 37, circleImageviewSize, circleImageviewSize)];

@@ -44,7 +44,7 @@ static int cellSize;
     
     
     
-    self.navigationItem.leftBarButtonItem = [self leftBarButton];
+//    self.navigationItem.rightBarButtonItem = [self leftBarButton];
     
     
     

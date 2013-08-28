@@ -21,8 +21,8 @@
     if (self) {
         // Initialization code
         if (!userImageview) {
-            CGFloat ImageSize = 60;
-            CGFloat ImageFromTop = 15.f;
+            CGFloat ImageSize = 30;
+            CGFloat ImageFromTop = 10;
             userImageview = [[UIImageView alloc] initWithFrame:CGRectMake(ImageFromTop, ImageFromTop, ImageSize, ImageSize)];
             userImageview.backgroundColor = [UIColor whiteColor];
             [userImageview.layer setMasksToBounds:YES];
@@ -35,7 +35,7 @@
         }
         
         if (!userNameLabel) {
-            userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 15, 200, 20)];
+            userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 15, 200, 20)];
             userNameLabel.backgroundColor = [UIColor clearColor];
             userNameLabel.textColor = [UIColor colorWithRed:219/255.f green:108/255.f blue:86/255.f alpha:1];
             userNameLabel.font = [UIFont fontWithName:FONT_NAME size:16];
@@ -43,15 +43,15 @@
         }
         
         if (!timeLabel) {
-            timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 45, 200, 15)];
-            timeLabel.textColor = [UIColor greenColor];
+            timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 45, 200, 15)];
+            timeLabel.textColor = [UIColor grayColor];
             timeLabel.backgroundColor = [UIColor clearColor];
             timeLabel.font = [UIFont fontWithName:FONT_NAME size:14];
-            [self addSubview:commentContentLabel];
+            [self addSubview:timeLabel];
         }
         
         if (!commentContentLabel) {
-            commentContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 65, 220, 20)];
+            commentContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 65, 260, 20)];
             commentContentLabel.backgroundColor = [UIColor clearColor];
             commentContentLabel.font = [UIFont fontWithName:FONT_NAME size:16];
             [self addSubview:commentContentLabel];
@@ -79,8 +79,8 @@
     timeLabel.text = [circlecommetentity timestamp:circlecommetentity.createdate];
     
     commentContentLabel.text = circlecommetentity.commentinfo;
-    [commentContentLabel sizeToFitFixedWidth:220.f];
-    cellheight = commentContentLabel.frame.size.height + commentContentLabel.frame.origin.y + 20.f;
+    [commentContentLabel sizeToFitFixedWidth:260.f];
+    cellheight = commentContentLabel.frame.size.height + commentContentLabel.frame.origin.y + 10;
 }
 
 - (CGFloat)cellHeights

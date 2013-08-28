@@ -113,9 +113,9 @@
         [cell configurecell:cce];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        if (indexPath.row % 2 != 0) {
-            cell.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1];
-        }
+//        if (indexPath.row % 2 == 0) {
+//            cell.backgroundColor = [UIColor yellowColor];//[UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1];
+//        }
         
         return cell;
         

@@ -167,6 +167,9 @@
 		8F37E83117A111140031301E /* IntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37E82E17A111140031301E /* IntroView.m */; };
 		8F37E83417A11CC20031301E /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F37E83217A11CC20031301E /* shadow.png */; };
 		8F37E83517A11CC20031301E /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F37E83317A11CC20031301E /* shadow@2x.png */; };
+		8F3E9CBB17C75CF9001C4300 /* MLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E9CBA17C75CF9001C4300 /* MLNavigationController.m */; };
+		8F3E9CBE17CAEEB1001C4300 /* CircleUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E9CBD17CAEEB1001C4300 /* CircleUserCell.m */; };
+		8F3E9CC117CB7418001C4300 /* CircleUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3E9CC017CB7418001C4300 /* CircleUserListViewController.m */; };
 		8F50AA74179E218A0069306D /* CircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F50AA73179E218A0069306D /* CircleListViewController.m */; };
 		8F880A4F176030380001A0D9 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4C176030380001A0D9 /* JASidePanelController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		8F880A50176030380001A0D9 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F880A4E176030380001A0D9 /* UIViewController+JASidePanel.m */; };
@@ -252,6 +255,7 @@
 		8FDF3808177A898F0006C35E /* nobody_male_origin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FDF3806177A898F0006C35E /* nobody_male_origin.png */; };
 		8FDF3809177A898F0006C35E /* nobody_male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FDF3807177A898F0006C35E /* nobody_male@2x.png */; };
 		8FDF380B177A8AAA0006C35E /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FDF380A177A8AAA0006C35E /* CommentCell.m */; };
+		8FE1F95E17C3172C00789186 /* CircleDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE1F95D17C3172C00789186 /* CircleDescriptionViewController.m */; };
 		8FE2264117A21E80008BDB57 /* start_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE2263F17A21E80008BDB57 /* start_button.png */; };
 		8FE2264217A21E80008BDB57 /* start_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FE2264017A21E80008BDB57 /* start_button@2x.png */; };
 		8FE2264517A24BDC008BDB57 /* XLCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE2264417A24BDC008BDB57 /* XLCycleScrollView.m */; };
@@ -547,6 +551,12 @@
 		8F37E82E17A111140031301E /* IntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroView.m; sourceTree = "<group>"; };
 		8F37E83217A11CC20031301E /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
 		8F37E83317A11CC20031301E /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
+		8F3E9CB917C75CF9001C4300 /* MLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNavigationController.h; sourceTree = "<group>"; };
+		8F3E9CBA17C75CF9001C4300 /* MLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNavigationController.m; sourceTree = "<group>"; };
+		8F3E9CBC17CAEEB1001C4300 /* CircleUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleUserCell.h; sourceTree = "<group>"; };
+		8F3E9CBD17CAEEB1001C4300 /* CircleUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleUserCell.m; sourceTree = "<group>"; };
+		8F3E9CBF17CB7418001C4300 /* CircleUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleUserListViewController.h; path = MainView/CircleUserListViewController.h; sourceTree = "<group>"; };
+		8F3E9CC017CB7418001C4300 /* CircleUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleUserListViewController.m; path = MainView/CircleUserListViewController.m; sourceTree = "<group>"; };
 		8F50AA72179E218A0069306D /* CircleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListViewController.h; path = MainView/CircleListViewController.h; sourceTree = "<group>"; };
 		8F50AA73179E218A0069306D /* CircleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListViewController.m; path = MainView/CircleListViewController.m; sourceTree = "<group>"; };
 		8F880A4B176030380001A0D9 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
@@ -647,6 +657,8 @@
 		8FDF3806177A898F0006C35E /* nobody_male_origin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nobody_male_origin.png; sourceTree = "<group>"; };
 		8FDF3807177A898F0006C35E /* nobody_male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nobody_male@2x.png"; sourceTree = "<group>"; };
 		8FDF380A177A8AAA0006C35E /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		8FE1F95C17C3172C00789186 /* CircleDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleDescriptionViewController.h; path = MainView/CircleDescriptionViewController.h; sourceTree = "<group>"; };
+		8FE1F95D17C3172C00789186 /* CircleDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleDescriptionViewController.m; path = MainView/CircleDescriptionViewController.m; sourceTree = "<group>"; };
 		8FE2263F17A21E80008BDB57 /* start_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_button.png; sourceTree = "<group>"; };
 		8FE2264017A21E80008BDB57 /* start_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start_button@2x.png"; sourceTree = "<group>"; };
 		8FE2264317A24BDC008BDB57 /* XLCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCycleScrollView.h; sourceTree = "<group>"; };
@@ -994,6 +1006,7 @@
 		6BC80E74163A21D500FFA57B /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				8FE1F95B17C316D200789186 /* circleviews */,
 				6B051B7717058CCE007BA49E /* AddViewController.h */,
 				6B051B7817058CCE007BA49E /* AddViewController.m */,
 				6BC80E77163A221200FFA57B /* IndexViewController.h */,
@@ -1008,12 +1021,6 @@
 				8F17F4C1178EB93F00C1ABC5 /* UserSettingViewController.m */,
 				8FC5D2AA1793E35100125A1B /* SelectCoverViewController.h */,
 				8FC5D2AB1793E35100125A1B /* SelectCoverViewController.m */,
-				8F50AA72179E218A0069306D /* CircleListViewController.h */,
-				8F50AA73179E218A0069306D /* CircleListViewController.m */,
-				8FA91B4117A76BEC007A98D0 /* CircleViewController.h */,
-				8FA91B4217A76BEC007A98D0 /* CircleViewController.m */,
-				8FD8EE8017A8FEB50063CEE9 /* CircleDetailViewController.h */,
-				8FD8EE8117A8FEB50063CEE9 /* CircleDetailViewController.m */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -1086,6 +1093,8 @@
 		6BFCF768151CE30E008502A8 /* elements */ = {
 			isa = PBXGroup;
 			children = (
+				8F3E9CB917C75CF9001C4300 /* MLNavigationController.h */,
+				8F3E9CBA17C75CF9001C4300 /* MLNavigationController.m */,
 				8FE2264317A24BDC008BDB57 /* XLCycleScrollView.h */,
 				8FE2264417A24BDC008BDB57 /* XLCycleScrollView.m */,
 				8F37E82817A111140031301E /* IntroControll */,
@@ -1123,6 +1132,8 @@
 				8FD8EE7E17A8BA990063CEE9 /* CircleDetailCell.m */,
 				8FEE54D017B3423E006FFD71 /* CircleCommentCell.h */,
 				8FEE54D117B3423E006FFD71 /* CircleCommentCell.m */,
+				8F3E9CBC17CAEEB1001C4300 /* CircleUserCell.h */,
+				8F3E9CBD17CAEEB1001C4300 /* CircleUserCell.m */,
 			);
 			path = elements;
 			sourceTree = "<group>";
@@ -1335,6 +1346,23 @@
 				8FC7DF01177015FB00CDE978 /* umeng_logo.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		8FE1F95B17C316D200789186 /* circleviews */ = {
+			isa = PBXGroup;
+			children = (
+				8FE1F95C17C3172C00789186 /* CircleDescriptionViewController.h */,
+				8FE1F95D17C3172C00789186 /* CircleDescriptionViewController.m */,
+				8F50AA72179E218A0069306D /* CircleListViewController.h */,
+				8F50AA73179E218A0069306D /* CircleListViewController.m */,
+				8FA91B4117A76BEC007A98D0 /* CircleViewController.h */,
+				8FA91B4217A76BEC007A98D0 /* CircleViewController.m */,
+				8FD8EE8017A8FEB50063CEE9 /* CircleDetailViewController.h */,
+				8FD8EE8117A8FEB50063CEE9 /* CircleDetailViewController.m */,
+				8F3E9CBF17CB7418001C4300 /* CircleUserListViewController.h */,
+				8F3E9CC017CB7418001C4300 /* CircleUserListViewController.m */,
+			);
+			name = circleviews;
 			sourceTree = "<group>";
 		};
 		8FF4A32D1779735A00AA1858 /* UMSocial_Sdk_2.1.3 */ = {
@@ -1741,6 +1769,10 @@
 				8FD8EE7F17A8BA990063CEE9 /* CircleDetailCell.m in Sources */,
 				8FD8EE8217A8FEB50063CEE9 /* CircleDetailViewController.m in Sources */,
 				8FEE54D217B3423E006FFD71 /* CircleCommentCell.m in Sources */,
+				8FE1F95E17C3172C00789186 /* CircleDescriptionViewController.m in Sources */,
+				8F3E9CBB17C75CF9001C4300 /* MLNavigationController.m in Sources */,
+				8F3E9CBE17CAEEB1001C4300 /* CircleUserCell.m in Sources */,
+				8F3E9CC117CB7418001C4300 /* CircleUserListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

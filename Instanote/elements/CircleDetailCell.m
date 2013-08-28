@@ -99,13 +99,13 @@
     
     CGFloat circleDescWidth = 220.f;
     CGFloat circleDescTop = circleTitle.frame.size.height + circleTitle.frame.origin.y + 10;
-    circleDesc.frame = CGRectMake(15, circleDescTop, circleDescWidth, 17);
+    circleDesc.frame = CGRectMake(10, circleDescTop, circleDescWidth, 17);
     circleDesc.text = [self stringWithoutNbsp:circleentity.circlecontent];
     [circleDesc sizeToFitFixedWidth:circleDescWidth];
     
     CGFloat circleTimeTop = circleDescTop + circleDesc.frame.size.height + 10;
     circleTime.text = [circleentity timestamp:circleentity.createdatetime];
-    circleTime.frame = CGRectMake(15, circleTimeTop, 100, 12);
+    circleTime.frame = CGRectMake(10, circleTimeTop, 100, 12);
     
     circleCommentCount.text = [NSString stringWithFormat:@"%d回应", circleentity.comcount];
     circleCommentCount.frame = CGRectMake(137, circleTimeTop, 100, 12);
