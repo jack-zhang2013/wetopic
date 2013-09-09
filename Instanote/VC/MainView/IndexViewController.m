@@ -330,7 +330,7 @@
         
     } else {
         
-        UITableViewCell *bcell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        UITableViewCell *bcell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (bcell == nil) {
             bcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }

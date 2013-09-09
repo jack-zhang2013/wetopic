@@ -98,7 +98,7 @@
                                          appKey:UMENG_APPKEY
                                       shareText:@"分享这个话题"
                                      shareImage:[UIImage imageNamed:@"icon.png"]
-                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina, UMShareToWechat, UMShareToRenren, UMShareToDouban, UMShareToSms, UMShareToEmail, nil]
+                                shareToSnsNames:[NSArray arrayWithObjects:nil]
                                        delegate:nil];
 }
 

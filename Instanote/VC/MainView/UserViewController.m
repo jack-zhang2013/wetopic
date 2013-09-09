@@ -143,9 +143,9 @@
 }
 
 - (UIBarButtonItem *)leftButtonForCenterPanel {
-    UIImage *faceImage = [UIImage imageNamed:@"arrow.png"];
+    UIImage *faceImage = [UIImage imageNamed:@"circle_back_normal.png"];
     UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
-    face.bounds = CGRectMake( 12, 12, 24, 16 );
+    face.bounds = CGRectMake( 0, 0, 50, 44 );
     [face setImage:faceImage forState:UIControlStateNormal];
     [face addTarget:self action:@selector(backActionWithPush) forControlEvents:UIControlEventTouchUpInside];
     return [[UIBarButtonItem alloc] initWithCustomView:face];
@@ -282,30 +282,30 @@
             [cell addSubview:userNameLabel];
             
             
-            UIView *bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 120, 320, 40)];
-            bannerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"user_cover_banner"]];
-            
-            UILabel * allNewsFeedLabel = [[UILabel alloc] initWithFrame:CGRectMake(160, 12, 134, 16)];
-            allNewsFeedLabel.text = @"所有动态";
-            allNewsFeedLabel.backgroundColor = [UIColor clearColor];
-            allNewsFeedLabel.textAlignment = NSTextAlignmentRight;
-            allNewsFeedLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-            allNewsFeedLabel.textColor = [UIColor whiteColor];
-            [bannerView addSubview:allNewsFeedLabel];
-            [allNewsFeedLabel release];
-            
-            UIButton *allNewsFeedButton = [[UIButton alloc] initWithFrame:CGRectMake(200, 0, 120, 40)];
-            [allNewsFeedButton addTarget:self action:@selector(allNewsFeedAction) forControlEvents:UIControlEventTouchUpInside];
-            [bannerView addSubview:allNewsFeedButton];
-            [allNewsFeedButton release];
-            
-            UIImageView * allNewsFeedAccessory = [[UIImageView alloc] initWithFrame:CGRectMake(295, 13, 14, 14)];
-            allNewsFeedAccessory.image = [UIImage imageNamed:@"user_cover_arrow"];
-            [bannerView addSubview:allNewsFeedAccessory];
-            [allNewsFeedAccessory release];
-            
-            [cell addSubview:bannerView];
-            [bannerView release];
+//            UIView *bannerView = [[UIView alloc] initWithFrame:CGRectMake(0, 120, 320, 40)];
+//            bannerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"user_cover_banner"]];
+//            
+//            UILabel * allNewsFeedLabel = [[UILabel alloc] initWithFrame:CGRectMake(160, 12, 134, 16)];
+//            allNewsFeedLabel.text = @"所有动态";
+//            allNewsFeedLabel.backgroundColor = [UIColor clearColor];
+//            allNewsFeedLabel.textAlignment = NSTextAlignmentRight;
+//            allNewsFeedLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+//            allNewsFeedLabel.textColor = [UIColor whiteColor];
+//            [bannerView addSubview:allNewsFeedLabel];
+//            [allNewsFeedLabel release];
+//            
+//            UIButton *allNewsFeedButton = [[UIButton alloc] initWithFrame:CGRectMake(200, 0, 120, 40)];
+//            [allNewsFeedButton addTarget:self action:@selector(allNewsFeedAction) forControlEvents:UIControlEventTouchUpInside];
+//            [bannerView addSubview:allNewsFeedButton];
+//            [allNewsFeedButton release];
+//            
+//            UIImageView * allNewsFeedAccessory = [[UIImageView alloc] initWithFrame:CGRectMake(295, 13, 14, 14)];
+//            allNewsFeedAccessory.image = [UIImage imageNamed:@"user_cover_arrow"];
+//            [bannerView addSubview:allNewsFeedAccessory];
+//            [allNewsFeedAccessory release];
+//            
+//            [cell addSubview:bannerView];
+//            [bannerView release];
             
         }
         

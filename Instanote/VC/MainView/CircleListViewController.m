@@ -8,6 +8,7 @@
 
 #import "CircleListViewController.h"
 #import "CircleViewController.h"
+#import "WelcomeViewController.h"
 #import "WeiboClient.h"
 #import "CircleEntity.h"
 #import <QuartzCore/QuartzCore.h>
@@ -57,6 +58,19 @@ static int cellSize;
 //    [self.view insertSubview:titleLabel atIndex:1];
 //    [titleLabel release];
     
+    [self firstsignin];
+    
+}
+
+- (void)firstsignin
+{
+    NSUserDefaults * df = [NSUserDefaults standardUserDefaults];
+    if (![[df objectForKey:@"amilogin"] isEqual:@"yes"]) {
+        [df setObject:@"yes" forKey:@"amilogin"];
+        WelcomeViewController * welcomeVC = [[WelcomeViewController alloc] init];
+        [self presentModalViewController:welcomeVC animated:NO];
+        [welcomeVC release];
+    }
 }
 
 - (UIBarButtonItem *)leftBarButton

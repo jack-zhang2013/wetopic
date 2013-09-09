@@ -8,12 +8,20 @@
 
 #import "CircleUserListViewController.h"
 #import "WeiboClient.h"
+#import "UsersEntity.h"
+#import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UILabel+Extensions.h"
+#import "CircleUserCell.h"
+#import "UserViewController.h"
 
 @interface CircleUserListViewController ()
 
 @end
 
 @implementation CircleUserListViewController
+
+@synthesize circleEntity;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,9 +41,52 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self initpage];
+    [self getMoreUsers];
     
+    self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
     
 }
+
+#pragma mark
+#pragma buttons
+- (UIBarButtonItem *)leftButtonForCenterPanel {
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake(0, 0, 50, 44);
+    [face setImage:[UIImage imageNamed:@"circle_back_normal.png"] forState:UIControlStateNormal];
+    //    [face setImage:[UIImage imageNamed:@"circle_back_highlight.png"] forState:UIControlStateHighlighted];
+    [face addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
+}
+
+- (UIBarButtonItem *)rightButtonForCenterPanel {
+    UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
+    face.bounds = CGRectMake(0, 0, 50, 44);
+    [face setImage:[UIImage imageNamed:@"circle_tweet.png"] forState:UIControlStateNormal];
+    //    [face setImage:[UIImage imageNamed:@"circle_tweet_highlight.png"] forState:UIControlStateHighlighted];
+    [face addTarget:self action:@selector(newCommentAction) forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:face];
+}
+
+- (void)backAction
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)userAction:(UIButton *)sender;
+{
+    UserViewController *uservc = [[UserViewController alloc] init];
+    uservc.usertype = 2;
+    uservc.userId = sender.tag;
+    [self.navigationController pushViewController:uservc animated:YES];
+    //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
+    //    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    //    [self presentModalViewController:nav animated:YES];
+    //    [nav release];
+    [uservc release];
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -48,23 +99,81 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 10;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    return [fetchArray count] + 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height;
+    if (indexPath.row >=0 && indexPath.row < [fetchArray count]) {
+        CircleUserCell * cell = (CircleUserCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
+        height = [cell cellHeights];
+    } else if (indexPath.row == [fetchArray count]) {
+        height = 45;
+    } else {
+        height = 10;
+    }
+    return height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
-    
-    return cell;
+    if (indexPath.row >= 0 && indexPath.row < [fetchArray count]) {
+        CircleUserCell * cell = (CircleUserCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[[CircleUserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UsersEntity *userenity = [fetchArray objectAtIndex:indexPath.row];
+        
+        [cell.authorViewButton addTarget:self action:@selector(userAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell configCell:userenity];
+        return cell;
+    }  else if (indexPath.row == [fetchArray count]) {
+        UITableViewCell * cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell_loadmore_style2"];
+        if (cell == nil){
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:@"cell_loadmore_style2"] autorelease];
+            UILabel *loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 14, 320, 17)];
+            loadMoreLabel.textAlignment = NSTextAlignmentCenter;
+            [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
+            [loadMoreLabel setTextColor:[UIColor grayColor]];
+            [loadMoreLabel setBackgroundColor:[UIColor clearColor]];
+            if ([fetchArray count] < totalcommentcount) {
+                [loadMoreLabel setText:@"上拉加载更多"];
+            } else {
+                if ([fetchArray count] == 0) {
+                    [loadMoreLabel setText:@"正在加载"];
+                } else {
+                    [loadMoreLabel setText:@"没有更多了"];
+                }
+            }
+            
+            [cell addSubview:loadMoreLabel];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [loadMoreLabel release];
+        }
+        
+        return cell;
+        
+    } else {
+        UITableViewCell *bcell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (bcell == nil) {
+            bcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        return bcell;
+    }
 }
 
 #pragma mark
@@ -72,8 +181,8 @@
 
 - (void)getMoreUsers
 {
-    WeiboClient *client = [[WeiboClient alloc] initWithTarget:self action:@selector(loadCommentInfoDataFinished:obj:)];
-    [client getCircleUsers:@"1" pageNum:pagenum pageSize:pagesize];
+    WeiboClient *client = [[WeiboClient alloc] initWithTarget:self action:@selector(loadDataFinished:obj:)];
+    [client getCircleUsers:circleEntity.circleid pageNum:pagenum pageSize:pagesize];
 }
 
 - (void)loadDataFinished:(WeiboClient *)sender
@@ -94,19 +203,20 @@
 
 - (void)convertdata:(NSObject *)obj
 {
-    //    NSLog(@"%@", obj);
+//    NSLog(@"%@", obj);
     int status = [[(NSDictionary *)obj objectForKey:@"status"] intValue];
     if (status == 1) {
         NSDictionary *jsondata = [(NSDictionary *)obj objectForKey:@"data"];
         NSDictionary *circleUsers = [jsondata objectForKey:@"userCircleRls"];
-        for (NSDictionary * cu in circleUsers) {
-            if (![cu isKindOfClass:[NSDictionary class]]) {
+        for (NSDictionary * ci in circleUsers) {
+            if (![ci isKindOfClass:[NSDictionary class]]) {
                 continue;
             }
-//            CircleEntity * circleentity = [CircleEntity entityWithJsonDictionary:cir];
-//            [circleArray addObject:circleentity];
+            NSDictionary * cu = [ci objectForKey:@"userinfo"];
+            UsersEntity * user = [UsersEntity entityWithJsonDictionary:cu];
+            [fetchArray addObject:user];
         }
-        [self reloadtableivew];
+        [self.tableView reloadData];
     }
 }
 

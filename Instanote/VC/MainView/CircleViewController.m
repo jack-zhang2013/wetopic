@@ -8,6 +8,7 @@
 
 #import "CircleViewController.h"
 #import "CircleDescriptionViewController.h"
+#import "CircleUserListViewController.h"
 #import "WeiboClient.h"
 #import "CircleDetailEntity.h"
 #import "CircleDetailCell.h"
@@ -77,14 +78,16 @@
 
 - (void)usercountAction
 {
-    NSLog(@"hello,world!");
+    CircleUserListViewController * culvc = [[CircleUserListViewController alloc] init];
+    culvc.circleEntity = cEntity;
+    [self.navigationController pushViewController:culvc animated:YES];
 }
 
 - (void)circleDescriptionAction
 {
     CircleDescriptionViewController * circledescriptionVC = [[CircleDescriptionViewController alloc] init];
     circledescriptionVC.circleentity = cEntity;
-    [self.navigationController pushViewController:circledescriptionVC animated:NO];
+    [self.navigationController pushViewController:circledescriptionVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -317,7 +320,8 @@
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         
-        UILabel * loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 14, 150, 17)];
+        UILabel * loadMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 14, 320, 17)];
+        loadMoreLabel.textAlignment = NSTextAlignmentCenter;
         [loadMoreLabel setFont:[UIFont fontWithName:FONT_NAME size:13]];
         [loadMoreLabel setTextColor:[UIColor grayColor]];
         

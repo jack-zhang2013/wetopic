@@ -21,7 +21,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
         if (!circleTitle) {
             circleTitle = [[UILabel alloc] initWithFrame:CGRectZero];
             circleTitle.textColor = [UIColor colorWithRed:219/255.f green:108/255.f blue:86/255.f alpha:1];

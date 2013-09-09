@@ -34,6 +34,8 @@
     self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
     self.title = circleentity.circlename;
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     CGFloat userCountViewSize = 74;
     CGFloat userCountViewradius = userCountViewSize / 2;
     

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CircleEntity.h"
 
 @interface CircleUserListViewController : UITableViewController
 {
@@ -17,6 +18,11 @@
     
     int totalcommentcount;
     int mLoadingDataType;
+    
+    CircleEntity * circleEntity;
+    
 }
+
+@property (nonatomic, retain) CircleEntity * circleEntity;
 
 @end

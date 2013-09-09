@@ -14,10 +14,10 @@
     #import <CoreData/CoreData.h>
 #endif
 
-#define UMENG_APPKEY @"50d7ced052701556be000276"
+#define UMENG_APPKEY @"5226946456240be8da0a12c7"
 #define WECHAT_APPID @""
 
-#define SERVER_API @"http://1mily.com/userInfoAction_ajaxLogin.do"
+#define SERVER_API @"http://1mily.com/userInfoAction_ajaxLogin.do" 
 #define API_DOMAIN @"www.1mily.com"
 #define API_FORMAT @"do"
 #define NETWORK_TIMEOUT 30
