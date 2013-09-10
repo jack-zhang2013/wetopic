@@ -38,7 +38,7 @@
     [super viewDidLoad];
     
     self.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
-    self.navigationItem.rightBarButtonItem = [self rightButtonForCenterPanel];
+//    self.navigationItem.rightBarButtonItem = [self rightButtonForCenterPanel];
     
     self.title = cEntity.circlename;
     

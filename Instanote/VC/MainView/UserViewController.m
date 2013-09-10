@@ -168,7 +168,7 @@
     usvc.finishTarget = self;
     usvc.finishAction = @selector(refeshAll);
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:usvc];
-    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
     [self presentModalViewController:nav animated:YES];
     [usvc release];
     [nav release];

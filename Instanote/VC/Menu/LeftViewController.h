@@ -13,6 +13,8 @@
     UIImageView *avatarView;
     UILabel *userName;
     UILabel *userDesc;
+    
+    UIButton *signoutButton;
 }
 
 @property (nonatomic, retain)UIImageView *avatarView;

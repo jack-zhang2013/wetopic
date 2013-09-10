@@ -363,7 +363,7 @@
 - (void)convertdata:(NSObject *)data
 {
     
-    NSLog(@"%@", data);
+//    NSLog(@"%@", data);
     
     NSDictionary * dic = (NSDictionary *)data;
     int status;

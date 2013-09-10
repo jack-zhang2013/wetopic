@@ -56,9 +56,9 @@
 }
 
 - (UIBarButtonItem *)leftButtonForCenterPanel {
-    UIImage *faceImage = [UIImage imageNamed:@"arrow.png"];
+    UIImage *faceImage = [UIImage imageNamed:@"circle_back_normal.png"];
     UIButton *face = [UIButton buttonWithType:UIButtonTypeCustom];
-    face.bounds = CGRectMake( 12, 12, 24, 16 );
+    face.bounds = CGRectMake( 0, 0, 50, 44 );
     [face setImage:faceImage forState:UIControlStateNormal];
     [face addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     return [[UIBarButtonItem alloc] initWithCustomView:face];
@@ -76,7 +76,7 @@
 
 - (void)backAction
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

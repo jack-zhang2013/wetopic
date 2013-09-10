@@ -17,7 +17,7 @@
 #import "CircleListViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
-
+#import "MobClick.h"
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
 #import "MLNavigationController.h"
@@ -48,11 +48,19 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(218, 14, 20, 20)];
-    [settingButton setImage:[UIImage imageNamed:@"about.png"] forState:UIControlStateNormal];
-    [settingButton addTarget:self action:@selector(tapSettingView) forControlEvents:UIControlEventTouchUpInside];
-    [self.navigationController.navigationBar addSubview:settingButton];
-    [settingButton release];
+    if (!signoutButton) {
+        signoutButton = [[UIButton alloc] initWithFrame:CGRectMake(188, 12, 50, 23)];
+        signoutButton.backgroundColor = [UIColor redColor];
+        [signoutButton setTitle:@"登出" forState:UIControlStateNormal];
+        signoutButton.titleLabel.font = [UIFont fontWithName:FONT_NAME size:14];
+        signoutButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        signoutButton.layer.cornerRadius = 3.f;
+        [signoutButton addTarget:self action:@selector(signoutAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.navigationController.navigationBar addSubview:signoutButton];
+        [signoutButton setHidden:YES];
+    }
+    
+    
     
     //    UIButton *noticeButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 14, 20, 20)];
     //    [noticeButton setImage:[UIImage imageNamed:@"notice.png"] forState:UIControlStateNormal];
@@ -83,11 +91,13 @@
             NSString *imageurl = [NSString stringWithFormat:@"http://%@/%@", API_DOMAIN, realimage];
             [avatarView setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"nobody_male.png"]];
         }
+        [signoutButton setHidden:NO];
         
     } else {
         userName.text = @"用户尚未登录";
         userDesc.text = @"个人素描";
         [avatarView setImage:[UIImage imageNamed:@"nobody_male.png"]];
+        [signoutButton setHidden:YES];
     }
     
 }
@@ -109,7 +119,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,62 +174,55 @@
             
         } else if (indexPath.row == 1) {
             
-            UIImageView * homeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"left_clock.png"]];
-            homeImageView.frame = CGRectMake(11, 11, 18, 18);
-            UILabel * homeLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
-            homeLable.text = @"最新话题";
-            homeLable.font = [UIFont fontWithName:FONT_NAME size:15];
+////            UIImageView * homeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"left_clock.png"]];
+////            homeImageView.frame = CGRectMake(11, 11, 18, 18);
+//            UILabel * homeLable = [[UILabel alloc] initWithFrame:CGRectMake(13, 13, 150, 14)];
+//            homeLable.text = @"圈子列表";
+//            homeLable.font = [UIFont fontWithName:FONT_NAME size:15];
+//            
+////            [cell addSubview:homeImageView];
+//            [cell addSubview:homeLable];
+//            
+////            [homeImageView release];
+//            [homeLable release];
+            cell.textLabel.text = @"圈子";
             
-            [cell addSubview:homeImageView];
-            [cell addSubview:homeLable];
             
-            [homeImageView release];
-            [homeLable release];
+        } else if (indexPath.row == 5) {
             
+//            UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fire.png"]];
+//            settingImageView.frame = CGRectMake(10, 9, 20, 20);
+//            UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
+//            settingLable.text = @"热门话题";
+//            settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
+//            
+//            [cell addSubview:settingImageView];
+//            [cell addSubview:settingLable];
+//            
+//            [settingImageView release];
+//            [settingLable release];
+            cell.textLabel.text = @"热门话题";
             
         } else if (indexPath.row == 2) {
             
-            UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fire.png"]];
-            settingImageView.frame = CGRectMake(10, 9, 20, 20);
-            UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
-            settingLable.text = @"热门话题";
-            settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
+////            UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback.png"]];
+////            settingImageView.frame = CGRectMake(10, 9, 20, 20);
+//            UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(13, 13, 150, 14)];
+//            settingLable.text = @"反馈";
+//            settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
+//            
+////            [cell addSubview:settingImageView];
+//            [cell addSubview:settingLable];
+//            
+////            [settingImageView release];
+//            [settingLable release];
+            cell.textLabel.text = @"反馈";
             
-            [cell addSubview:settingImageView];
-            [cell addSubview:settingLable];
-            
-            [settingImageView release];
-            [settingLable release];
             
         } else if (indexPath.row == 3) {
-            
-            UIImageView * settingImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback.png"]];
-            settingImageView.frame = CGRectMake(10, 9, 20, 20);
-            UILabel * settingLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
-            settingLable.text = @"反馈";
-            settingLable.font = [UIFont fontWithName:FONT_NAME size:15];
-            
-            [cell addSubview:settingImageView];
-            [cell addSubview:settingLable];
-            
-            [settingImageView release];
-            [settingLable release];
-            
+            cell.textLabel.text = NSLocalizedString(@"more_update", nil);
         } else if (indexPath.row == 4) {
-            
-            UIImageView * aboutImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"setting.png"]];
-            aboutImageView.frame = CGRectMake(10, 10, 20, 20);
-            UILabel * aboutLable = [[UILabel alloc] initWithFrame:CGRectMake(35, 13, 150, 14)];
-            aboutLable.text = @"设置";
-            aboutLable.font = [UIFont fontWithName:FONT_NAME size:15];
-            
-            [cell addSubview:aboutImageView];
-            [cell addSubview:aboutLable];
-            
-            [aboutImageView release];
-            [aboutLable release];
-        } else {
-            //
+            cell.textLabel.text = @"关于";
         }
     }
     return cell;
@@ -234,15 +237,23 @@
         [self avatarAction];
     } else if (indexPath.row == 1) {
         [self circleListView];
-    } else if (indexPath.row == 2) {
+    } else if (indexPath.row == 5) {
         [self tapHomeViewHot];
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.row == 2) {
         [self tapFeedbackView];
+    } else if (indexPath.row == 3) {
+        [self versionAction];
+    } else if (indexPath.row == 4) {
+        [self tapAboutView];
     }
-//    else if (indexPath.row == 4) {
-//        [self tapSettingView];
-//    }
 }
+
+
+- (void)versionAction
+{
+    [MobClick checkUpdate];
+}
+
 
 - (void)signinAction
 {
@@ -257,9 +268,9 @@
 }
 
 - (void)tapAboutView {
-    SettingViewController *aboutvc = [[SettingViewController alloc] init];
+    VersionViewController *aboutvc = [[VersionViewController alloc] init];
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:aboutvc];
-    //[nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
     [self presentModalViewController:nav animated:YES];
     [aboutvc release];
     [nav release];
@@ -298,18 +309,22 @@
 
 - (void)circleListView
 {
-    CircleListViewController *circlevc = [[CircleListViewController alloc] init];
-    MLNavigationController * nav = [[MLNavigationController alloc] initWithRootViewController:circlevc];
+//    CircleListViewController *circlevc = [[CircleListViewController alloc] init];
+//    MLNavigationController * nav = [[MLNavigationController alloc] initWithRootViewController:circlevc];
+//    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
+//    [self presentModalViewController:nav animated:YES];
+//    [circlevc release];
+//    [nav release];
+    CircleListViewController *homevc = [[CircleListViewController alloc] init];
+//    homevc.pagetype = 2;
+//    homevc.title = @"热门话题";
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:homevc];
     [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
-    [self presentModalViewController:nav animated:YES];
-    [circlevc release];
+    self.sidePanelController.centerPanel = nav;
+    [homevc release];
     [nav release];
 }
 
-- (void)tapHelp
-{
-    
-}
 
 - (void)tapFeedbackView {
     UMFeedbackViewController *feedbackViewController = [[UMFeedbackViewController alloc] initWithNibName:@"UMFeedbackViewController" bundle:nil];
@@ -326,11 +341,40 @@
     uservc.userId = userentity.userid;
     uservc.usertype = 1;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uservc];
-    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"banner.png"] forBarMetrics:UIBarMetricsDefault];
+    [nav.navigationBar setBackgroundImage:[UIImage imageNamed:@"circle_banner.png"] forBarMetrics:UIBarMetricsDefault];
     self.sidePanelController.centerPanel = nav;
     [nav release];
     [uservc release];
     
+}
+
+- (void)signoutAction
+{
+    [self confrimlogout];
+}
+
+- (void)confrimlogout
+{
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"more_logout_title", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"more_logout_no", nil) otherButtonTitles:NSLocalizedString(@"more_logout_yes", nil), nil];
+    [alert show];
+}
+
+- (void)modalView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self goCover];
+    }
+    [alertView release];
+}
+
+- (void)goCover
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"-1" forKey:aUserId];
+    [defaults setObject:@"" forKey:@"email"];
+    [defaults synchronize];
+    
+    [self refreshTableview];
 }
 
 #pragma mark
